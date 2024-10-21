@@ -5,7 +5,7 @@ import React from 'react'
 const Login = () => {
   return (
     <div>
-      <p>inicia sesion</p>
+      <p>inicia sesion desde rama feature/login-register</p>
     </div>
   )
 }
