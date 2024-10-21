@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 :root {
-  font-family: "Orbitron", sans-serif;
+  font-family: "Orbitron" "Inter", sans-serif;
+ 
 }
 
 * {
