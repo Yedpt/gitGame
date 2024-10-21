@@ -4,8 +4,10 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",   
+    
   ],
   theme: {
+  extend: {
     colors: {
       'dark': '#2D342D',
       'light': '#D9D9D9',
@@ -18,7 +20,7 @@ export default {
       'title': ['Orbitron', 'sans-serif'],
       'paragraph': ['Inter', 'sans-serif'],
     },
-  extend: {},
+  },
   plugins: [],
 }
 }

@@ -2,8 +2,8 @@ import React from 'react'
 
 const Home = () => {
   return (
-    <div>
-      <h1> GIT GAME </h1>
+    <div className="bg-greenLight">
+      <p> GIT GAsME </p>
     </div>
   )
 }
