@@ -6,22 +6,14 @@ const News = () => {
   return (
     <div className="bg-greenDark h-full" >
       <p>noticias</p>
-      <div className="bg-dark h-full">
+      <div className="relative bg-greenDark h-full bg-cover bg-center bg-no-repeat">
         <img
           src={image}
           alt="fondo verde"
-          className="w-full block"
+          className="absolute w-full block"
         />
-
-<p>noticias</p>
-
       </div>
-
-      <img
-          src={card}
-          alt="fondo verde"
-          className="w-92 items-center flex"
-        />
+<p>noticias</p>
 <p>noticias</p>
 <p>noticias</p>
 <p>noticias</p>
