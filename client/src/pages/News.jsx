@@ -1,28 +1,37 @@
-import React from 'react'
-import image from '../assets/images/image.png'
-import card from '../assets/images/card.png'
+import { React, useEffect, useState } from 'react';
+import image from '../assets/images/image.png';
+import MainCard from '../components/MainCard';
+import { getAllNews } from '../services/gitGameServices';
 
-const News = () => {
+const GameNews = () => {
+  const [news, setNews] = useState([]);
+
+  const fetchData = async () => {
+    const dataNews = await getAllNews();
+    setNews(dataNews);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
-    <div className="bg-greenDark h-full" >
-      <p>noticias</p>
-      <div className="relative bg-greenDark h-full bg-cover bg-center bg-no-repeat">
+    <div div className="w-full min-h-screen flex flex-col items-center bg-dark">
+      <div className="w-full">
         <img
           src={image}
           alt="fondo verde"
-          className="absolute w-full block"
+          className="absolute w-full"
         />
       </div>
-<p>noticias</p>
-<p>noticias</p>
-<p>noticias</p>
-<p>noticias</p>
-<p>noticias</p>
-<p>noticias</p>
-<p>noticias</p>
 
+      <div className="grid sm:grid-cols-1 h-full justify-items-center">
+        <div className="" key={id}>
+          <MainCard url={url} id_new={id} />
+        </div>
+      </div>
     </div>
   )
 }
 
-export default News
+export default GameNews
