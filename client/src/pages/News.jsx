@@ -25,11 +25,10 @@ const GameNews = () => {
         />
       </div>
 
-      <div className="grid sm:grid-cols-1 h-full justify-items-center">
-        <div className="" key={id}>
-          <MainCard url={url} id_new={id} />
-        </div>
+      <div className="grid sm:grid-cols-1 w-5/6 mt-24">
+        <MainCard />
       </div>
+
     </div>
   )
 }

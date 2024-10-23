@@ -32,7 +32,7 @@ export default function Home() {
           {/* Ajuste de cuadrícula */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* El MainCard ocupará toda la altura del lado izquierdo */}
-            <div className="md:col-span-2 bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 relative">
+            <div className="md:col-span-2 bg-dark overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 relative">
               <MainCard />
             </div>
             
