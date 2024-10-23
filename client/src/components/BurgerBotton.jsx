@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../img/gglogo1.svg";
+import logo from "../assets/img/ggLogo1.svg"
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -64,7 +64,7 @@ const Navbar = () => {
                     {/* Menú principal - visible en pantallas grandes */}
                     <div className="hidden lg:flex items-center space-x-3 font-title font-semibold">
                         <Link
-                            to="/gallery"
+                            to="/news"
                             className="text-light text-sm hover:text-greenLight px-4 py-1 rounded transition-all duration-300"
                         >
                             Noticias
@@ -119,9 +119,12 @@ const Navbar = () => {
                                 </button>
                             </>
                         ) : (
+                            <Link to="/login">
+
                             <button className="bg-greenLight text-dark font-title px-4 py-2 rounded-full">
                                 Iniciar sesión
                             </button>
+                            </Link>
                         )}
                     </div>
 

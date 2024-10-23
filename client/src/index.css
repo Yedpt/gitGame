@@ -10,9 +10,9 @@ html, body {
 }
 
 #root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;   /* !IMPORTANTE: cambiar si es necesario, el footer se va mas abajo de la página */
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
 }
 
 
