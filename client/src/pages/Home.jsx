@@ -16,7 +16,7 @@ export default function Home() {
     <div className="min-h-screen font-orbitron" style={{ backgroundColor: '#2D342D', color: 'white' }}>
       <main className="pt-16">
         {/* Hero Section */}
-        <section className="relative h-[1000px] flex items-center justify-center overflow-hidden">
+        <section className="relative h-[95vh] flex items-center justify-center overflow-hidden">
           <img src={home} alt="Fantasy landscape" className="absolute inset-0 w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/80"></div>
           <div className="relative z-10 text-center">
