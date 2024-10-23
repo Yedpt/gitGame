@@ -1,5 +1,5 @@
 import React from 'react';
-import blackops from '../assets/blackops.svg';
+import blackops from '../assets/img/blackops.svg';
 
 const MainCard = () => {
   return (
