@@ -1,11 +1,11 @@
 import React from 'react';
-import home from '../assets/home.svg';
-import logo from '../assets/logo.svg';
-import team from '../assets/team.svg';
-import darksoul from '../assets/darksoul.svg';
-import luigi from '../assets/luigi.svg';
-import gta from '../assets/gta.svg';
-import contacto from '../assets/contacto.svg';
+import home from '../assets/img/home.svg';
+import logo from '../assets/img/logo.svg';
+import team from '../assets/img/team.svg';
+import darksoul from '../assets/img/darksoul.svg';
+import luigi from '../assets/img/luigi.svg';
+import gta from '../assets/img/gta.svg';
+import contacto from '../assets/img/contacto.svg';
 
 // Importar MainCard
 import MainCard from '../components/MainCard.jsx';
