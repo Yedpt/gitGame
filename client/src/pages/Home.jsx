@@ -20,7 +20,7 @@ export default function Home() {
           <img src={home} alt="Fantasy landscape" className="absolute inset-0 w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/80"></div>
           <div className="relative z-10 text-center">
-            <h2 className="text-6xl font-bold mb-4 font-title">Bienvenido a</h2>
+            <h2 className="text-4xl font-bold mb-4 font-title">Bienvenido a</h2>
             <img src={logo} alt="Descripción de la imagen SVG" />
           </div>
         </section>
@@ -58,25 +58,28 @@ export default function Home() {
 
         {/* Sobre Nosotros */}
         <section className="p-8" style={{ backgroundColor: '#2D342D' }}>
-          <h2 className="text-3xl font-bold mb-6 text-green-500 font-title">SOBRE NOSOTROS</h2>
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 mb-6 md:mb-0 md:pr-8">
-              <p className="mb-4 font-paragraph">
-                Somos un grupo de apasionados por los videojuegos, dedicados a compartir nuestras experiencias y
-                conocimientos con la comunidad gamer. Nuestro objetivo es mantenerte informado sobre las últimas
-                novedades, análisis y noticias del fascinante mundo de los videojuegos.
-              </p>
-              <p className="font-paragraph">
-                Nuestra misión es proporcionarte información actualizada, análisis detallados y contenido exclusivo
-                sobre tus juegos favoritos y los próximos lanzamientos, para que estés siempre al día con las
-                novedades de la industria.
-              </p>
-            </div>
-            <div className="md:w-1/2">
-              <img src={team} alt="Gamers playing" className="w-full h-auto rounded-lg shadow-lg" />
-            </div>
-          </div>
-        </section>
+  <h2 className="text-3xl font-bold mb-6 text-green-500 font-title">SOBRE NOSOTROS</h2>
+  <div className="flex flex-col md:flex-row items-center md:items-stretch">
+    <div className="md:w-1/2 mb-6 md:mb-0 md:pr-8 flex flex-col justify-center">
+      {/* Aumentar el tamaño de fuente y espaciado en pantallas grandes */}
+      <p className="mb-4 font-paragraph flex-grow text-lg md:text-2xl lg:text-3xl leading-relaxed md:leading-loose">
+        Somos un grupo de apasionados por los videojuegos, dedicados a compartir nuestras experiencias y
+        conocimientos con la comunidad gamer. Nuestro objetivo es mantenerte informado sobre las últimas
+        novedades, análisis y noticias del fascinante mundo de los videojuegos.
+        <br /><br />
+        Nuestra misión es proporcionarte información actualizada, análisis detallados y contenido exclusivo sobre tus juegos favoritos y los
+        próximos lanzamientos, para que estés siempre al día con las novedades de la industria.
+      </p>
+    </div>
+    <div className="md:w-1/2">
+      <img src={team} alt="Gamers playing" className="w-full h-auto rounded-lg shadow-lg" />
+    </div>
+  </div>
+</section>
+
+
+
+
 
         {/* Contacto */}
         <section className="p-4 sm:p-8" style={{ backgroundColor: '#2D342D' }}>
