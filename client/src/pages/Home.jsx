@@ -60,9 +60,9 @@ export default function Home() {
         <section className="p-8" style={{ backgroundColor: '#2D342D' }}>
   <h2 className="text-3xl font-bold mb-6 text-green-500 font-title">SOBRE NOSOTROS</h2>
   <div className="flex flex-col md:flex-row items-center md:items-stretch">
+    {/* Contenedor de texto */}
     <div className="md:w-1/2 mb-6 md:mb-0 md:pr-8 flex flex-col justify-center">
-      {/* Aumentar el tamaño de fuente y espaciado en pantallas grandes */}
-      <p className="mb-4 font-paragraph flex-grow text-lg md:text-2xl lg:text-3xl leading-relaxed md:leading-loose">
+      <p className="mb-4 font-paragraph text-lg md:text-2xl lg:text-2xl leading-relaxed md:leading-loose">
         Somos un grupo de apasionados por los videojuegos, dedicados a compartir nuestras experiencias y
         conocimientos con la comunidad gamer. Nuestro objetivo es mantenerte informado sobre las últimas
         novedades, análisis y noticias del fascinante mundo de los videojuegos.
@@ -71,11 +71,13 @@ export default function Home() {
         próximos lanzamientos, para que estés siempre al día con las novedades de la industria.
       </p>
     </div>
-    <div className="md:w-1/2">
+    {/* Contenedor de imagen */}
+    <div className="md:w-1/2 flex items-center justify-center">
       <img src={team} alt="Gamers playing" className="w-full h-auto rounded-lg shadow-lg" />
     </div>
   </div>
 </section>
+
 
 
 
