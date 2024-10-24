@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
+    "type": "module",
   "scripts": {
     "test": "jest",
     "dev": "ts-node-dev --respawn ./app.ts"
