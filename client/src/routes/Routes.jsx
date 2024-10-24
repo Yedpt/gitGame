@@ -12,6 +12,7 @@ import Profile from '../pages/Profile'
 import Register from '../pages/Register'
 import Reviews from '../pages/Reviews'
 import Videos from '../pages/Videos'
+import CreateNew from '../pages/CreateNew'
 
 export const routes = createBrowserRouter([{
     path : '/',
@@ -32,6 +33,10 @@ export const routes = createBrowserRouter([{
         {
             path: 'login',
             element: <Login/>
+        },
+        {
+            path: 'createnew',
+            element: <CreateNew/>
         },
         {
             path: 'news',
