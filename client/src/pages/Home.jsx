@@ -1,11 +1,11 @@
 import React from 'react';
-import home from '../assets/home.svg';
-import logo from '../assets/logo.svg';
-import team from '../assets/team.svg';
-import darksoul from '../assets/darksoul.svg';
-import luigi from '../assets/luigi.svg';
-import gta from '../assets/gta.svg';
-import contacto from '../assets/contacto.svg';
+import home from '../assets/img/home.svg';
+import logo from '../assets/img/logo.svg';
+import team from '../assets/img/team.svg';
+import darksoul from '../assets/img/darksoul.svg';
+import luigi from '../assets/img/luigi.svg';
+import gta from '../assets/img/gta.svg';
+import contacto from '../assets/img/contacto.svg';
 
 // Importar MainCard
 import MainCard from '../components/MainCard.jsx';
@@ -20,7 +20,7 @@ export default function Home() {
           <img src={home} alt="Fantasy landscape" className="absolute inset-0 w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/80"></div>
           <div className="relative z-10 text-center">
-            <h2 className="text-6xl font-bold mb-4 font-title">Bienvenido a</h2>
+            <h2 className="text-4xl font-bold mb-4 font-title">Bienvenido a</h2>
             <img src={logo} alt="Descripción de la imagen SVG" />
           </div>
         </section>
@@ -58,25 +58,30 @@ export default function Home() {
 
         {/* Sobre Nosotros */}
         <section className="p-8" style={{ backgroundColor: '#2D342D' }}>
-          <h2 className="text-3xl font-bold mb-6 text-green-500 font-title">SOBRE NOSOTROS</h2>
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 mb-6 md:mb-0 md:pr-8">
-              <p className="mb-4 font-paragraph">
-                Somos un grupo de apasionados por los videojuegos, dedicados a compartir nuestras experiencias y
-                conocimientos con la comunidad gamer. Nuestro objetivo es mantenerte informado sobre las últimas
-                novedades, análisis y noticias del fascinante mundo de los videojuegos.
-              </p>
-              <p className="font-paragraph">
-                Nuestra misión es proporcionarte información actualizada, análisis detallados y contenido exclusivo
-                sobre tus juegos favoritos y los próximos lanzamientos, para que estés siempre al día con las
-                novedades de la industria.
-              </p>
-            </div>
-            <div className="md:w-1/2">
-              <img src={team} alt="Gamers playing" className="w-full h-auto rounded-lg shadow-lg" />
-            </div>
-          </div>
-        </section>
+  <h2 className="text-3xl font-bold mb-6 text-green-500 font-title">SOBRE NOSOTROS</h2>
+  <div className="flex flex-col md:flex-row items-center md:items-stretch">
+    {/* Contenedor de texto */}
+    <div className="md:w-1/2 mb-6 md:mb-0 md:pr-8 flex flex-col justify-center">
+      <p className="mb-4 font-paragraph text-lg md:text-2xl lg:text-2xl leading-relaxed md:leading-loose">
+        Somos un grupo de apasionados por los videojuegos, dedicados a compartir nuestras experiencias y
+        conocimientos con la comunidad gamer. Nuestro objetivo es mantenerte informado sobre las últimas
+        novedades, análisis y noticias del fascinante mundo de los videojuegos.
+        <br /><br />
+        Nuestra misión es proporcionarte información actualizada, análisis detallados y contenido exclusivo sobre tus juegos favoritos y los
+        próximos lanzamientos, para que estés siempre al día con las novedades de la industria.
+      </p>
+    </div>
+    {/* Contenedor de imagen */}
+    <div className="md:w-1/2 flex items-center justify-center">
+      <img src={team} alt="Gamers playing" className="w-full h-auto rounded-lg shadow-lg" />
+    </div>
+  </div>
+</section>
+
+
+
+
+
 
         {/* Contacto */}
         <section className="p-4 sm:p-8" style={{ backgroundColor: '#2D342D' }}>
