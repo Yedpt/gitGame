@@ -1,7 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
 import connectionDb from '../database/conectionDb';
 // import { CatMeme } from '../Interfaces/catInterfaces';
-// Definición de los atributos de Book
+
 
 // interface catMeme extends Model<CatMeme>, CatMeme {}
 const news = connectionDb.define(
