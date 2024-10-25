@@ -3,7 +3,7 @@ import logo from "../assets/img/ggLogo1.svg"
 
 const Footer = () => {
   return (
-    <footer className="h-auto bg-greenDark flex flex-col md:flex-row justify-between items-center px-6 py-4 w-full">
+    <footer className="h-auto bg-greenDark flex flex-col md:flex-row justify-between items-center px-6 py-4 w-full relative">
       {/* Logo a la izquierda */}
       <div className="flex items-center md:justify-start justify-center w-full md:w-auto mb-4 md:mb-0">
         <a href="/">
@@ -19,7 +19,7 @@ const Footer = () => {
         <a href="/" className="hover:text-greenLight">Contacto</a>
       </div>
 
-      {/* Copyright centrado debajo de los links en responsive */}
+      {/* Copyright */}
       <div className="text-light text-[11px] text-center leading-none font-paragraph font-extralight w-full md:w-auto">
         <p>
           Copyright © 2024 GitGame. <br />
