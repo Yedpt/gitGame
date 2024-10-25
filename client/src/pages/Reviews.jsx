@@ -5,6 +5,8 @@ import marioParty from '../assets/img/marioParty.svg';
 import silenthill from '../assets/img/silenthill.svg';
 import starone from '../assets/img/starsOne.svg';
 import starsec from '../assets/img/starsSec.svg';
+import cultoflamb from '../assets/img/cultoflamb.svg';
+import corekeeper from '../assets/img/corekeeper.svg';
 
 // Simulamos la API con reviews desde el backend
 const fetchReviews = async () => {
@@ -22,10 +24,10 @@ const fetchReviews = async () => {
     },
     {
       id: 2,
-      title: 'Silent Hill Review',
+      title: 'Análisis de Silent Hill 2 Remake',
       description:
-        'El terror psicológico de Silent Hill te envuelve en una atmósfera oscura...',
-      author: 'Admin',
+        'Silent Hill 2 es, en líneas generales, un remake bastante fiel al clásico de terror de Konami. Lo que más se nota, más allá de los gráficos renovados, es que el diseño de niveles ha mejorado muchísimo, convirtiendo los míticos entornos en lugares más interesantes que recorrer. Lo mismo ocurre con el combate, que es más reactivo y dentro de sus limitaciones encuentra formas creativas de enfrentarse a los enemigos con las mismas herramientas.  En lo narrativo hay pocos cambios, y son más cuestión de detalles y sutilezas, pero importantes. Algunas escenas que, en mi opinión, pierden fuerza mientras que otras, en cambio, salen reforzadas. Pero con todo, Bloober ha creado algo especial. Sabe mantener la tensión y producir las sensaciones correctas, sobre todo en el gameplay. Se ha ganado el puesto para seguir trabajando en la franquicia.',
+      author: 'Arturo :)',
       image: silenthill,
       rating: starsec,
     },
@@ -34,6 +36,24 @@ const fetchReviews = async () => {
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
+  const [userReviews, setUserReviews] = useState([
+    { 
+      id: 1,
+      title: 'Análisis de Cult of the Lamb: Pilgrim’s Edition', 
+      description: 'Lorem ipsum dolor En lo narrativo hay pocos cambios, y son más cuestión de detalles y sutilezas, pero importantes. Algunas escenas que, en mi opinión, pierden fuerza mientras que otras, en cambio, salen reforzadas. Pero con todo, Bloober ha creado algo especial. Sabe mantener la tensión y producir las sensaciones correctas, sobre todo en el gameplay. Se ha ganado el puesto para seguir trabajando en la franquicia.', 
+      author: 'Usuario123', 
+      likes: 0, 
+      image: cultoflamb
+    },
+    { 
+      id: 2, 
+      title: 'Análisis de Core Keeper', 
+      description: 'Si te gusta minecraft, Stardew Valley, Terraria, Valheim y demás, este juego te encantará. Algunas escenas que, en mi opinión, pierden fuerza mientras que otras, en cambio, salen reforzadas. Pero con todo, Bloober ha creado algo especial. Sabe mantener la tensión y producir las sensaciones correctas, sobre todo en el gameplay. Se ha ganado el puesto para seguir trabajando en la franquicia.', 
+      author: 'GamerXYZ',
+      image: corekeeper,
+      likes: 0 
+    },
+  ]);
   const [expandedReview, setExpandedReview] = useState(null);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
@@ -61,6 +81,14 @@ useEffect(() => {
 
   const toggleReview = (id) => {
     setExpandedReview(expandedReview === id ? null : id);
+  };
+
+  const handleLike = (id) => {
+    setUserReviews((prevReviews) =>
+      prevReviews.map((review) =>
+        review.id === id ? { ...review, likes: review.likes + 1 } : review
+      )
+    );
   };
 
   return (
@@ -126,11 +154,24 @@ useEffect(() => {
         </section>
 
         {/* Reviews Users */}
-        <section className="bg-dark px-4 py-10">
-          <h2 className="text-3xl sm:text-4xl text-light mb-8">
+        <section className="bg-dark px-0 py-10">
+          <h2 className="font-title text-3xl sm:text-4xl px-10 text-light font-semibold md:text-left  text-center mb-8">
             REVIEWS DE USUARIOS
-            </h2>
-          {/* Aquí puedes añadir el código para reviews de usuarios */}
+          </h2>
+          {userReviews.map((userReview) => (
+            <div key={userReview.id} className="bg-greenMid flex flex-col gap-4 px-6 py-4 rounded-lg mx-4 mb-6">
+              <h3 className="text-2xl font-bold text-light">{userReview.title}</h3>
+              <p className="text-light font-paragraph">{userReview.description}</p>
+              <p className="text-sm text-light">Autor: {userReview.author}</p>
+              <div className="flex items-center gap-2 mt-2">
+              <img src={userReview.image} alt="rating" className="w-24" />
+                <button onClick={() => handleLike(userReview.id)} className="bg-blue-600 text-white px-3 py-1 rounded">
+                  Like
+                </button>
+                <span className="text-light">{userReview.likes} Likes</span>
+              </div>
+            </div>
+          ))}
         </section>
       </main>
     </div>
