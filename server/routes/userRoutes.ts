@@ -2,6 +2,6 @@
 import { Router } from "express";
 import { getUsers } from "../controllers/userControllers";
 
-export const router = Router();
+export const userRouter = Router();
 
-router.get('/', getUsers)
+userRouter.get('/', getUsers)

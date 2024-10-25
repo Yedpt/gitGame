@@ -2,17 +2,17 @@ import conectionDb from './database/conectionDb';
 import UserModel from './models/userModel';
 import express from 'express';
 import cors from 'cors';
-import {router} from './routes/gitgameRoutes';
+import {userRouter} from './routes/userRoutes';
 import { PORT } from './config';
 
 export const app = express();
-// nodemon -I --exec node --experimental-specifier-resolution=node  --loader ts-node/esm ./app.ts
+
 app.use(cors({
     origin: 'http://localhost:5173', // el localhost donde esta corriendo el front
   }));
 app.use(express.json());
 
-app.use('/api/users', router);
+app.use('/api/users', userRouter);
 
     try {
         conectionDb.authenticate();
