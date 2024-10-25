@@ -159,10 +159,15 @@ useEffect(() => {
             REVIEWS DE USUARIOS
           </h2>
           {userReviews.map((userReview) => (
-            <div key={userReview.id} className="bg-greenMid flex flex-col gap-4 px-6 py-4 rounded-lg mx-4 mb-6">
-              <h3 className="text-2xl font-bold text-light">{userReview.title}</h3>
-              <p className="text-light font-paragraph">{userReview.description}</p>
-              <p className="text-sm text-light">Autor: {userReview.author}</p>
+            <div 
+            key={userReview.id} 
+            className={`relative h-auto w-full lg:h-screen flex flex-col lg:flex-row items-start lg:items-center justify-between px-10 gap-5
+              ${review.id % 2 === 0 ? 'bg-greenMid' : 'bg-greenMidsec'}`}
+            style={{ margin: 0 }}
+            >
+              <h3 className="text-2xl font-bold font-title text-light">{userReview.title}</h3>
+              <p className="text-light font-extralight font-paragraph">{userReview.description}</p>
+              <p className="text-sm font-paragraph font-bold text-greenLight font ">Autor: {userReview.author}</p>
               <div className="flex items-center gap-2 mt-2">
               <img src={userReview.image} alt="rating" className="w-24" />
                 <button onClick={() => handleLike(userReview.id)} className="bg-blue-600 text-white px-3 py-1 rounded">
