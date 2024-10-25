@@ -68,128 +68,135 @@ const Register = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-gray-800 p-6 rounded-lg shadow-lg mt-10 mb-10">
-      <h1 className="text-2xl text-white mb-4">Regístrate</h1>
-      <form onSubmit={handleSubmit}>
-        {/* Nombre */}
-        <div className="mb-4">
-          <label className="block text-white">Nombre</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full p-2 rounded-lg bg-gray-700 text-white"
-          />
-          {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
-        </div>
-
-        {/* Correo */}
-        <div className="mb-4">
-          <label className="block text-white">Correo</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full p-2 rounded-lg bg-gray-700 text-white"
-          />
-          {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
-        </div>
-
-        {/* Fecha de nacimiento */}
-        <div className="mb-4">
-          <label className="block text-white">Fecha de Nacimiento</label>
-          <input
-            type="date"
-            name="birth_date"
-            value={formData.birth_date}
-            onChange={handleChange}
-            className="w-full p-2 rounded-lg bg-gray-700 text-white"
-          />
-          {errors.birth_date && <p className="text-red-500 text-sm">{errors.birth_date}</p>}
-        </div>
-
-        {/* Contraseña */}
-        <div className="mb-4">
-          <label className="block text-white">Contraseña</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className="w-full p-2 rounded-lg bg-gray-700 text-white"
-          />
-          {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
-        </div>
-
-        {/* Confirmar Contraseña */}
-        <div className="mb-4">
-          <label className="block text-white">Confirmar Contraseña</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            className="w-full p-2 rounded-lg bg-gray-700 text-white"
-          />
-          {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword}</p>}
-        </div>
-
-        {/* Acerca de mí */}
-        <div className="mb-4">
-          <label className="block text-white">Acerca de mí</label>
-          <textarea
-            name="bio"
-            value={formData.bio}
-            onChange={handleChange}
-            className="w-full p-2 rounded-lg bg-gray-700 text-white"
-          ></textarea>
-          {errors.bio && <p className="text-red-500 text-sm">{errors.bio}</p>}
-        </div>
-
-        {/* Elige Avatar */}
-        <div className="mb-4 relative">
-          <label className="block text-white">Elige Avatar</label>
-          <div
-            className="w-full p-2 rounded-lg bg-gray-700 text-white cursor-pointer"
-            onClick={() => setShowAvatarDropdown(!showAvatarDropdown)}
-          >
-            {formData.avatar ? (
-              <img
-                src={formData.avatar}
-                alt="Avatar seleccionado"
-                className="inline-block w-10 h-10 rounded-full mr-2"
+    <div className="min-h-screen flex flex-col justify-between px-8 bg-cover bg-center bg-no-repeat py-12"
+      style={{ backgroundImage: `url('/fondoLoginMobile.png')` }}
+    >
+      {/* Contenedor de registro centrado */}
+      <div className="flex-grow flex justify-center items-center mt-20"> {/* Agregado mt-20 para margen superior */}
+        <div className="bg-green-900 p-8 rounded-lg shadow-lg max-w-md w-full md:max-w-lg">
+          <h2 className="text-white text-3xl mb-6 text-center">Regístrate</h2>
+          
+          <form onSubmit={handleSubmit}>
+            {/* Nombre */}
+            <div className="mb-4">
+              <label className="block text-white text-sm mb-2">Nombre</label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full p-2 rounded bg-gray-100 text-gray-900"
               />
-            ) : (
-              'Seleccionar Avatar...'
-            )}
-          </div>
-
-          {/* Dropdown de avatares */}
-          {showAvatarDropdown && (
-            <div
-              className="absolute z-10 mt-2 w-full bg-gray-800 p-4 rounded-lg shadow-lg grid grid-cols-4 gap-4"
-              style={{ maxHeight: '200px', overflowY: 'auto', top: '100%' }}
-            >
-              {avatars.map((avatar, index) => (
-                <img
-                  key={index}
-                  src={avatar}
-                  alt={`Avatar ${index + 1}`}
-                  className="w-16 h-16 object-cover  cursor-pointer hover:ring-4 hover:ring-green-500"  // Añadido object-cover para asegurar que la imagen mantenga sus proporciones
-                  onClick={() => handleAvatarSelect(avatar)}
-                />
-              ))}
+              {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
             </div>
-          )}
-          {errors.avatar && <p className="text-red-500 text-sm">{errors.avatar}</p>}
-        </div>
 
-        <button type="submit" className="w-full bg-green-500 text-white p-2 rounded-lg">
-          Crear Cuenta
-        </button>
-      </form>
+            {/* Correo */}
+            <div className="mb-4">
+              <label className="block text-white text-sm mb-2">Correo</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full p-2 rounded bg-gray-100 text-gray-900"
+              />
+              {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+            </div>
+
+            {/* Fecha de nacimiento */}
+            <div className="mb-4">
+              <label className="block text-white text-sm mb-2">Fecha de Nacimiento</label>
+              <input
+                type="date"
+                name="birth_date"
+                value={formData.birth_date}
+                onChange={handleChange}
+                className="w-full p-2 rounded bg-gray-100 text-gray-900"
+              />
+              {errors.birth_date && <p className="text-red-500 text-sm">{errors.birth_date}</p>}
+            </div>
+
+            {/* Contraseña */}
+            <div className="mb-4">
+              <label className="block text-white text-sm mb-2">Contraseña</label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="w-full p-2 rounded bg-gray-100 text-gray-900"
+              />
+              {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+            </div>
+
+            {/* Confirmar contraseña */}
+            <div className="mb-4">
+              <label className="block text-white text-sm mb-2">Confirmar Contraseña</label>
+              <input
+                type="password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className="w-full p-2 rounded bg-gray-100 text-gray-900"
+              />
+              {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword}</p>}
+            </div>
+
+            {/* Acerca de mí */}
+            <div className="mb-4">
+              <label className="block text-white text-sm mb-2">Acerca de mí</label>
+              <textarea
+                name="bio"
+                value={formData.bio}
+                onChange={handleChange}
+                className="w-full p-2 rounded bg-gray-100 text-gray-900"
+              ></textarea>
+              {errors.bio && <p className="text-red-500 text-sm">{errors.bio}</p>}
+            </div>
+
+            {/* Elige avatar */}
+            <div className="mb-4 relative">
+              <label className="block text-white text-sm mb-2">Elige Avatar</label>
+              <div
+                className="w-full p-2 rounded bg-gray-100 text-gray-900 cursor-pointer"
+                onClick={() => setShowAvatarDropdown(!showAvatarDropdown)}
+              >
+                {formData.avatar ? (
+                  <img
+                    src={formData.avatar}
+                    alt="Avatar seleccionado"
+                    className="inline-block w-10 h-10 rounded-full mr-2"
+                  />
+                ) : (
+                  'Seleccionar Avatar...'
+                )}
+              </div>
+
+              {showAvatarDropdown && (
+                <div
+                  className="absolute z-10 mt-2 w-full bg-gray-800 p-4 rounded-lg shadow-lg grid grid-cols-4 gap-4"
+                  style={{ maxHeight: '200px', overflowY: 'auto', top: '100%' }}
+                >
+                  {avatars.map((avatar, index) => (
+                    <img
+                      key={index}
+                      src={avatar}
+                      alt={`Avatar ${index + 1}`}
+                      className="w-16 h-16 object-cover cursor-pointer hover:ring-4 hover:ring-green-500"
+                      onClick={() => handleAvatarSelect(avatar)}
+                    />
+                  ))}
+                </div>
+              )}
+              {errors.avatar && <p className="text-red-500 text-sm">{errors.avatar}</p>}
+            </div>
+
+            <button type="submit" className="w-full bg-green-500 hover:bg-green-600 text-white p-2 rounded">
+              Crear Cuenta
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };
