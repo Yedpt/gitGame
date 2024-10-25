@@ -1,6 +1,7 @@
 import conectionDb from './database/conectionDb';
 import UserModel from './models/userModel';
 import news from "./models/newsModel";
+import reviews from "./models/reviewModel";
 import express from 'express';
 import cors from 'cors';
 import {userRouter} from './routes/userRoutes';
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use('/api/users', userRouter);
 app.use('/news', router)
+app.use('/reviews', router)
 
     try {
         conectionDb.authenticate();
@@ -26,6 +28,9 @@ app.use('/news', router)
 
         news.sync({ force: false });
         console.log('Tabla de noticias creada');
+
+        reviews.sync({ force: false });
+        console.log('Tabla de reviews creada');
 
     }catch (error) {
         console.log("error al conectar la base de datos 😒", error);
