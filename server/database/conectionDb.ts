@@ -1,16 +1,15 @@
-import { envConfig } from '../config';
+import { Sequelize } from "sequelize";
+import { NODE_ENV, DB_TEST_NAME, DB_DEV_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT } from "../config";
 
-const connectToDatabase = () => {
-    const { DB_HOST, DB_USER, DB_PASSWORD, DB_DEV_NAME } = envConfig;
+const DB_NAME = NODE_ENV === 'test' ? DB_TEST_NAME : DB_DEV_NAME;
 
-    console.log(`Conectando a la base de datos en ${DB_HOST} con el usuario ${DB_USER}`);
+const connectionDb = new Sequelize( DB_NAME , DB_USER, DB_PASSWORD, {
+    host: DB_HOST,
+    dialect: 'mysql',
+    port: Number(DB_PORT) || 3306,
+    define: {
+        timestamps: false
+    }
+  });
 
-  // Aquí podrías usar alguna librería como Sequelize o Knex para hacer la conexión
-  // Ejemplo (si usas alguna librería de conexión):
-  // return new Sequelize(DB_DEV_NAME, DB_USER, DB_PASSWORD, {
-  //     host: DB_HOST,
-  //     dialect: 'mysql' // o el que uses
-  // });
-};
-
-export default connectToDatabase;
+export default connectionDb;

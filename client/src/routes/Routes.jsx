@@ -3,7 +3,7 @@ import {createBrowserRouter} from 'react-router-dom'
 import Layout from '../layout/Layout'
 import Home from '../pages/Home'
 import CreateReview from '../pages/CreateReview'
-import  Launch from '../pages/Launch'
+import Launch from '../pages/Launch'
 import Login from '../pages/Login'
 import News from '../pages/News'
 import PageUnderConstruction from '../pages/PageUnderConstruction'
@@ -12,6 +12,7 @@ import Profile from '../pages/Profile'
 import Register from '../pages/Register'
 import Reviews from '../pages/Reviews'
 import Videos from '../pages/Videos'
+import CreateNew from '../pages/CreateNew'
 
 export const routes = createBrowserRouter([{
     path : '/',
@@ -34,11 +35,15 @@ export const routes = createBrowserRouter([{
             element: <Login/>
         },
         {
+            path: 'createnew',
+            element: <CreateNew/>
+        },
+        {
             path: 'news',
             element: <News/>
         },
         {
-            path: 'newsdetails',
+            path: 'newsdetails/:id',
             element: <NewsDetails/>
         },
         {
