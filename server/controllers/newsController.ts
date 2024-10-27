@@ -47,19 +47,11 @@ export const deleteNew = async (req: Request, res: Response) => {
 };
 
 //PUT
-export const editNew = async (req: Request, res: Response) => {
+export const updateNew = async (req: Request, res: Response) => {
   try {
     const newId = req.params.id;
-    const {
-      user_id,
-      title,
-      news,
-      published_at,
-      updated_at,
-      num_likes,
-      image_url
-    } = req.body;
-    const editNew = await NewsModel.update(
+    const {user_id, title, news, published_at, updated_at, num_likes, image_url} = req.body;
+    const updatedNew = await NewsModel.update(
       {
         user_id,
         title,
