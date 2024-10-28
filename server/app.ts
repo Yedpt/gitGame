@@ -5,7 +5,7 @@ import reviews from "./models/reviewModel";
 import express from 'express';
 import cors from 'cors';
 import {userRouter} from './routes/userRoutes';
-import { router } from "./routes/newsRoutes";
+import { newRouter } from './routes/newsRoutes';
 import { PORT } from './config';
 
 export const app = express();
@@ -16,8 +16,7 @@ app.use(cors({
 app.use(express.json());
 
 app.use('/api/users', userRouter);
-app.use('/news', router)
-app.use('/reviews', router)
+app.use('/api/news', newRouter)
 
     try {
         conectionDb.authenticate();
