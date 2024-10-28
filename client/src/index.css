@@ -8,11 +8,16 @@ html, body {
   display: flex;
   flex-direction: column;
 }
+@font-face {
+  font-family: 'Orbitron';
+  src: url('./assets/fonts/Orbitron-VariableFont_wght.ttf'); /* ya me descargué el font orbitron de google fonts y lo puse en la carpeta fonts en assets , ahora lo  traigo para ponerlo en global. */ 
+ }
 
 #root {
   margin: 0%;
   padding: 0%;
   box-sizing: border-box;
+ @apply font-title;
 }
 
 
