@@ -3,7 +3,7 @@ import connectionDb from "../database/conectionDb";
 import { Users } from "../interfaces/userInterface";
 
 interface UserModel extends Model<Users>, Users {}
-    const UserModel = connectionDb.define('users', {
+const UserModel= connectionDb.define('users', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -11,7 +11,7 @@ interface UserModel extends Model<Users>, Users {}
     },
     rol: {
         type: DataTypes.STRING,
-        allowNull: false,
+        defaultValue: 'usuario'
     },
     name: {
         type: DataTypes.STRING,
@@ -31,15 +31,17 @@ interface UserModel extends Model<Users>, Users {}
     },
     created_at: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: DataTypes.NOW,
     },
     last_login: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
     },
     status: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM('active','inactive','deleted'), 
         allowNull: false,
+        defaultValue: 'active'
     },
     bio: {
         type: DataTypes.STRING,
