@@ -1,9 +1,8 @@
 import { DataTypes, Model } from 'sequelize';
 import connectionDb from '../database/conectionDb';
 
-
-const news = connectionDb.define(
-    'New',
+const NewsModel = connectionDb.define(
+    'News',
     {
         id: {
             type: DataTypes.INTEGER,
@@ -44,6 +43,6 @@ const news = connectionDb.define(
         timestamps: false,
     });
 
-    console.log(news === connectionDb.models.New);
+    // console.log(news === connectionDb.models.New);
 
-export default news;
+export default NewsModel;
