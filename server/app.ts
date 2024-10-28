@@ -18,7 +18,7 @@ app.use('/api/users', userRouter);
         conectionDb.authenticate();
         console.log("conexión exitosa a la bbdd");
 
-        UserModel.sync({ force: true });
+        UserModel.sync({ force: false });
         console.log("se ha creado la tabla de usuarios");
     }catch (error) {
         console.log("error al conectar la base de datos 😒", error);

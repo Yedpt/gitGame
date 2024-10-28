@@ -25,6 +25,10 @@ const Register = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [showAvatarDropdown, setShowAvatarDropdown] = useState(false);
 
+  // Estados para la visibilidad de la contraseña y confirmación
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6, avatar7, avatar8];
 
   const handleChange = (e) => {
@@ -119,26 +123,42 @@ const Register = () => {
             {/* Contraseña */}
             <div className="mb-4">
               <label className="block text-white text-sm mb-2">Contraseña</label>
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                className="w-full p-2 rounded bg-gray-100 text-gray-900"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="w-full p-2 rounded bg-gray-100 text-gray-900"
+                />
+                <span
+                  className="absolute right-3 top-3 cursor-pointer"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? "🙈" : "👁️"}
+                </span>
+              </div>
               {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
             </div>
 
             {/* Confirmar contraseña */}
             <div className="mb-4">
               <label className="block text-white text-sm mb-2">Confirmar Contraseña</label>
-              <input
-                type="password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                className="w-full p-2 rounded bg-gray-100 text-gray-900"
-              />
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  className="w-full p-2 rounded bg-gray-100 text-gray-900"
+                />
+                <span
+                  className="absolute right-3 top-3 cursor-pointer"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                >
+                  {showConfirmPassword ? "🙈" : "👁️"}
+                </span>
+              </div>
               {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword}</p>}
             </div>
 
@@ -194,12 +214,9 @@ const Register = () => {
             <button type="submit" className="w-full bg-green-500 hover:bg-green-600 text-white p-2 rounded">
               Crear Cuenta
             </button>
-          </form>
 
-          {/* Mensaje de éxito */}
-          {successMessage && (
-            <p className="text-green-500 text-center mt-4">{successMessage}</p>
-          )}
+            {successMessage && <p className="text-green-500 mt-4 text-sm">{successMessage}</p>}
+          </form>
         </div>
       </div>
     </div>
