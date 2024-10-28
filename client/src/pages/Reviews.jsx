@@ -97,11 +97,15 @@ useEffect(() => {
     <div>
       <main>
         {/* Portada */}
-        <section className="relative h-[95vh] flex items-center justify-center overflow-hidden">
-          <img src={review} alt="Fantasy landscape" className="absolute inset-0 w-full h-full object-cover" />
+        <section className={`relative ${isSmallScreen ? 'h-[50vh]' : 'h-[95vh]'} flex items-center justify-center overflow-hidden`}>
+        <img 
+          src={review} 
+          alt="Fantasy landscape" 
+          className={`absolute inset-0 w-full ${isSmallScreen ? 'h-full' : 'h-full'} object-cover`}
+        />
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/50"></div>
           <div className="relative z-0 text-center">
-            <h2 className="text-6xl font-bold text-light mb-4 font-title">REVIEWS</h2>
+            <h2 className="md:text-6xl text-4xl font-bold text-light mb-4 font-title">REVIEWS</h2>
           </div>
         </section>
 
