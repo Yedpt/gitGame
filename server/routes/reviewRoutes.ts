@@ -1,7 +1,7 @@
 import {Router} from 'express';
 import { createReview, getAllReviews } from '../controllers/reviewControllers';
 
-export const router = Router();
+export const reviewRouter = Router();
 
-router.get('/', getAllReviews);
-router.post('/', createReview);
+reviewRouter.get('/', getAllReviews);
+reviewRouter.post('/', createReview);

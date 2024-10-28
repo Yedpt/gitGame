@@ -4,6 +4,7 @@ import news from "./models/newsModel";
 import reviews from "./models/reviewModel";
 import express from 'express';
 import cors from 'cors';
+import { reviewRouter } from './routes/reviewRoutes';
 import {userRouter} from './routes/userRoutes';
 import { newRouter } from './routes/newsRoutes';
 import { PORT } from './config';
@@ -17,6 +18,7 @@ app.use(express.json());
 
 app.use('/api/users', userRouter);
 app.use('/api/news', newRouter)
+app.use('/api/reviews', reviewRouter);
 
     try {
         conectionDb.authenticate();
