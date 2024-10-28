@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { createUser } from '../services/userServices';
 import avatar1 from '../assets/avatarImage/avatar1.svg';
 import avatar2 from '../assets/avatarImage/avatar2.svg';
 import avatar3 from '../assets/avatarImage/avatar3.svg';
@@ -10,6 +11,7 @@ import avatar7 from '../assets/avatarImage/avatar7.svg';
 import avatar8 from '../assets/avatarImage/avatar8.svg';
 
 const Register = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -19,13 +21,11 @@ const Register = () => {
     bio: '',
     avatar: '',
   });
-
   const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState('');
   const [showAvatarDropdown, setShowAvatarDropdown] = useState(false);
 
-  const avatars = [
-    avatar1, avatar2, avatar3, avatar4, avatar5, avatar6, avatar7, avatar8
-  ];
+  const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6, avatar7, avatar8];
 
   const handleChange = (e) => {
     setFormData({
@@ -51,11 +51,12 @@ const Register = () => {
     e.preventDefault();
     const validationErrors = validateForm();
     setErrors(validationErrors);
-    
+
     if (Object.keys(validationErrors).length === 0) {
       try {
-        const response = await axios.post('http://localhost:5000/api/register', formData);
-        alert('Registro exitoso');
+        await createUser(formData);
+        setSuccessMessage("¡Registro exitoso! Serás redirigido al inicio de sesión.");
+        setTimeout(() => navigate('/login'), 3000); // Espera de 3 segundos antes de redirigir
       } catch (error) {
         console.error('Error al registrar', error);
       }
@@ -71,8 +72,7 @@ const Register = () => {
     <div className="min-h-screen flex flex-col justify-between px-8 bg-cover bg-center bg-no-repeat py-12"
       style={{ backgroundImage: `url('/fondoLoginMobile.png')` }}
     >
-      {/* Contenedor de registro centrado */}
-      <div className="flex-grow flex justify-center items-center mt-20"> {/* Agregado mt-20 para margen superior */}
+      <div className="flex-grow flex justify-center items-center mt-20">
         <div className="bg-green-900 p-8 rounded-lg shadow-lg max-w-md w-full md:max-w-lg">
           <h2 className="text-white text-3xl mb-6 text-center">Regístrate</h2>
           
@@ -195,6 +195,11 @@ const Register = () => {
               Crear Cuenta
             </button>
           </form>
+
+          {/* Mensaje de éxito */}
+          {successMessage && (
+            <p className="text-green-500 text-center mt-4">{successMessage}</p>
+          )}
         </div>
       </div>
     </div>

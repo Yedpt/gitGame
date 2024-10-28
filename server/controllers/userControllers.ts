@@ -61,6 +61,28 @@ export const deleteUser = async (req: Request, res: Response) => {
     }
 }
 
+export const updateUser = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { name, email, birth_date, password, bio, avatar } = req.body;
+        await UserModel.update({
+            name,
+            email,
+            birth_date,
+            password,
+            bio,
+            avatar
+        }, {
+            where: {
+                id
+            }
+        });
+        res.json({message: "usuario actualizado"});
+    } catch (error) {
+        res.json({message: "error al actualizar el usuario"});
+    }
+}
+
 // // Función para iniciar sesión de un usuario
 // export const loginUser = async (req: Request, res: Response) => {
 //     try {
