@@ -26,9 +26,8 @@ const CreateNew = () => {
     const newErrors = {};
     if (!formData.title) newErrors.title = "El título es obligatorio.";
     if (!formData.news) newErrors.news = "El contenido de la noticia es obligatorio.";
-    if (!formData.published_at) newErrors.published_at = "La fecha de publicación es automatica";
     if (!formData.updated_at) newErrors.updated_at = "La fecha de actualización es automatica";
-    // if (!formData.num_likes) newErrors.num_likes = "ABCD";
+    // if (!formData.num_likes) newErrors.num_likes = "CANTIDAD DE LIKES";
     if (!formData.image_url) newErrors.image_url = "URL";
     if (!formData.image2_url) newErrors.image2_url = "URL";
     if (!formData.news || formData.news.length < 500) newErrors.news = "La noticia debe tener al menos 500 caracteres.";
@@ -52,8 +51,10 @@ const CreateNew = () => {
 
   const [fecha, setFecha] = useState('');
   useEffect(() => {
-    const fechaActual = new Date().toISOString().slice(0, 10);
-    setFecha(fechaActual);
+    const fechaActual = new Date();
+    const opciones = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const fechaFormateada = fechaActual.toLocaleDateString('es-ES', opciones);
+    setFecha(fechaFormateada);
   }, []);
 
   return (
@@ -61,75 +62,77 @@ const CreateNew = () => {
       style={{ backgroundImage: `url('/fondoLoginMobile.png')` }}
     >
       <div className="flex-grow flex justify-center items-center mt-20">
-        <div className="bg-green-900 p-8 rounded-lg shadow-lg max-w-md w-full md:max-w-lg">
-          <h2 className="text-white text-3xl mb-6 text-center">Crea una noticia</h2>
+        <div className="bg-greenMid p-8 rounded-lg shadow-lg max-w-md w-full md:max-w-lg">
+          <h2 className="font-title text-white text-4xl mb-6 text-center">CREA UNA NOTICIA</h2>
 
           <form onSubmit={handleSubmit}>
             {/* title */}
             <div className="mb-4">
-              <label className="block text-white text-sm mb-2">Título</label>
+              <label className="font-title block text-greenLight text-lg mb-2">TÍTULO</label>
               <input
                 type="text"
                 name="title"
                 value={formData.title}
                 onChange={handleChange}
-                className="w-full p-2 rounded bg-gray-100 text-gray-900"
+                className="w-full p-2 rounded-md bg-gray-100 text-gray-900 font-paragraph"
               />
               {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
             </div>
 
             {/* Noticia */}
             <div className="mb-4">
-              <label className="block text-white text-sm mb-2">Desglose de la noticia</label>
+              <label className="font-title block text-greenLight text-lg mb-2">DETALLE</label>
               <textarea
                 name="news"
                 value={formData.news}
                 onChange={handleChange}
-                className="w-full p-2 rounded bg-gray-100 text-gray-900"
+                className="w-full p-2 rounded-md bg-gray-100 text-gray-900 font-paragraph"
               ></textarea>
               {errors.news && <p className="text-red-500 text-sm">{errors.news}</p>}
             </div>
 
             {/* Fecha de publicación */}
             <div className="mb-4">
-              <label className="block text-white text-sm mb-2">Fecha de Publicación</label>
+              <label className="font-title block text-greenLight text-lg  mb-2">FECHA DE PUBLICACIÓN</label>
               <input
-                type="date"
+                type="text"
                 name="published_at"
                 value={fecha}
-                onChange={(e) => setFecha(e.target.value)}
-                className="w-full p-2 rounded bg-gray-100 text-gray-900"
+                readOnly
+                className="w-full p-2 rounded-md bg-gray-100 text-gray-900 font-paragraph"
               />
               {errors.published_at && <p className="text-red-500 text-sm">{errors.published_at}</p>}
             </div>
 
             <div className="mb-4">
-              <label className="block text-white text-sm mb-2">Subi la imagen principal</label>
+              <label className="font-title block text-greenLight text-lg  mb-2">IMAGEN PRINCIPAL</label>
               <input
                 type="file"
                 name="url"
                 value={formData.image_url}
                 onChange={handleChange}
-                className="w-full p-2 rounded bg-gray-100 text-gray-900"
+                className="w-full p-2 rounded-md bg-gray-100 text-gray-900 font-paragraph"
               />
               {errors.image_url && <p className="text-red-500 text-sm">{errors.image_url}</p>}
             </div>
 
             <div className="mb-4">
-              <label className="block text-white text-sm mb-2">Subi una imagen secundaria</label>
+              <label className="font-title block text-greenLight text-lg  mb-2">IMAGEN SECUNDARIA</label>
               <input
                 type="file"
                 name="url"
                 value={formData.image2_url}
                 onChange={handleChange}
-                className="w-full p-2 rounded bg-gray-100 text-gray-900"
+                className="w-full p-2 rounded-md bg-gray-100 text-gray-900 font-paragraph"
               />
               {errors.image2_url && <p className="text-red-500 text-sm">{errors.image2_url}</p>}
             </div>
 
-            <button type="submit" className="w-full bg-green-500 hover:bg-green-600 text-white p-2 rounded">
-              Crear Noticia
-            </button>
+            <div className="mb-4 flex justify-center">
+              <button type="submit" className="font-title w-32 bg-greenLight hover:bg-greenMidsec text-white p-3 rounded-md">
+                Enviar
+              </button>
+            </div>
           </form>
         </div>
       </div>
