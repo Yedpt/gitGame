@@ -1,5 +1,6 @@
 import React from 'react';
 import blackops from '../assets/img/blackops.svg';
+import { Link } from 'react-router-dom';
 
 const MainCard = () => {
   return (
@@ -18,9 +19,10 @@ const MainCard = () => {
       </div>
 
       <div className='col-span-9' >
-        {/* <Link to={``}> */}
+        {/* <Link to={`/newsdetails/${id}`}> */}
+        <Link to={`/newsdetails/1`}>
         <button className='font-title text-white rounded-md bg-greenMid px-1 py-1 text-sm font-bold my-4'>LEER MÁS</button>
-        {/* </Link> */}
+        </Link>
       </div>
 
       <div className="col-span-9">
