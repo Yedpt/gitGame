@@ -70,7 +70,7 @@ const Navbar = () => {
                             Noticias
                         </Link>
                         <Link
-                            to="/"
+                            to="/videos"
                             className="text-light text-sm hover:text-greenLight px-6 py-3 rounded transition-all duration-300"
                         >
                             Videos
