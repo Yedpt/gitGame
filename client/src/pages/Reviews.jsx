@@ -7,6 +7,8 @@ import starone from '../assets/img/starsOne.svg';
 import starsec from '../assets/img/starsSec.svg';
 import cultoflamb from '../assets/img/cultoflamb.svg';
 import corekeeper from '../assets/img/corekeeper.svg';
+import { AiFillHeart } from 'react-icons/ai';
+
 
 // Simulamos la API con reviews desde el backend
 const fetchReviews = async () => {
@@ -105,8 +107,8 @@ useEffect(() => {
 
         {/* Preview Admins */}
         <section className="bg-dark px-0 py-10">
-          <h2 className="font-title text-3xl sm:text-4xl px-10 text-light font-semibold md:text-left  text-center mb-8">
-            ÚLTIMOS REVIEWS
+          <h2 className="font-title text-3xl md:text-4xl px-10 text-light font-semibold md:text-left  text-center mb-8">
+            ÚLTIMAS RESEÑAS
           </h2>
 
           {/* Contenedores de reviews ADMIN */}
@@ -155,25 +157,50 @@ useEffect(() => {
 
         {/* Reviews Users */}
         <section className="bg-dark px-0 py-10">
-          <h2 className="font-title text-3xl sm:text-4xl px-10 text-light font-semibold md:text-left  text-center mb-8">
-            REVIEWS DE USUARIOS
+          <h2 className="font-title text-3xl md:text-4xl px-10 text-light font-semibold md:text-left  text-center mb-8">
+            RESEÑAS DE USUARIOS
           </h2>
+
+          {/* Contenedores de reviews USUARIOS */}
           {userReviews.map((userReview) => (
             <div 
             key={userReview.id} 
-            className={`relative h-auto w-full lg:h-screen flex flex-col lg:flex-row items-start lg:items-center justify-between px-10 gap-5
-              ${review.id % 2 === 0 ? 'bg-greenMid' : 'bg-greenMidsec'}`}
+            className={`relative h-auto w-full lg:h-screen flex flex-col lg:flex-row items-start lg:items-center justify-between p-10 gap-5
+              ${userReview.id % 2 === 0 ? 'bg-greenMid' : 'bg-greenMidsec'}`}
             style={{ margin: 0 }}
             >
-              <h3 className="text-2xl font-bold font-title text-light">{userReview.title}</h3>
-              <p className="text-light font-extralight font-paragraph">{userReview.description}</p>
-              <p className="text-sm font-paragraph font-bold text-greenLight font ">Autor: {userReview.author}</p>
-              <div className="flex items-center gap-2 mt-2">
-              <img src={userReview.image} alt="rating" className="w-24" />
-                <button onClick={() => handleLike(userReview.id)} className="bg-blue-600 text-white px-3 py-1 rounded">
-                  Like
+            {/* Contenedor de Título, Descripción y Datos */}
+            <div className={`flex-1 md:mr-10 ${isSmallScreen ? 'w-full' : 'text-left'}`}
+              onClick={() => isSmallScreen && toggleReview(userReview.id)}
+            >
+
+              <h1 className="md:text-3xl md:text-left text-center px-4 mb-4 text-2xl font-bold cursor-pointer font-title text-light">{userReview.title}</h1>
+
+              {isSmallScreen ? (
+                <Collapse isOpened={expandedReview === userReview.id}>
+                  <div className='px-4 py-2'>
+                    <p className="text-base md:text-lg text-light  font-paragraph mb-4">{userReview.description}</p>
+                    <p className="text-light">Autor: {userReview.author}</p>
+                  </div>
+                  </Collapse>
+              ) : (
+              <div className="px-4 py-2">
+                <p className="text-light font-extralight font-paragraph">{userReview.description}</p>
+                <p className="text-sm font-paragraph font-bold text-greenLight font ">Autor: {userReview.author}</p>
+                <button onClick={() => handleLike(userReview.id)} className="text-light hover:text-pink-700 px-3 py-1 rounded">
+                  <AiFillHeart size={24} />
                 </button>
                 <span className="text-light">{userReview.likes} Likes</span>
+              </div>
+              )}
+            </div>
+            {/* Contenedor de la Imagen */}
+            <div className="flex-1 flex justify-center md:justify-end px-4">
+              <img 
+                className="w-[100%] max-w-[651px] max-h-[442px] object-contain"
+                src={userReview.image} 
+                alt={userReview.title} 
+              />
               </div>
             </div>
           ))}
