@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { getAllNews, createNew, deleteNew, updateNew } from "../controllers/newsController";
 
-export const newsRouter = Router();
+export const newRouter = Router();
 
-newsRouter.get('/', getAllNews);
-newsRouter.post('/', createNew);
-newsRouter.delete('/:id', deleteNew)
-newsRouter.put('/:id', updateNew)
+newRouter.get('/', getAllNews);
+newRouter.post('/', createNew);
+newRouter.delete('/:id', deleteNew)
+newRouter.put('/:id', updateNew)
