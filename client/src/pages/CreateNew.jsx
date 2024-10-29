@@ -1,14 +1,12 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { createNew } from '../services/newServices';
 
 const CreateNew = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    users_id: '',
     title: '',
     news: '',
-    published_at: '',
-    updated_at: '',
-    num_likes: '',
     image_url: '',
     image2_url: '',
   });
@@ -26,11 +24,9 @@ const CreateNew = () => {
     const newErrors = {};
     if (!formData.title) newErrors.title = "El título es obligatorio.";
     if (!formData.news) newErrors.news = "El contenido de la noticia es obligatorio.";
-    if (!formData.updated_at) newErrors.updated_at = "La fecha de actualización es automatica";
-    // if (!formData.num_likes) newErrors.num_likes = "CANTIDAD DE LIKES";
     if (!formData.image_url) newErrors.image_url = "URL";
     if (!formData.image2_url) newErrors.image2_url = "URL";
-    if (!formData.news || formData.news.length < 500) newErrors.news = "La noticia debe tener al menos 500 caracteres.";
+    if (!formData.news || formData.news.length < 10) newErrors.news = "La noticia debe tener al menos 10 caracteres.";
     return newErrors;
   };
 
@@ -41,21 +37,13 @@ const CreateNew = () => {
 
     if (Object.keys(validationErrors).length === 0) {
       try {
-        const response = await axios.post('http://localhost:3000/api/news', formData);
-        alert('Registro exitoso');
+        await createNew(formData);
+        setTimeout(() => navigate('/news'), 3000);
       } catch (error) {
         console.error('Error al registrar', error);
       }
     }
   };
-
-  const [fecha, setFecha] = useState('');
-  useEffect(() => {
-    const fechaActual = new Date();
-    const opciones = { day: '2-digit', month: '2-digit', year: 'numeric' };
-    const fechaFormateada = fechaActual.toLocaleDateString('es-ES', opciones);
-    setFecha(fechaFormateada);
-  }, []);
 
   return (
     <div className="min-h-screen flex flex-col justify-between px-8 bg-cover bg-center bg-no-repeat py-12"
@@ -66,6 +54,7 @@ const CreateNew = () => {
           <h2 className="font-title text-white text-4xl mb-6 text-center">CREA UNA NOTICIA</h2>
 
           <form onSubmit={handleSubmit}>
+
             {/* title */}
             <div className="mb-4">
               <label className="font-title block text-greenLight text-lg mb-2">TÍTULO</label>
@@ -91,24 +80,11 @@ const CreateNew = () => {
               {errors.news && <p className="text-red-500 text-sm">{errors.news}</p>}
             </div>
 
-            {/* Fecha de publicación */}
-            <div className="mb-4">
-              <label className="font-title block text-greenLight text-lg  mb-2">FECHA DE PUBLICACIÓN</label>
-              <input
-                type="text"
-                name="published_at"
-                value={fecha}
-                readOnly
-                className="w-full p-2 rounded-md bg-gray-100 text-gray-900 font-paragraph"
-              />
-              {errors.published_at && <p className="text-red-500 text-sm">{errors.published_at}</p>}
-            </div>
-
             <div className="mb-4">
               <label className="font-title block text-greenLight text-lg  mb-2">IMAGEN PRINCIPAL</label>
               <input
                 type="file"
-                name="url"
+                name="image_url"
                 value={formData.image_url}
                 onChange={handleChange}
                 className="w-full p-2 rounded-md bg-gray-100 text-gray-900 font-paragraph"
@@ -133,6 +109,7 @@ const CreateNew = () => {
                 Enviar
               </button>
             </div>
+
           </form>
         </div>
       </div>
