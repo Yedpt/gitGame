@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/img/ggLogo1.svg"
+import { useAuth } from "../context/AuthContext";
+import logo from "../assets/img/ggLogo1.svg";
+import avatar1 from "../assets/avatarimage/avatar1.svg";
 
 const Navbar = () => {
+    const { isLoggedIn, logout } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // Simulación de login
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
-    };
+    const toggleMenu = () => setIsOpen(!isOpen);
+    const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+
+    
 
     return (
         <header className="font-title">
@@ -61,69 +65,60 @@ const Navbar = () => {
                         </button>
                     </div>
 
-                    {/* Menú principal - visible en pantallas grandes */}
+                     {/* Menú principal - visible en pantallas grandes */}
                     <div className="hidden lg:flex items-center space-x-3 font-title font-semibold">
-                        <Link
-                            to="/news"
-                            className="text-light text-sm hover:text-greenLight px-4 py-1 rounded transition-all duration-300"
-                        >
+                        <Link to="/news" className="text-light text-sm hover:text-greenLight px-4 py-1 rounded transition-all duration-300">
                             Noticias
                         </Link>
-                        <Link
-                            to="/videos"
-                            className="text-light text-sm hover:text-greenLight px-6 py-3 rounded transition-all duration-300"
-                        >
+                        <Link to="/videos" className="text-light text-sm hover:text-greenLight px-6 py-3 rounded transition-all duration-300">
                             Videos
                         </Link>
-                        <Link
-                            to="/"
-                            className="text-light text-sm hover:text-greenLight px-6 py-3 rounded transition-all duration-300"
-                        >
+                        <Link to="/" className="text-light text-sm hover:text-greenLight px-6 py-3 rounded transition-all duration-300">
                             Reviews
                         </Link>
-                        <Link
-                            to="/"
-                            className="text-light text-sm hover:text-greenLight px-6 py-3 rounded transition-all duration-300"
-                        >
+                        <Link to="/" className="text-light text-sm hover:text-greenLight px-6 py-3 rounded transition-all duration-300">
                             Próximos Lanzamientos
                         </Link>
 
                         {/* Simulación de cambio entre Login y Profile */}
                         {isLoggedIn ? (
                             <>
-                                {/* Icono de perfil */}
-                                <button className="bg-greenLight text-dark font-title px-4 py-2 rounded-full">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                        className="w-6 h-6"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M5.121 19.364A1.5 1.5 0 014 18.237V16.5A3.5 3.5 0 017.5 13h9a3.5 3.5 0 013.5 3.5v1.737a1.5 1.5 0 01-1.121 1.127l-7 1.5a1.5 1.5 0 01-.758 0l-7-1.5z"
-                                        />
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M12 12a4 4 0 100-8 4 4 0 000 8z"
-                                        />
-                                    </svg>
+                                {/* Avatar y saludo */}
+                                <button onClick={toggleDropdown} className="flex items-center bg-greenLight text-dark font-title px-4 py-2 rounded-full">
+                                    <img src={avatar1} alt="avatar" className="w-6 h-6 rounded-full" />
+                                    <span className="ml-2">Hola Usuario</span> 
                                 </button>
-                                <button className="text-light text-sm hover:text-red-500 px-4 py-2">
-                                    Cerrar sesión
-                                </button>
+                                
+                                {/* Dropdown Menu */}
+                                {isDropdownOpen && (
+                                    <div className="absolute top-full text-base h-10  right-5 mt-0 w-40 bg-dark text-light  z-20">
+                                        
+                                        {/* Botón de "Perfil" */}
+                                        <Link to="/profile" onClick={() => setIsDropdownOpen(false)}>
+                                            <button className="block w-full text-center px-4 py-2 hover:bg-light hover:text-dark ">
+                                                Perfil
+                                            </button>
+                                        </Link>
+
+                                        {/* Botón de "Cerrar sesión" */}
+                                        <button
+                                            onClick={() => {
+                                                logout();
+                                                setIsDropdownOpen(false);
+                                            }}
+                                            className="block w-full text-center bg-dark px-4 py-2 hover:bg-red-500 hover:text-dark "
+                                        >
+                                            Cerrar sesión
+                                        </button>
+                                    </div>
+                                    
+                                )}
                             </>
                         ) : (
                             <Link to="/login">
-
-                            <button className="bg-greenLight text-dark font-title px-4 py-2 rounded-full">
-                                Iniciar sesión
-                            </button>
+                                <button className="bg-greenLight text-dark font-title px-4 py-2 rounded-full">
+                                    Iniciar sesión
+                                </button>
                             </Link>
                         )}
                     </div>
@@ -132,10 +127,10 @@ const Navbar = () => {
                     <div
                         className={`${
                             isOpen ? "block" : "hidden"
-                        } lg:hidden fixed inset-0 bg-primary bg-opacity-60 backdrop-blur-lg flex flex-col items-center justify-center space-y-6 z-20`}
+                        } lg:hidden fixed inset-0 bg-primary bg-opacity-60 backdrop-blur-lg flex flex-col items-center justify-center text-center space-y-6 z-20`}
                     >
                         {/* Botón de cerrar en el centro superior */}
-                        <div className="absolute top-4 inset-x-0 flex justify-center">
+                        <div className="absolute top-10 inset-x-0 flex justify-center items-center">
                             <button
                                 onClick={toggleMenu}
                                 className="text-light focus:outline-none"
@@ -159,39 +154,61 @@ const Navbar = () => {
 
                         <Link
                             to="/"
-                            className="text-light text-lg hover:text-greenLight"
+                            className="text-greenLight text-2xl font-semibold"
                             onClick={toggleMenu}
                         >
                             Noticias
                         </Link>
                         <Link
                             to="/"
-                            className="text-light text-lg hover:text-greenLight"
+                            className="text-light text-2xl font-semibold hover:text-greenLight"
                             onClick={toggleMenu}
                         >
                             Videos
                         </Link>
                         <Link
                             to="/"
-                            className="text-light text-lg hover:text-greenLight"
+                            className=" text-2xl font-semibold text-greenLight"
                             onClick={toggleMenu}
                         >
                             Reviews
                         </Link>
                         <Link
                             to="/"
-                            className="text-light text-lg hover:text-greenLight"
+                            className="text-light text-2xl font-semibold "
                             onClick={toggleMenu}
                         >
                             Próximos Lanzamientos
                         </Link>
-                        <Link
-                            to="/login"
-                            className="text-light text-lg hover:text-greenLight"
-                            onClick={toggleMenu}
-                        >
-                            {isLoggedIn ? "Perfil" : "Iniciar sesión"}
-                        </Link>
+                            {/* Opciones de Perfil y Cerrar sesión */}
+                            {isLoggedIn ? (
+                                <div className="flex flex-col space-y-2">
+                                    <Link 
+                                        to="/profile" 
+                                        className="text-greenLight text-center text-2xl font-bold "
+                                        onClick={toggleMenu}
+                                    >
+                                        Perfil
+                                    </Link>
+                                    <button
+                                        onClick={() => {
+                                            logout();
+                                            toggleMenu();
+                                        }}
+                                        className="text-2xl text-center font-bold text-red-500 hover:text-red-600"
+                                    >
+                                        Cerrar sesión
+                                    </button>
+                                </div>
+                            ) : (
+                                <Link
+                                to="/login"
+                                className="text-lg  text-center font-semibold text-greenLight"
+                                onClick={toggleMenu}
+                            >
+                                Iniciar sesión
+                            </Link>
+                            )}
                     </div>
                 </div>
             </nav>
