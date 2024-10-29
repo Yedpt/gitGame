@@ -38,7 +38,7 @@ const CreateNew = () => {
     if (Object.keys(validationErrors).length === 0) {
       try {
         await createNew(formData);
-        setTimeout(() => navigate('/news'), 3000);
+        setTimeout(() => navigate('/news'), 2000);
       } catch (error) {
         console.error('Error al registrar', error);
       }
@@ -81,7 +81,7 @@ const CreateNew = () => {
             </div>
 
             <div className="mb-4">
-              <label className="font-title block text-greenLight text-lg  mb-2">IMAGEN PRINCIPAL</label>
+              <label className="font-title block text-greenLight text-lg  mb-2">IMÁGEN PRINCIPAL</label>
               <input
                 type="file"
                 name="image_url"
@@ -93,10 +93,10 @@ const CreateNew = () => {
             </div>
 
             <div className="mb-4">
-              <label className="font-title block text-greenLight text-lg  mb-2">IMAGEN SECUNDARIA</label>
+              <label className="font-title block text-greenLight text-lg  mb-2">IMÁGEN SECUNDARIA</label>
               <input
                 type="file"
-                name="url"
+                name="image2_url"
                 value={formData.image2_url}
                 onChange={handleChange}
                 className="w-full p-2 rounded-md bg-gray-100 text-gray-900 font-paragraph"

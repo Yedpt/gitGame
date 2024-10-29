@@ -2,9 +2,21 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:3000/api/news';
 
+
+//Get all news -- GET
+export const getAllNews = async () => {
+    try {
+      const res = await axios.get(URL_API);
+      return res;
+    } catch (error) {
+      console.error('getAllNews error ', error.message);
+      throw error;
+    }
+  };
+
 // Crear una noticia
 export const createNew = async (newData) => {
-  const { title, news, image_url } = newData;
+  const { title, news, image_url, image2_url } = newData;
   const user_id = 1; // LIGADO A LA TABLA DE USUARIOS
   const published_at = new Date(); // Fecha de creación
   const updated_at = new Date(); // Fecha de actualización
@@ -19,6 +31,7 @@ export const createNew = async (newData) => {
         updated_at,
         num_likes,
         image_url,
+        image2_url,
     });
     return response.data;
   } catch (error) {
