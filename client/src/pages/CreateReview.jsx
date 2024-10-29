@@ -1,8 +1,13 @@
-//crear una review desde el perfil
-
 import React from 'react'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { createReview } from '../services/newServices';
 
-const CreateReview = () => {
+const createReview = () => {
+  const navigate = useNavigate ();
+  const [formData, setFormData] = useState (
+    
+  )
   return (
     <div>
       <p>crea una review</p>
@@ -10,4 +15,4 @@ const CreateReview = () => {
   )
 }
 
-export default CreateReview
+export default createReview
