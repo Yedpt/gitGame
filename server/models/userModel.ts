@@ -3,7 +3,7 @@ import connectionDb from "../database/conectionDb";
 import { Users } from "../interfaces/userInterface";
 
 interface UserModel extends Model<Users>, Users {}
-const UserModel= connectionDb.define('users', {
+const UserModel= connectionDb.define<UserModel>('users', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,

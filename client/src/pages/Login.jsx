@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ setIsLoggedIn, setUserName }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -53,9 +53,16 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/api/login', { email, password });
+      // Verificar el usuario en el backend
+      const response = await axios.post('http://localhost:3000/api/users', { email, password });
       console.log('Login exitoso:', response.data);
-      // Aquí puedes redirigir o guardar el token según tu lógica
+      
+      // Guardar información del usuario en sessionStorage
+      sessionStorage.setItem('user', JSON.stringify(response.data.user)); // Guarda el objeto del usuario en sessionStorage
+
+      setIsLoggedIn(true);
+      setUserName(response.data.user.name); // Asumiendo que el backend retorna el nombre del usuario
+      navigate('/'); // Redirige al home
     } catch (error) {
       setError('Error al iniciar sesión. Verifica tus credenciales.');
     }
@@ -66,7 +73,6 @@ const Login = () => {
       className="min-h-screen flex flex-col justify-between px-8 mt-8 bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url('/fondoLoginMobile.png')` }} 
     >
-      {/* Contenedor de login centrado */}
       <div className="flex-grow flex justify-center items-center">
         <div className="bg-green-900 p-8 rounded-lg shadow-lg max-w-md w-full md:max-w-lg">
           <h2 className="text-white text-3xl mb-6 text-center">Inicia Sesión</h2>
@@ -78,7 +84,7 @@ const Login = () => {
               </label>
               <input
                 className="w-full p-2 rounded bg-gray-100 text-gray-900"
-                type="text"  // Cambiado a "text" para eliminar la validación nativa
+                type="text"
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}

@@ -1,8 +1,8 @@
-import { Request, Response } from 'express';
-import dotenv from 'dotenv';
+import { Request, Response } from "express";
 import UserModel from '../models/userModel';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { status } from '../interfaces/userInterface';
 
 //CRUD
 //READ - GET
@@ -15,6 +15,30 @@ export const getUsers = async (req: Request, res: Response) => {
         res.json({message: "error al obtener los usuarios"});
     }
 }
+
+export const loginUser = async (req : any , res: any) => { //  aqui me he QUEDADO 
+    const { email, password } = req.body;
+  
+    try {
+      // Buscar el usuario por correo
+      const user = await UserModel.findOne({ where: { email } });
+  
+      if (!user) {
+        return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
+  
+      // Comprobar la contraseña (sin bcrypt por ahora)
+      if (user.password !== password) {
+        return res.status(401).json({ message: 'Contraseña incorrecta' });
+      }
+  
+      // Aquí puedes establecer una sesión o manejar el inicio de sesión según tu lógica
+      return res.status(200).json({ message: 'Login exitoso', user: { id: user.id, name: user.name, avatar: user.avatar } });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Error del servidor' });
+    }
+  };
 
 export const getUsersById = async (req: Request, res: Response) => {
     try {
@@ -35,9 +59,9 @@ export const createUser = async (req: Request, res: Response) => {
         password,
         bio,
         avatar,
-        create_at: new Date(),
-        status: 'active',
-        role: 'usuario',
+        created_at: new Date(),
+        status : status.active,
+        rol: 'usuario',
       });
       res.status(201).json(user);
     } catch (error) {
@@ -58,6 +82,28 @@ export const deleteUser = async (req: Request, res: Response) => {
         res.json({message: "usuario eliminado"});
     } catch (error) {
         res.json({message: "error al eliminar el usuario"});
+    }
+}
+
+export const updateUser = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { name, email, birth_date, password, bio, avatar } = req.body;
+        await UserModel.update({
+            name,
+            email,
+            birth_date,
+            password,
+            bio,
+            avatar
+        }, {
+            where: {
+                id
+            }
+        });
+        res.json({message: "usuario actualizado"});
+    } catch (error) {
+        res.json({message: "error al actualizar el usuario"});
     }
 }
 
