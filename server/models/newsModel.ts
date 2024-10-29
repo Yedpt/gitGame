@@ -38,6 +38,10 @@ const NewsModel = connectionDb.define(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        image2_url: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
     },
     {
         timestamps: false,

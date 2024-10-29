@@ -14,7 +14,7 @@ export const getAllNews = async (req: Request, res: Response) => {
 //POST
 export const createNew = async (req: Request, res: Response) => {
   try {
-    const { user_id, title, news, published_at, updated_at, num_likes, image_url } = req.body;
+    const { user_id, title, news, published_at, updated_at, num_likes, image_url, image2_url } = req.body;
     const report = await NewsModel.create({
       user_id,
       title,
@@ -23,6 +23,7 @@ export const createNew = async (req: Request, res: Response) => {
       updated_at,
       num_likes,
       image_url,
+      image2_url,
     });
     res.json(report);
   }
@@ -50,7 +51,7 @@ export const deleteNew = async (req: Request, res: Response) => {
 export const updateNew = async (req: Request, res: Response) => {
   try {
     const newId = req.params.id;
-    const {user_id, title, news, published_at, updated_at, num_likes, image_url} = req.body;
+    const {user_id, title, news, published_at, updated_at, num_likes, image_url, image2_url} = req.body;
     const updatedNew = await NewsModel.update(
       {
         user_id,
@@ -60,6 +61,7 @@ export const updateNew = async (req: Request, res: Response) => {
         updated_at,
         num_likes,
         image_url,
+        image2_url
       },
       {
         where: { id: newId }
