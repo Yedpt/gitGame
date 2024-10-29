@@ -61,7 +61,7 @@ export const updateNew = async (req: Request, res: Response) => {
         updated_at,
         num_likes,
         image_url,
-        image2_url
+        image2_url,
       },
       {
         where: { id: newId }
