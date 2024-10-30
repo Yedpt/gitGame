@@ -2,7 +2,7 @@ import conectionDb from './database/conectionDb';
 import UserModel from './models/userModel';
 import express from 'express';
 import cors from 'cors';
-import {userRouter} from './routes/userRoutes';
+import {loginRouter, userRouter} from './routes/userRoutes';
 import { PORT } from './config';
 
 export const app = express();
@@ -13,6 +13,7 @@ app.use(cors({
 app.use(express.json());
 
 app.use('/api/users', userRouter);
+app.use('/api/login', loginRouter);
 
     try {
         conectionDb.authenticate();

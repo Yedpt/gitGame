@@ -15,7 +15,7 @@ const UserModel= connectionDb.define<UserModel>('users', {
     },
     name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     email: {
         type: DataTypes.STRING,
@@ -27,7 +27,7 @@ const UserModel= connectionDb.define<UserModel>('users', {
     },
     avatar: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     created_at: {
         type: DataTypes.DATE,
@@ -40,16 +40,16 @@ const UserModel= connectionDb.define<UserModel>('users', {
     },
     status: {
         type: DataTypes.ENUM('active','inactive','deleted'), 
-        allowNull: false,
+        allowNull: true,
         defaultValue: 'active'
     },
     bio: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     birth_date: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
     },
     
     });

@@ -117,26 +117,26 @@ export const deleteUser = async (req: Request, res: Response) => {
     }
 }
 
-export const updateUser = async (req: Request, res: Response) => {
-    try {
-        const { id } = req.params;
-        const { name, email, birth_date, password, bio, avatar } = req.body;
+// export const updateUser = async (req: Request, res: Response) => {
+//     try {
+//         const { id } = req.params;
+//         const { name, email, birth_date, password, bio, avatar } = req.body;
 
-        const hashedPassword = password ? await bcrypt.hash(password, 10) : undefined;
+//         const hashedPassword = password ? await bcrypt.hash(password, 10) : undefined;
 
-        await UserModel.update({
-            name,
-            email,
-            birth_date,
-            password: hashedPassword,
-            bio,
-            avatar
-        }, {
-            where: { id }
-        });
+//         await UserModel.update({
+//             name,
+//             email,
+//             birth_date,
+//             password: hashedPassword,
+//             bio,
+//             avatar
+//         }, {
+//             where: { id }
+//         });
 
-        res.json({ message: "Usuario actualizado" });
-    } catch (error) {
-        res.json({ message: "Error al actualizar el usuario" });
-    }
-}
+//         res.json({ message: "Usuario actualizado" });
+//     } catch (error) {
+//         res.json({ message: "Error al actualizar el usuario" });
+//     }
+// }
