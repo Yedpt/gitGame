@@ -3,6 +3,7 @@ import { createContext, useContext, useState } from "react";
 
 // Crear el contexto de autenticación
 // Este contexto almacenará el estado de autenticación y la función de inicio de sesión
+// y cierre de sesión.
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
