@@ -2,10 +2,12 @@ import conectionDb from './database/conectionDb';
 import UserModel from './models/userModel';
 import news from "./models/newsModel";
 import reviews from "./models/reviewModel";
+import Video from './models/videoModel';
 import express from 'express';
 import cors from 'cors';
-import { newRouter } from './routes/newsRoutes';
 import {loginRouter, userRouter} from './routes/userRoutes';
+import { newRouter } from './routes/newsRoutes';
+import { videoRouter } from './routes/videoRoutes';
 import { PORT } from './config';
 import reviewRoutes, { uploadRouter } from './routes/reviewRoutes';
 
@@ -21,9 +23,10 @@ app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 app.use('/api/uploads', uploadRouter);
 app.use('/api/users', userRouter);
-app.use('/api/news', newRouter)
-app.use('/api/reviews', reviewRoutes);
 app.use('/api/login', loginRouter);
+app.use('/api/news', newRouter);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/videos', videoRouter);
 
     try {
         conectionDb.authenticate();
@@ -37,6 +40,10 @@ app.use('/api/login', loginRouter);
 
         reviews.sync({ force: false });
         console.log('Tabla de reviews creada');
+        
+        Video.sync({ force:false});
+        console.log('Tabla de videos creada');
+        
 
     }catch (error) {
         console.log("error al conectar la base de datos 😒", error);
