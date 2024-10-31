@@ -6,8 +6,8 @@ const API_URL = 'http://localhost:3000/api/news';
 //Get all news -- GET
 export const getAllNews = async () => {
     try {
-      const res = await axios.get(URL_API);
-      return res;
+      const res = await axios.get(API_URL);
+      return res.data;
     } catch (error) {
       console.error('getAllNews error ', error.message);
       throw error;
