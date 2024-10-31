@@ -1,8 +1,14 @@
 import conectionDb from './database/conectionDb';
 import UserModel from './models/userModel';
+import news from "./models/newsModel";
+import reviews from "./models/reviewModel";
+import Video from './models/videoModel';
 import express from 'express';
 import cors from 'cors';
+import { reviewRouter } from './routes/reviewRoutes';
 import {loginRouter, userRouter} from './routes/userRoutes';
+import { newRouter } from './routes/newsRoutes';
+import { videoRouter } from './routes/videoRoutes';
 import { PORT } from './config';
 
 export const app = express();
@@ -14,6 +20,9 @@ app.use(express.json());
 
 app.use('/api/users', userRouter);
 app.use('/api/login', loginRouter);
+app.use('/api/news', newRouter)
+app.use('/api/reviews', reviewRouter);
+app.use('/api/videos', videoRouter);
 
     try {
         conectionDb.authenticate();
@@ -21,6 +30,17 @@ app.use('/api/login', loginRouter);
 
         UserModel.sync({ force: false });
         console.log("se ha creado la tabla de usuarios");
+
+        news.sync({ force: false });
+        console.log('Tabla de noticias creada');
+
+        reviews.sync({ force: false });
+        console.log('Tabla de reviews creada');
+        
+        Video.sync({ force:false});
+        console.log('Tabla de videos creada');
+        
+
     }catch (error) {
         console.log("error al conectar la base de datos 😒", error);
     }

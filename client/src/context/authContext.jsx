@@ -1,33 +1,31 @@
-// src/context/AuthContext.js
-import React, { createContext, useContext, useEffect, useState } from 'react';
+// context/AuthContext.js
+import { createContext, useContext, useState } from "react";
 
+// Crear el contexto
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const storedUser = sessionStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
+    const login = (userData) => {
+        setIsLoggedIn(true);
+        setUser(userData);
+    };
 
-  const login = (userData) => {
-    setUser(userData);
-    sessionStorage.setItem('user', JSON.stringify(userData));
-  };
+    const logout = () => {
+        setIsLoggedIn(false);
+        setUser(null);
+        sessionStorage.removeItem('user');
+    };
 
-  const logout = () => {
-    setUser(null);
-    sessionStorage.removeItem('user');
-  };
 
-  return (
-    <AuthContext.Provider value={{ user, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
+    return (
+        <AuthContext.Provider value={{ isLoggedIn,user, login, logout }}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
 
+// Hook para usar el contexto
 export const useAuth = () => useContext(AuthContext);

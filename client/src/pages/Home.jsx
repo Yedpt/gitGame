@@ -19,7 +19,7 @@ export default function Home() {
         <section className="relative h-[95vh] flex items-center justify-center overflow-hidden">
           <img src={home} alt="Fantasy landscape" className="absolute inset-0 w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/80"></div>
-          <div className="relative z-10 text-center">
+          <div className="relative z-0 text-center">
             <h2 className="text-4xl font-bold mb-4 font-title">Bienvenido a</h2>
             <img src={logo} alt="Descripción de la imagen SVG" />
           </div>
@@ -32,7 +32,7 @@ export default function Home() {
           {/* Ajuste de cuadrícula */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* El MainCard ocupará toda la altura del lado izquierdo */}
-            <div className="md:col-span-2 bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 relative">
+            <div className="md:col-span-2 bg-dark overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 relative">
               <MainCard />
             </div>
             
