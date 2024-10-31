@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { createReview } from '../services/reviewServices';
 import pattern from '../assets/img/pattern.svg';
 
 const CreateReview = () => {
@@ -9,17 +8,20 @@ const CreateReview = () => {
   const [formData, setFormData] = useState ({
     title: '',
     review: '',
-    image_url: '',
     author: '',
     rating: '',
+    image_url: null,
   });
 
   const [errors, setErrors] = useState({});
+  const [submissionError, setSubmissionError] = useState('');
 
-  const handleChange = (e) => {
+
+const handleChange = (e) => {
+    const { name, value, files } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: files ? files[0] : value, // Asigna la imagen si es un archivo
     });
   };
 
@@ -27,10 +29,10 @@ const CreateReview = () => {
     const newErrors = {};
     if (!formData.title) newErrors.title = "El título es obligatorio.";
     if (!formData.review) newErrors.review = "El contenido de la reseña es obligatorio.";
-    if (!formData.image_url) newErrors.image_url = "URL";
+    if (!formData.image_url) newErrors.image_url = "Debes seleccionar una imagen.";
     if (!formData.author) newErrors.author = "El autor es obligatorio.";
     if (!formData.rating) newErrors.rating = "La calificación es obligatoria.";
-    if (!formData.review || formData.review.length < 10) newErrors.review = "La reseña debe tener al menos 10 caracteres.";
+    if (formData.review.length < 10) newErrors.review = "La reseña debe tener al menos 10 caracteres.";
     return newErrors;
   };
 
@@ -40,14 +42,27 @@ const CreateReview = () => {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-        try {
-          const response = await axios.post('http://localhost:5000/api/reviews', formData);
-          alert('Registro exitoso');
-        } catch (error) {
-            console.error('Error al registrar reseña:', error);
-        }
+      const formDataToSend = new FormData();
+      formDataToSend.append('title', formData.title);
+      formDataToSend.append('review', formData.review);
+      formDataToSend.append('author', formData.author);
+      formDataToSend.append('rating', formData.rating);
+      formDataToSend.append('image_url', formData.image_url); // Usa el image_url del estado
+
+      try {
+        await axios.post('http://localhost:3000/api/reviews', formDataToSend, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        alert('Registro exitoso');
+        navigate('/reviews');
+      } catch (error) {
+        setSubmissionError('Error al registrar reseña: ' + error.message); // Mejora el manejo de errores
+        console.error('Error al registrar reseña:', error);
+      }
     }
-};
+  };
 
     
 return (
@@ -85,19 +100,6 @@ return (
               {errors.review && <p className="text-red-500 text-sm">{errors.review}</p>}
             </div>
 
-            {/* image_url */}
-            <div className="mb-4">
-                <label className="font-title block text-greenLight text-lg mb-2">IMAGEN</label>
-                <input
-                type="file"
-                name="image_url"
-                value={formData.image_url}
-                onChange={handleChange}
-                className="w-full p-2 rounded-md bg-gray-100 text-gray-900 font-paragraph"
-              />    
-              {errors.image_url && <p className="text-red-500 text-sm">{errors.image_url}</p>}
-            </div>
-
             {/* author */}
             <div className="mb-4">
                 <label className="font-title block text-greenLight text-lg mb-2">AUTOR</label>
@@ -123,6 +125,19 @@ return (
                 />
                 {errors.rating && <p className="text-red-500 text-sm">{errors.rating}</p>}
             </div>
+
+            {/* Image */}
+            <div className="mb-4">
+              <label className="font-title block text-greenLight text-lg mb-2">IMAGEN</label>
+              <input
+                type="file"
+                name="image_url"
+                onChange={handleChange}
+                className="w-full p-2 rounded-md bg-gray-100 text-gray-900 font-paragraph"
+              />
+              {errors.image_url && <p className="text-red-500 text-sm">{errors.image_url}</p>}
+            </div>
+
             <div className="mb-4 flex justify-center">
             <button type="submit" className="font-title w-32 bg-greenLight hover:bg-greenMidsec text-white p-3 rounded-md">
                 Enviar
