@@ -13,6 +13,7 @@ import Register from '../pages/Register'
 import Reviews from '../pages/Reviews'
 import Videos from '../pages/Videos'
 import CreateNew from '../pages/CreateNew'
+import UpcomingReleases from '../components/UpcomingReleases'
 
 export const routes = createBrowserRouter([{
     path : '/',
@@ -65,7 +66,12 @@ export const routes = createBrowserRouter([{
         {
             path: 'videos',
             element: <Videos/>
+        },
+        {
+            path: 'upcoming',
+            element: <UpcomingReleases/>
         }
+
 
     ]
 }])

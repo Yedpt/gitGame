@@ -1,6 +1,6 @@
-/*Aqui creamos la la lógica principal de la pagina
+/*Aqui creamos la lógica principal de la pagina
 de proximos lanzamientos y llamar los subcomponents
-para cada sección del mes y cada card de juego. */
+para cada sección del mes y cada Card de juego. */
 
 
 import React from 'react';
