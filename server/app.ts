@@ -5,6 +5,7 @@ import reviews from "./models/reviewModel";
 import Video from './models/videoModel';
 import express from 'express';
 import cors from 'cors';
+import releasesRoutes from './routes/releasesRoutes';
 import { reviewRouter } from './routes/reviewRoutes';
 import {userRouter} from './routes/userRoutes';
 import { newRouter } from './routes/newsRoutes';
@@ -22,6 +23,7 @@ app.use('/api/users', userRouter);
 app.use('/api/news', newRouter)
 app.use('/api/reviews', reviewRouter);
 app.use('/api/videos', videoRouter);
+app.use('/api/releases', releasesRoutes); // para Usar las rutas de los juegos
 
     try {
         conectionDb.authenticate();
