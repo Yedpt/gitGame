@@ -25,6 +25,18 @@ export const getOneReview = async (id) => {
     }
 };
 
+//GET all reviews by user ID -- GET
+export const getReviewsByUserId = async (userId) => {
+    try {
+        const response = await axios.get(`${BASE_URL}/reviews/user/${userId}`);
+        return response.data;
+    } catch (error)
+    {
+        console.error(`Error al obtener las reseñas del usuario con ID ${userId}:`, error.message);
+        throw error;
+    }
+};
+
 
 
 //CREATE new review -- POST

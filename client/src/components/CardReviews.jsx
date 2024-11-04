@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-// import { fetchUserReviews } from '../services/reviewsService'; // Supongamos que este servicio obtiene los reviews del usuario
+import { getReviewsByUserId } from '../services/reviewServices'; // Supongamos que este servicio obtiene los reviews del usuario
 
 const CardsReviews = ({ userId }) => {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
         const loadReviews = async () => {
-            const userReviews = await fetchUserReviews(userId); // Llama al servicio que obtiene los reviews de la base de datos
-            // hay que cambiar lo de arriba lo del await y el fetchUserReviews
+            const userReviews = await getReviewsByUserId(userId); 
             setReviews(userReviews);
         };
 
