@@ -26,12 +26,10 @@ const reviews = connectionDb.define(
         published_at: {
             type: DataTypes.DATE,
             defaultValue: DataTypes.NOW,
-            allowNull: true,
         },
         updated_at: {
             type: DataTypes.DATE,
             defaultValue: DataTypes.NOW,
-            allowNull: true,
         },
         image_url: {
             type: DataTypes.STRING,
@@ -53,6 +51,7 @@ const reviews = connectionDb.define(
     },
     {
         timestamps: false,
+        tableName: 'reviews',
     });
 
     console.log(reviews === connectionDb.models.Review);
