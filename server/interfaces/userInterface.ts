@@ -1,4 +1,4 @@
-enum status {
+export enum status {
     active = "active",
     inactive = "inactive",
     deleted = "deleted"
@@ -11,8 +11,14 @@ export interface Users {
     password: string;
     avatar: string;
    created_at: Date;
-   last_login: Date;
+   last_login?: Date;
    status: status
    bio: string
    birth_date: Date
   }
+
+  export interface LoginRequestBody {
+    email: string;
+    password: string;
+  }
+

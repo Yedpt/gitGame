@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { createUser } from '../services/userServices';
 import avatar1 from '../assets/avatarImage/avatar1.svg';
 import avatar2 from '../assets/avatarImage/avatar2.svg';
 import avatar3 from '../assets/avatarImage/avatar3.svg';
@@ -10,6 +11,7 @@ import avatar7 from '../assets/avatarImage/avatar7.svg';
 import avatar8 from '../assets/avatarImage/avatar8.svg';
 
 const Register = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -19,13 +21,15 @@ const Register = () => {
     bio: '',
     avatar: '',
   });
-
   const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState('');
   const [showAvatarDropdown, setShowAvatarDropdown] = useState(false);
 
-  const avatars = [
-    avatar1, avatar2, avatar3, avatar4, avatar5, avatar6, avatar7, avatar8
-  ];
+  // Estados para la visibilidad de la contraseña y confirmación
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6, avatar7, avatar8];
 
   const handleChange = (e) => {
     setFormData({
@@ -51,11 +55,12 @@ const Register = () => {
     e.preventDefault();
     const validationErrors = validateForm();
     setErrors(validationErrors);
-    
+
     if (Object.keys(validationErrors).length === 0) {
       try {
-        const response = await axios.post('http://localhost:5000/api/register', formData);
-        alert('Registro exitoso');
+        await createUser(formData);
+        setSuccessMessage("¡Registro exitoso! Serás redirigido al inicio de sesión.");
+        setTimeout(() => navigate('/login'), 3000); // Espera de 3 segundos antes de redirigir
       } catch (error) {
         console.error('Error al registrar', error);
       }
@@ -71,8 +76,7 @@ const Register = () => {
     <div className="min-h-screen flex flex-col justify-between px-8 bg-cover bg-center bg-no-repeat py-12"
       style={{ backgroundImage: `url('/fondoLoginMobile.png')` }}
     >
-      {/* Contenedor de registro centrado */}
-      <div className="flex-grow flex justify-center items-center mt-20"> {/* Agregado mt-20 para margen superior */}
+      <div className="flex-grow flex justify-center items-center mt-20">
         <div className="bg-green-900 p-8 rounded-lg shadow-lg max-w-md w-full md:max-w-lg">
           <h2 className="text-white text-3xl mb-6 text-center">Regístrate</h2>
           
@@ -119,26 +123,42 @@ const Register = () => {
             {/* Contraseña */}
             <div className="mb-4">
               <label className="block text-white text-sm mb-2">Contraseña</label>
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                className="w-full p-2 rounded bg-gray-100 text-gray-900"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="w-full p-2 rounded bg-gray-100 text-gray-900"
+                />
+                <span
+                  className="absolute right-3 top-3 cursor-pointer"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? "🙈" : "👁️"}
+                </span>
+              </div>
               {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
             </div>
 
             {/* Confirmar contraseña */}
             <div className="mb-4">
               <label className="block text-white text-sm mb-2">Confirmar Contraseña</label>
-              <input
-                type="password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                className="w-full p-2 rounded bg-gray-100 text-gray-900"
-              />
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  className="w-full p-2 rounded bg-gray-100 text-gray-900"
+                />
+                <span
+                  className="absolute right-3 top-3 cursor-pointer"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                >
+                  {showConfirmPassword ? "🙈" : "👁️"}
+                </span>
+              </div>
               {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword}</p>}
             </div>
 
@@ -194,6 +214,8 @@ const Register = () => {
             <button type="submit" className="w-full bg-green-500 hover:bg-green-600 text-white p-2 rounded">
               Crear Cuenta
             </button>
+
+            {successMessage && <p className="text-green-500 mt-4 text-sm">{successMessage}</p>}
           </form>
         </div>
       </div>

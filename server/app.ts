@@ -5,22 +5,27 @@ import reviews from "./models/reviewModel";
 import Video from './models/videoModel';
 import express from 'express';
 import cors from 'cors';
-import { reviewRouter } from './routes/reviewRoutes';
-import {userRouter} from './routes/userRoutes';
+import {loginRouter, userRouter} from './routes/userRoutes';
 import { newRouter } from './routes/newsRoutes';
 import { videoRouter } from './routes/videoRoutes';
 import { PORT } from './config';
+import reviewRoutes, { uploadRouter } from './routes/reviewRoutes';
 
 export const app = express();
+// Hacer pública la carpeta de uploads para servir archivos
 
 app.use(cors({
-    origin: 'http://localhost:5173', // el localhost donde esta corriendo el front
-  }));
+    origin: 'http://localhost:5173', // Cambia al puerto de tu frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
-
+app.use('/uploads', express.static('uploads'));
+app.use('/api/uploads', uploadRouter);
 app.use('/api/users', userRouter);
-app.use('/api/news', newRouter)
-app.use('/api/reviews', reviewRouter);
+app.use('/api/login', loginRouter);
+app.use('/api/news', newRouter);
+app.use('/api/reviews', reviewRoutes);
 app.use('/api/videos', videoRouter);
 
     try {

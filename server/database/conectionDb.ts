@@ -8,6 +8,7 @@ const connectionDb = new Sequelize( DB_NAME , DB_USER, DB_PASSWORD , {
   host: DB_HOST ,
   dialect: 'mysql',
   port: Number(DB_PORT) || 3306,
+  timezone: "+01:00",
   define: {
     timestamps: false,
   },
