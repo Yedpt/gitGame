@@ -1,4 +1,3 @@
-// client/src/services/releasesService.js
 const API_URL = 'http://localhost:5000/api/releases';
 
 // Fonction pour récupérer tous les jeux à venir
