@@ -16,6 +16,7 @@ export const getUsers = async (req: Request, res: Response) => {
     }
 }
 
+//LoginUser
 export const loginUser = async (req: any, res: any) => {
     const { email, password } = req.body;
 
@@ -34,7 +35,7 @@ export const loginUser = async (req: any, res: any) => {
         user.last_login = new Date();
         await user.save();
 
-        const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user.id, rol:user.rol }, JWT_SECRET, { expiresIn: '1h' });
 
         res.status(200).json({
             message: 'Inicio de sesión exitoso',
@@ -42,7 +43,8 @@ export const loginUser = async (req: any, res: any) => {
             user: {
                 id: user.id,
                 name: user.name,
-                avatar: user.avatar
+                avatar: user.avatar,
+                rol: user.rol,
             },
         });
     } catch (error) {
@@ -50,6 +52,8 @@ export const loginUser = async (req: any, res: any) => {
         res.status(500).json({ message: 'Error al iniciar sesión' });
     }
 };
+
+///GET users by ID
 
 export const getUsersById = async (req: Request, res: Response) => {
     try {
@@ -61,6 +65,7 @@ export const getUsersById = async (req: Request, res: Response) => {
     }
 }
 
+//CREATE user- POST
 export const createUser = async (req: Request, res: Response) => {
     try {
         const { name, email, birth_date, password, bio, avatar } = req.body;
@@ -81,7 +86,7 @@ export const createUser = async (req: Request, res: Response) => {
         });
 
         // Generación de token JWT
-        const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user.id, rol:user.rol }, JWT_SECRET, { expiresIn: '1h' });
 
         res.status(201).json({
             message: 'Usuario creado exitosamente',
