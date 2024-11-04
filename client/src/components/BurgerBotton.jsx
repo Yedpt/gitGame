@@ -23,9 +23,9 @@ const Navbar = () => {
         <header className="font-title">
             <nav className="bg-dark p-1 fixed w-full top-0 z-10">
                 <div className="max-w-screen-2xl mt-4 flex justify-between items-center mx-auto px-4">
-                    <a href="/">
-                        <img className="max-w-14" src={logo} alt="logo" />
-                    </a>
+                    <Link to="/">
+                    <img className="max-w-14" src={logo} alt="logo" />
+                    </Link>
 
                     <div className="md:hidden">
                         <button onClick={toggleMenu} className="text-light focus:outline-none">
