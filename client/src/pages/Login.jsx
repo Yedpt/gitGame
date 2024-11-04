@@ -18,7 +18,6 @@ const Login = () => {
   };
 
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
   const validatePassword = (password) => password.length >= 6;
 
   const handleSubmit = async (e) => {
@@ -39,10 +38,20 @@ const Login = () => {
 
     try {
       const response = await axios.post('http://localhost:3000/api/login', { email, password });
-      login(response.data.user); // Llama a login para almacenar el usuario en el contexto
-      sessionStorage.setItem('user', JSON.stringify(response.data.user)); // Almacena el usuario en sessionStorage
-      console.log("exito!")
-      navigate('/'); // Redirige a la ruta raíz que muestra el componente Home
+      const userData = response.data.user;
+
+      // Llama a login para almacenar el usuario en el contexto
+      login(userData);
+      sessionStorage.setItem('user', JSON.stringify(userData)); // Almacena el usuario en sessionStorage
+      console.log("Inicio de sesión exitoso!");
+
+      // Redirige según el rol del usuario
+      if (userData.rol === 'admin') {
+        navigate('/'); // Cambia a la ruta que corresponda a admin
+      } else {
+        navigate('/'); // Redirige al home si es un usuario regular
+      }
+
     } catch (error) {
       setError('Error al iniciar sesión. Verifica tus credenciales.');
     }
@@ -50,7 +59,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex flex-col justify-between px-8 mt-8 bg-cover bg-center bg-no-repeat"
-         style={{ backgroundImage: `url('/fondoLoginMobile.png')` }}>
+        style={{ backgroundImage: `url('/fondoLoginMobile.png')` }}>
       <div className="flex-grow flex justify-center items-center">
         <div className="bg-green-900 p-8 rounded-lg shadow-lg max-w-md w-full md:max-w-lg">
           <h2 className="text-white text-3xl mb-6 text-center">Inicia Sesión</h2>

@@ -56,7 +56,7 @@ const handleChange = (e) => {
           },
         });
         alert('Registro exitoso');
-        navigate('/reviews');
+        // navigate('/reviews');
       } catch (error) {
         setSubmissionError('Error al registrar reseña: ' + error.message); // Mejora el manejo de errores
         console.error('Error al registrar reseña:', error);

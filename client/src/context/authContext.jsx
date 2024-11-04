@@ -1,4 +1,3 @@
-// context/AuthContext.js
 import { createContext, useContext, useState } from "react";
 
 // Crear el contexto de autenticación
@@ -19,6 +18,11 @@ export const AuthProvider = ({ children }) => {
         setIsLoggedIn(false);
         setUser(null);
         sessionStorage.removeItem('user');
+    };
+
+    // Nueva función para verificar si el usuario es admin
+    const isAdmin = () => {
+        return user && user.rol === 'admin'; // Devuelve true si el usuario tiene rol admin
     };
 
 

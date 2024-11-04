@@ -5,7 +5,7 @@ const BASE_URL = 'http://localhost:3000/api/reviews'; // Cambia esta URL si tu e
 //GET all reviews -- GET
 export const  getAllReviews = async () => {
     try {
-        const response = await axios.get(`${BASE_URL}/reviews`);
+        const response = await axios.get(`${BASE_URL}`);
         return response.data;
     } catch (error) {
         console.error('Error al obtener las reseñas:', error);
@@ -17,7 +17,7 @@ export const  getAllReviews = async () => {
 //GET one review by ID -- GET
 export const getOneReview = async (id) => {
     try {
-        const response = await axios.get(`${BASE_URL}/reviews/${id}`);
+        const response = await axios.get(`${BASE_URL}/${id}`);
         return response.data;
     } catch (error) {
         console.error(`Error al obtener la reseña con ID ${id}:`, error.message);
@@ -28,7 +28,7 @@ export const getOneReview = async (id) => {
 //GET all reviews by user ID -- GET
 export const getReviewsByUserId = async (userId) => {
     try {
-        const response = await axios.get(`${BASE_URL}/reviews/user/${userId}`);
+        const response = await axios.get(`${BASE_URL}/user/${userId}`);
         return response.data;
     } catch (error)
     {
@@ -43,7 +43,7 @@ export const getReviewsByUserId = async (userId) => {
 
 export const createReview = async (reviewData) => {
     try {
-        const response = await axios.post(`${BASE_URL}/reviews`, reviewData);
+        const response = await axios.post(`${BASE_URL}`, reviewData);
         return response.data;
     } catch (error) {
         console.error('Error al crear la reseña:', error);
@@ -54,7 +54,7 @@ export const createReview = async (reviewData) => {
 //DELETE review -- DELETE
 export const deleteReview = async (id) => {
     try {
-        const response = await axios.delete(`${BASE_URL}/reviews/${id}`);
+        const response = await axios.delete(`${BASE_URL}/${id}`);
         return response.data;
     } catch (error) {
         console.error(`Error al eliminar la reseña con ID ${id}:`, error.message);
@@ -65,7 +65,7 @@ export const deleteReview = async (id) => {
 //UPDATE review -- PUT
 export const updateReview = async (id, updatedData) => {
     try {
-        const response = await axios.put(`${BASE_URL}/reviews/${id}`, updatedData);
+        const response = await axios.put(`${BASE_URL}/${id}`, updatedData);
         return response.data;
     } catch (error) {
         console.error(`Error al actualizar la reseña con ID ${id}:`, error.message);
