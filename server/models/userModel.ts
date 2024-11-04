@@ -37,6 +37,7 @@ const UserModel= connectionDb.define<UserModel>('users', {
     last_login: {
         type: DataTypes.DATE,
         allowNull: true,
+        defaultValue: DataTypes.NOW // Esta línea utiliza DataTypes directamente
     },
     status: {
         type: DataTypes.ENUM('active','inactive','deleted'), 
