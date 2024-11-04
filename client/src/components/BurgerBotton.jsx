@@ -48,10 +48,10 @@ const Navbar = () => {
                         <Link to="/videos" className="text-light text-sm hover:text-greenLight px-6 py-3 rounded transition-all duration-300">
                             Videos
                         </Link>
-                        <Link to="/" className="text-light text-sm hover:text-greenLight px-6 py-3 rounded transition-all duration-300">
+                        <Link to="/reviews" className="text-light text-sm hover:text-greenLight px-6 py-3 rounded transition-all duration-300">
                             Reviews
                         </Link>
-                        <Link to="/" className="text-light text-sm hover:text-greenLight px-6 py-3 rounded transition-all duration-300">
+                        <Link to="/launch" className="text-light text-sm hover:text-greenLight px-6 py-3 rounded transition-all duration-300">
                             Próximos Lanzamientos
                         </Link>
 
