@@ -3,7 +3,7 @@ import axios from 'axios';
 const API_URL = 'http://localhost:3000/api/users';
 
 // Crear un nuevo usuario
-export const createUser = async (userData) => {
+export const createUser = async (userData) => { // aqui tenemos un error momentaneo
   const { name, email, birth_date, password, bio, avatar } = userData;
   const role = 'usuario'; // Asigna el rol por defecto
   const create_at = new Date(); // Fecha de creación
