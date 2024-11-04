@@ -7,6 +7,7 @@ const CardsReviews = ({ userId }) => {
     useEffect(() => {
         const loadReviews = async () => {
             const userReviews = await fetchUserReviews(userId); // Llama al servicio que obtiene los reviews de la base de datos
+            // hay que cambiar lo de arriba lo del await y el fetchUserReviews
             setReviews(userReviews);
         };
 
