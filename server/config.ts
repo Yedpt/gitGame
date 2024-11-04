@@ -1,5 +1,6 @@
-import { config } from "dotenv";
+import { config } from 'dotenv';
 
+// Cargar las variables de entorno desde el archivo .env
 config();
 
 export const DB_PASSWORD =<string> process.env.DB_PASSWORD;

@@ -1,17 +1,29 @@
 // context/AuthContext.js
 import { createContext, useContext, useState } from "react";
 
-// Crear el contexto
+// Crear el contexto de autenticación
+// Este contexto almacenará el estado de autenticación y la función de inicio de sesión
+// y cierre de sesión.
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState(null);
 
-    const login = () => setIsLoggedIn(true);
-    const logout = () => setIsLoggedIn(false);
+    const login = (userData) => {
+        setIsLoggedIn(true);
+        setUser(userData);
+    };
+
+    const logout = () => {
+        setIsLoggedIn(false);
+        setUser(null);
+        sessionStorage.removeItem('user');
+    };
+
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+        <AuthContext.Provider value={{ isLoggedIn,user, login, logout }}>
             {children}
         </AuthContext.Provider>
     );
