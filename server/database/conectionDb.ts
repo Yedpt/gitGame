@@ -13,9 +13,5 @@ const connectionDb = new Sequelize( DB_NAME , DB_USER, DB_PASSWORD , {
     timestamps: false,
   },
 });
-<<<<<<< HEAD
-export default connectionDb;
-=======
 
 export default connectionDb;
->>>>>>> a23966d04463ec528c3235a29fb2c42a62e64f44

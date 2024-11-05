@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getUpcomingReleases, getReleasesByMonth } from '../controllers/releasesController.js';
+import { getUpcomingReleases, getReleasesByMonth } from '../controllers/releasesController';
 
 const router = Router();
 

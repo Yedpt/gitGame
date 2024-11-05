@@ -1,21 +1,30 @@
 import { Request, Response } from 'express';
-import db from '../database/conectionDb.js';
+import  UpComingReleases  from '../models/releasesModels';
 
-// Fonction pour récupérer tous les jeux à venir
-export const getUpcomingReleases = (req: Request, res: Response) => {
-    db.query('SELECT * FROM upcoming_releases', (err: Error | null, results: any) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(results);
-    });
+// Extiende el tipo Request para incluir la propiedad `file` de Multer.
+interface MulterRequest extends Request {
+    file?: Express.Multer.File;
+}
+
+//GET
+export const getUpcomingReleases = async (req: Request, res: Response) => {
+    try {
+        const releases = await UpComingReleases.findAll();
+        res.json(releases);
+    } catch (error) {
+        res.json({ message: "Lanzamiento no encontrado", error });
+    }
 };
 
-// Fonction pour récupérer les jeux d'un mois spécifique
-export const getReleasesByMonth = (req: Request, res: Response) => {
-    const month = req.params.month;
-    db.query('SELECT * FROM upcoming_releases WHERE month = ?', [month], (err: Error | null, results: any) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(results);
-    });
+//GET by month
+export const getReleasesByMonth = async (req: Request, res: Response) => {
+    const { month } = req.params;
+    try {
+        const releases = await UpComingReleases.findAll({ where: {month} });
+        res.json(releases);
+    } catch (error)
+    {
+        res.json({ message: "Lanzamiento mensual no encontrado", error });
+    }
 };
 
-//Usar sequelize para el modelo 

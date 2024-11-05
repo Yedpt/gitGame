@@ -5,13 +5,8 @@ import reviews from "./models/reviewModel";
 import Video from './models/videoModel';
 import express from 'express';
 import cors from 'cors';
-<<<<<<< HEAD
 import releasesRoutes from './routes/releasesRoutes';
-import { reviewRouter } from './routes/reviewRoutes';
-import {userRouter} from './routes/userRoutes';
-=======
 import {loginRouter, userRouter} from './routes/userRoutes';
->>>>>>> a23966d04463ec528c3235a29fb2c42a62e64f44
 import { newRouter } from './routes/newsRoutes';
 import { videoRouter } from './routes/videoRoutes';
 import { PORT } from './config';
