@@ -46,6 +46,7 @@ const reviews = connectionDb.define(
         },
         num_likes: {
             type: DataTypes.INTEGER,
+            defaultValue: 0,
             allowNull: true,
         },
         rating: {

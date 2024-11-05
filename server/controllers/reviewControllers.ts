@@ -53,35 +53,31 @@ export const getReviewsByUserId = async (req: UserIdRequest, res: Response) => {
 };
 
 // POST: Crear una nueva reseña
-export const createReview = async (req: MulterRequest, res: Response): Promise<void> => {
+export const createReview = async (req: Request, res: Response) => {
     try {
-        const { user_id, rol, title, review, author, num_likes, rating } = req.body;
-        
-        // Normaliza la ruta de la imagen
-        const imagePath = req.file?.path ? req.file.path.replace(/\\/g, '/') : ''; 
-        const imageName = imagePath.split('/').pop(); 
-        const imageUrl = imageName ? `http://localhost:3000/uploads/reviews/${imageName}` : ''; 
-
-        const report = await reviews.create({
-            user_id,
-            rol,
-            title,
-            review,
-            published_at: new Date(),
-            updated_at: new Date(),
-            image_url: imageUrl,
-            author,
-            num_likes,
-            rating,
-        });
-
-        // Envía la respuesta y termina la ejecución sin retorno
-        res.json(report);
+      const { title, review, author, rating } = req.body;
+  
+      // Guardar la URL de la imagen si el archivo fue subido
+      const imageUrl = req.file ? `/uploads/reviews/${req.file.filename}` : null;
+  
+      // Crear la reseña en la base de datos
+      const newReview = await reviews.create({
+        title,
+        review,
+        author,
+        rating,
+        image_url: imageUrl,
+        published_at: new Date(),
+        updated_at: new Date(),
+      });
+  
+      res.status(201).json(newReview);
     } catch (error) {
-        res.status(500).json({ message: "No se ha podido crear un review", error });
+      console.error("Error al crear la reseña:", error);
+      res.status(500).json({ message: "No se ha podido crear un review", error });
     }
-};
-
+  };
+  
 //DELETE 
 export const deleteReview = async (req: Request, res: Response) => {
     try {
