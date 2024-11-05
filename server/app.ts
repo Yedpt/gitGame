@@ -3,6 +3,7 @@ import UserModel from './models/userModel';
 import news from "./models/newsModel";
 import reviews from "./models/reviewModel";
 import Video from './models/videoModel';
+import releases from './models/releasesModels';
 import express from 'express';
 import cors from 'cors';
 import releasesRoutes from './routes/releasesRoutes';
@@ -45,6 +46,9 @@ app.use('/api/releases', releasesRoutes); // para Usar las rutas de los juegos
         
         Video.sync({ force:false});
         console.log('Tabla de videos creada');
+
+        releases.sync({force:true});
+        console.log('Tabla de proximos lanzamientos');
         
 
     }catch (error) {
