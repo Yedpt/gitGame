@@ -1,5 +1,6 @@
-import { config } from "dotenv";
+import { config } from 'dotenv';
 
+// Cargar las variables de entorno desde el archivo .env
 config();
 
 export const DB_PASSWORD =<string> process.env.DB_PASSWORD;
@@ -10,3 +11,4 @@ export const DB_PORT = process.env.DB_PORT;
 export const PORT = process.env.PORT;
 export const DB_TEST_NAME =<string> process.env.DB_TEST_NAME;
 export const NODE_ENV = process.env.NODE_ENV;
+export const JWT_SECRET =<string> process.env.JWT_SECRET;
