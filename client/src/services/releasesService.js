@@ -1,21 +1,24 @@
-const API_URL = 'http://localhost:3000/api/releases';
+import axios from "axios";
+const BASE_URL = 'http://localhost:3000/api/releases';
 
-// Fonction pour récupérer tous les jeux à venir
-export const fetchUpcomingReleases = async () => {
+// Fonción para recuperar los proximos juegos.
+export const getAllUpComingReleases = async () => {
     try {
-        const response = await fetch(API_URL);
-        return await response.json();
+        const response = await axios.get(`${BASE_URL}/UpcomingReleases`);
+        return response.data;
     } catch (error) {
-        console.error('Erreur lors de la récupération des jeux:', error);
+        console.error('Surgió un error a la hora de recuperar los juegos', error);
+        throw error;
     }
 };
 
-// Fonction pour récupérer les jeux d'un mois spécifique
-export const fetchReleasesByMonth = async (month) => {
+// Fonción para recuperar los juegos de un mes específico.
+export const getReleasesByMonth = async (month) => {
     try {
-        const response = await fetch(`${API_URL}/${month}`);
-        return await response.json();
+        const response = await axios.get(`${BASE_URL}/${month}`);
+        return response.data;
     } catch (error) {
-        console.error(`Erreur lors de la récupération des jeux pour le mois de ${month}:`, error);
+        console.error(`Surgió un error a la hora de recuperar el juego del mes de ${month}:`, error);
+        throw error;
     }
 };
