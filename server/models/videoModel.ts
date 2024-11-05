@@ -1,4 +1,3 @@
-// models/videoModel.ts
 import { DataTypes, Model, Optional } from 'sequelize';
 import connectionDb from '../database/conectionDb';
 
@@ -8,6 +7,7 @@ interface VideoAttributes {
     user_id: number;
     title: string;
     video_url: string;
+    thumbnail: string; 
     published_at?: Date;
     updated_at?: Date;
 }
@@ -21,6 +21,7 @@ class Video extends Model<VideoAttributes, VideoCreationAttributes> implements V
     public user_id!: number;
     public title!: string;
     public video_url!: string;
+    public thumbnail!: string; 
     public published_at!: Date;
     public updated_at!: Date;
 
@@ -32,7 +33,7 @@ class Video extends Model<VideoAttributes, VideoCreationAttributes> implements V
     }
 }
 
-// Inicializa el modelo
+
 Video.init(
     {
         id: {
@@ -44,7 +45,7 @@ Video.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'users', // Nombre de la tabla a la que hace referencia
+                model: 'users', 
                 key: 'id',
             },
         },
@@ -56,25 +57,27 @@ Video.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        thumbnail: { 
+            type: DataTypes.STRING,
+            allowNull: true, 
+        },
         published_at: {
             type: DataTypes.DATE,
             defaultValue: DataTypes.NOW,
         },
         updated_at: {
             type: DataTypes.DATE,
-            allowNull: true, // Esto permite que sea nulo si no se actualiza
+            allowNull: true, 
         },
     },
     {
         tableName: 'videos',
-        sequelize: connectionDb, // Se debe pasar la conexión
-        timestamps: false, // Si usas timestamps automáticos, puedes poner esto en true
+        sequelize: connectionDb, 
+        timestamps: false, 
     }
 );
 
-// Inicializa la actualización de `updated_at` antes de cualquier actualización
+
 Video.initialize();
 
 export default Video;
-
-

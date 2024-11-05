@@ -15,16 +15,17 @@ export const getAllVideos = async (req: Request, res: Response) => {
 
 // POST: Crear un nuevo video
 export const createVideo = async (req: Request, res: Response) => {
-    const { user_id, title, video_url, published_at } = req.body;
+    const { user_id, title, video_url, published_at, thumbnail } = req.body; // Asegúrate de incluir el campo thumbnail
 
     try {
-        const newVideo = await Video.create({ user_id, title, video_url, published_at });
+        const newVideo = await Video.create({ user_id, title, video_url, published_at, thumbnail });
         res.status(201).json(newVideo);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Ha ocurrido un error', error });
     }
 };
+
 
 // DELETE: Eliminar un video por ID
 export const deleteVideo = async (req: Request, res: Response) => {
