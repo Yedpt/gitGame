@@ -1,21 +1,30 @@
-import { useState } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import pattern from '../assets/img/pattern.svg';
+import { useAuth } from '../context/authContextsss';
+import { createReview } from '../services/reviewServices';
 
 const CreateReview = () => {
-  const navigate = useNavigate ();
-  const [formData, setFormData] = useState ({
+  const navigate = useNavigate();
+  const { user, isLoggedIn } = useAuth();
+  
+  const [formData, setFormData] = useState({
     title: '',
     review: '',
     author: '',
     rating: '',
-    image_url: null,
+    image_url: null, // Debe ser null inicialmente para un archivo
   });
 
   const [errors, setErrors] = useState({});
   const [submissionError, setSubmissionError] = useState('');
 
+  useEffect(() => {
+    if (!isLoggedIn) {
+      // Redirige al inicio de sesión si no está autenticado
+      navigate('/login');
+    }
+  }, [isLoggedIn, navigate]);
 
 const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -28,10 +37,10 @@ const handleChange = (e) => {
   const validateForm = () => {
     const newErrors = {};
     if (!formData.title) newErrors.title = "El título es obligatorio.";
-    if (!formData.review) newErrors.review = "El contenido de la reseña es obligatorio.";
-    if (!formData.image_url) newErrors.image_url = "Debes seleccionar una imagen.";
-    if (!formData.author) newErrors.author = "El autor es obligatorio.";
-    if (!formData.rating) newErrors.rating = "La calificación es obligatoria.";
+    if (!formData.review) newErrors.review = "El contenido de la reseña es obligatorio";
+    if (!formData.image_url) newErrors.image_url = "Debes seleccionar una imagen";
+    if (!formData.author) newErrors.author = "El autor es obligatorio";
+    if (user?.rol === 'admin' && !formData.rating) newErrors.rating = "ADMIN: la calificación es necesaria del 1 al 5";
     if (formData.review.length < 10) newErrors.review = "La reseña debe tener al menos 10 caracteres.";
     return newErrors;
   };
@@ -50,15 +59,11 @@ const handleChange = (e) => {
       formDataToSend.append('image_url', formData.image_url); // Usa el image_url del estado
 
       try {
-        await axios.post('http://localhost:3000/api/reviews', formDataToSend, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-        alert('Registro exitoso');
-        // navigate('/reviews');
+        await createReview(formDataToSend);
+        alert('Reseña creada exitosamente');
+        navigate('/');
       } catch (error) {
-        setSubmissionError('Error al registrar reseña: ' + error.message); // Mejora el manejo de errores
+        setSubmissionError('Error al registrar reseña: ' + error.message);
         console.error('Error al registrar reseña:', error);
       }
     }
@@ -114,6 +119,7 @@ return (
             </div>
 
             {/* rating */}
+          {user?.rol === 'admin' && (
             <div className="mb-4">
                 <label className="font-title block text-greenLight text-lg mb-2">CALIFICACIÓN</label>
                 <input
@@ -125,7 +131,8 @@ return (
                 />
                 {errors.rating && <p className="text-red-500 text-sm">{errors.rating}</p>}
             </div>
-
+          )}
+          
             {/* Image */}
             <div className="mb-4">
               <label className="font-title block text-greenLight text-lg mb-2">IMAGEN</label>

@@ -5,7 +5,7 @@ const BASE_URL = 'http://localhost:3000/api/reviews'; // Cambia esta URL si tu e
 //GET all reviews -- GET
 export const  getAllReviews = async () => {
     try {
-        const response = await axios.get(`${BASE_URL}`);
+        const response = await axios.get(BASE_URL);
         return response.data;
     } catch (error) {
         console.error('Error al obtener las reseñas:', error);
@@ -42,8 +42,15 @@ export const getReviewsByUserId = async (userId) => {
 //CREATE new review -- POST
 
 export const createReview = async (reviewData) => {
+    const token = localStorage.getItem('token'); // Obtén el token del localStorage
+
     try {
-        const response = await axios.post(`${BASE_URL}`, reviewData);
+        const response = await axios.post('http://localhost:3000/api/reviews', reviewData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${token}`, // Añade el token aquí
+            },
+        });
         return response.data;
     } catch (error) {
         console.error('Error al crear la reseña:', error);
@@ -57,7 +64,7 @@ export const deleteReview = async (id) => {
         const response = await axios.delete(`${BASE_URL}/${id}`);
         return response.data;
     } catch (error) {
-        console.error(`Error al eliminar la reseña con ID ${id}:`, error.message);
+        console.error(`Error al eliminar la reseña con ID ${id}:`, error);
         throw error;
     }
 };

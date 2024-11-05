@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 // IMPORTANTE!!!!!Este es el contexto bueno no borrar IMPORTANTE!!!!!
 const AuthContext = createContext();
