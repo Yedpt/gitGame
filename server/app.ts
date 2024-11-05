@@ -9,23 +9,33 @@ import {loginRouter, userRouter} from './routes/userRoutes';
 import { newRouter } from './routes/newsRoutes';
 import { videoRouter } from './routes/videoRoutes';
 import { PORT } from './config';
-import reviewRoutes, { uploadRouter } from './routes/reviewRoutes';
+import { reviewRouter } from './routes/reviewRoutes';
+import path from 'path';
 
 export const app = express();
+
 // Hacer pública la carpeta de uploads para servir archivos
 
+// Configuración de CORS
 app.use(cors({
     origin: 'http://localhost:5173', // Cambia al puerto de tu frontend
+    credentials: true, // Permite cookies
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// Hacer pública la carpeta de uploads para servir archivos estáticos
+const uploadPath = path.join(__dirname, 'uploads');
+app.use('/uploads', express.static(uploadPath));
+
+// Middleware para procesar JSON
 app.use(express.json());
-app.use('/uploads', express.static('uploads'));
-app.use('/api/uploads', uploadRouter);
+
+// Rutas API
 app.use('/api/users', userRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/news', newRouter);
-app.use('/api/reviews', reviewRoutes);
+app.use('/api/reviews', reviewRouter);
 app.use('/api/videos', videoRouter);
 
     try {
