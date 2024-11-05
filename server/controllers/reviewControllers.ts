@@ -55,14 +55,15 @@ export const getReviewsByUserId = async (req: UserIdRequest, res: Response) => {
 // POST: Crear una nueva reseña
 export const createReview = async (req: MulterRequest, res: Response): Promise<void> => {
     try {
-        const { user_id, rol, title, review, author, num_likes, rating } = req.body;
+        const { id,user_id, rol, title, review, author, num_likes, rating } = req.body;
         
         // Normaliza la ruta de la imagen
         const imagePath = req.file?.path ? req.file.path.replace(/\\/g, '/') : ''; 
         const imageName = imagePath.split('/').pop(); 
-        const imageUrl = imageName ? `http://localhost:3000/uploads/reviews/${imageName}` : ''; 
+        const imageUrl = imageName ? `http://localhost:3000/api/reviews/uploads/${imageName}` : ''; 
 
         const report = await reviews.create({
+            id,
             user_id,
             rol,
             title,

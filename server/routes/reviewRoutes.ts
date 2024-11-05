@@ -1,5 +1,6 @@
 import { Router } from "express";
 import multer from 'multer';
+import path from 'path';
 import { 
   createReview, 
   updateReview, 
@@ -9,29 +10,37 @@ import {
   getReviewsByUserId  
 } from "../controllers/reviewControllers";
 
-// Crea el router para las rutas de reviews
-export const reviewRouter = Router();
+// Ruta absoluta para almacenar las imágenes de reseñas
+const UPLOADS_PATH = path.resolve('C:/Users/usuario/Desktop/bootcamp/gitGame/server/uploads/reviews');
 
-// Crea una instancia de `upload` de Multer usando el middleware que ya definiste
+// Define el tipo de archivo de Multer
+interface MulterRequest extends Express.Request {
+  file?: Express.Multer.File;
+}
+
+// Configuración de almacenamiento de Multer
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/reviews/');
+    cb(null, UPLOADS_PATH);
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + '-' + file.originalname);
+    cb(null, `${uniqueSuffix}-${file.originalname}`);
   },
 });
 
 const upload = multer({ storage });
 
-// Configura la ruta para la subida de imágenes
-reviewRouter.post('/upload', upload.single('image_url'), createReview);
-reviewRouter.post('/', createReview); // Cambiado de '/reviews' a '/' para que coincida con el router
+// Crea el router para las rutas de reviews
+export const reviewRouter = Router();
 
-// Rutas de CRUD para reviews
+// Ruta para la creación de una reseña con imagen
+reviewRouter.post('/', upload.single('image_url'), createReview);
+
+// Rutas CRUD para reviews
 reviewRouter.get('/', getAllReviews);
 reviewRouter.get('/:id', getReviewById);
 reviewRouter.delete('/:id', deleteReview);
 reviewRouter.put('/:id', updateReview);
 reviewRouter.get('/user/:userId', getReviewsByUserId);
+
