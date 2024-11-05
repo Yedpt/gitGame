@@ -2,24 +2,33 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '../config';
 
-export const isAdmin = (req: Request, res: Response, next: NextFunction): void => {
+// Extiende la interfaz Request para incluir la propiedad user
+interface UserRequest extends Request {
+    user?: any; // Puedes definir un tipo más específico si tienes un tipo de usuario definido
+}
+
+// Middleware para autenticar el token
+export const authenticateToken = (req: UserRequest, res: Response, next: NextFunction): Response<any> | void => {
     const token = req.headers.authorization?.split(' ')[1];
 
     if (!token) {
-        res.status(401).json({ message: 'Token no proporcionado' });
-        return; // Asegúrate de que el middleware termine aquí si falta el token
+        return res.status(401).json({ message: 'Token no proporcionado' });
     }
 
-    try {
-        const decoded = jwt.verify(token, JWT_SECRET) as any;
-
-        if (decoded.rol !== 'admin') {
-            res.status(403).json({ message: 'No tienes permisos de administrador' });
-            return; // Termina aquí si el rol no es admin
+    jwt.verify(token, JWT_SECRET, (err, user) => {
+        if (err) {
+            return res.status(403).json({ message: 'Token inválido' });
         }
+        req.user = user; // Guarda el usuario decodificado en la solicitud
+        next();
+    });
+};
 
-        next(); // Permite el acceso si el usuario es administrador
-    } catch (error) {
-        res.status(401).json({ message: 'Token inválido' });
+// Middleware para verificar si el usuario es administrador
+export const isAdmin = (req: UserRequest, res: Response, next: NextFunction): Response<any> | void => {
+    // Verifica si el usuario está definido y si tiene el rol de admin
+    if (!req.user || req.user.rol !== 'admin') {
+        return res.status(403).json({ message: 'No tienes permisos de administrador' });
     }
+    next();
 };
