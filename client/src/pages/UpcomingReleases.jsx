@@ -1,4 +1,3 @@
-// client/src/pages/UpcomingReleases.jsx
 import React, { useEffect, useState } from 'react';
 import { fetchUpcomingReleases } from '../services/releasesService';
 import MonthSection from '../components/MonthSection';

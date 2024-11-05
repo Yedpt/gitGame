@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000/api/releases';
+const API_URL = 'http://localhost:3000/api/releases';
 
 // Fonction pour récupérer tous les jeux à venir
 export const fetchUpcomingReleases = async () => {
