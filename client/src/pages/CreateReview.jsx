@@ -9,6 +9,8 @@ const CreateReview = () => {
   const { user, isLoggedIn } = useAuth();
   
   const [formData, setFormData] = useState({
+    id: '',
+    user_id: user ? user.id : '',
     title: '',
     review: '',
     author: '',
@@ -52,11 +54,17 @@ const handleChange = (e) => {
 
     if (Object.keys(validationErrors).length === 0) {
       const formDataToSend = new FormData();
+      formDataToSend.append('id', formData.id);
+      formDataToSend.append('user_id', user.id);
+      formDataToSend.append('rol', user.rol);
       formDataToSend.append('title', formData.title);
       formDataToSend.append('review', formData.review);
-      formDataToSend.append('author', formData.author);
-      formDataToSend.append('rating', formData.rating);
       formDataToSend.append('image_url', formData.image_url); // Usa el image_url del estado
+      formDataToSend.append('author', formData.author);
+      formDataToSend.append('num_likes', 0); // Inicialmente en 0
+      formDataToSend.append('rating', formData.rating);
+      
+      
 
       try {
         await createReview(formDataToSend);
