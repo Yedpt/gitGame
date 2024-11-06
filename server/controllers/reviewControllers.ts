@@ -56,6 +56,23 @@ export const getReviewsByUserId = async (req: UserIdRequest, res: Response) => {
 export const createReview = async (req: MulterRequest, res: Response): Promise<void> => {
     try {
         const { user_id, rol, title, review, author, rating } = req.body;
+
+        // Verifica que los datos estén correctamente enviados
+        console.log("User ID:", user_id);
+        console.log("Role:", rol);
+        console.log("Title:", title);
+        console.log("Review:", review);
+        console.log("Author:", author);
+        console.log("Rating:", rating);
+
+
+        // Verifica si el campo rating está presente solo si el rol es "admin"
+        if (rol === 'admin' && (rating === undefined || rating < 1 || rating > 5)) {
+            res.status(400).json({ message: 'El rating debe estar entre 1 y 5 para el rol admin' });
+            return;
+        }
+        // Si el rol es "user", el rating no es necesario, o se puede asignar un valor por defecto
+        const finalRating = rol === 'user' ? 0 : rating; // Si es usuario, el rating puede ser 0 o no enviado
         
         // Normaliza la ruta de la imagen
         const imagePath = req.file?.path ? req.file.path.replace(/\\/g, '/') : ''; 
@@ -72,16 +89,18 @@ export const createReview = async (req: MulterRequest, res: Response): Promise<v
             image_url: imageUrl,
             author,
             num_likes: 0,
-            rating: rating,
+
+            rating: finalRating,
         });
 
         // Envía la respuesta y termina la ejecución sin retorno
         res.json(newReview);
     } catch (error) {
+        console.error("Error al crear la reseña:", error); // Agrega log detallado de error
         res.status(500).json({ message: "No se ha podido crear un review", error });
     }
-};
 
+};
 //DELETE 
 export const deleteReview = async (req: Request, res: Response) => {
     try {
