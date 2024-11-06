@@ -9,10 +9,12 @@ const CreateReview = () => {
   const { user, isLoggedIn } = useAuth();
   
   const [formData, setFormData] = useState({
+    id: '',
+    user_id: user ? user.id : '',
     title: '',
     review: '',
     author: '',
-    rating: '',
+    rating: null,
     image_url: null, // Debe ser null inicialmente para un archivo
   });
 
@@ -40,7 +42,10 @@ const CreateReview = () => {
     if (!formData.review) newErrors.review = "El contenido de la reseña es obligatorio";
     if (!formData.image_url) newErrors.image_url = "Debes seleccionar una imagen";
     if (!formData.author) newErrors.author = "El autor es obligatorio";
-    if (user?.rol === 'admin' && !formData.rating) newErrors.rating = "ADMIN: la calificación es necesaria del 1 al 5";
+    // Solo los admins necesitan un rating
+    if (user?.rol === 'admin' && (!formData.rating || formData.rating < 1 || formData.rating > 5)) {
+      newErrors.rating = "ADMIN: la calificación es necesaria del 1 al 5";
+    }
     if (formData.review.length < 10) newErrors.review = "La reseña debe tener al menos 10 caracteres.";
     return newErrors;
   };
@@ -52,12 +57,20 @@ const CreateReview = () => {
 
     if (Object.keys(validationErrors).length === 0) {
       const formDataToSend = new FormData();
+      formDataToSend.append('id', formData.id);
+      formDataToSend.append('user_id', user.id);
+      formDataToSend.append('rol', user.rol);
       formDataToSend.append('title', formData.title);
       formDataToSend.append('review', formData.review);
-      formDataToSend.append('author', formData.author);
-      formDataToSend.append('rating', formData.rating);
       formDataToSend.append('image_url', formData.image_url); // Usa el image_url del estado
-      formDataToSend.append('type', 'Reviews'); // Asegúrate de que el tipo sea 'Reviews'
+      formDataToSend.append('author', formData.author);
+      formDataToSend.append('num_likes', 0); // Inicialmente en 0
+      // Solo los admins envían rating
+      if (user?.rol === 'admin' && formData.rating) {
+        formDataToSend.append('rating', formData.rating);
+      }
+      
+      
 
       try {
         await createReview(formDataToSend);

@@ -2,9 +2,17 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '../config';
 
-// Extiende la interfaz Request para incluir la propiedad user
+// Define el tipo para el usuario decodificado
+interface DecodedUser {
+    id: string;
+    rol: string;
+    // Agrega otros campos que puedas tener en el token, si es necesario
+}
+
+
+// Extiende la interfaz Request para incluir la propiedad `user` de tipo DecodedUser
 interface UserRequest extends Request {
-    user?: any; // Puedes definir un tipo más específico si tienes un tipo de usuario definido
+    user?: DecodedUser;
 }
 
 // Middleware para autenticar el token
@@ -16,15 +24,14 @@ export const authenticateToken = (req: UserRequest, res: Response, next: NextFun
         return; // Agrega un return explícito
     }
 
-    jwt.verify(token, JWT_SECRET, (err, user) => {
-        if (err) {
-            res.status(403).json({ message: 'Token inválido' });
-            return; // Agrega un return explícito
+    jwt.verify(token, JWT_SECRET, (err, decoded) => {
+        if (err || !decoded) {
+            return res.status(403).json({ message: 'Token inválido' });
         }
-        req.user = user; // Guarda el usuario decodificado en la solicitud
+        req.user = decoded as DecodedUser; // Guarda el usuario decodificado con el tipo correcto
         next();
     });
-};
+}
 
 // Middleware para verificar si el usuario es administrador
 export const isAdmin = (req: UserRequest, res: Response, next: NextFunction): void => {
