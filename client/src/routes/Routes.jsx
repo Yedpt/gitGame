@@ -13,6 +13,8 @@ import Register from '../pages/Register'
 import Reviews from '../pages/Reviews'
 import Videos from '../pages/Videos'
 import CreateNew from '../pages/CreateNew'
+import CreateVideo from '../pages/CreateVideo'
+import ManageVideos from '../pages/ManageVideos'
 
 export const routes = createBrowserRouter([{
     path : '/',
@@ -65,6 +67,14 @@ export const routes = createBrowserRouter([{
         {
             path: 'videos',
             element: <Videos/>
+        },
+        {
+            path: 'createvideo',
+            element: <CreateVideo/>
+        },
+        {
+            path: 'managevideo',
+            element: <ManageVideos/>
         }
 
     ]

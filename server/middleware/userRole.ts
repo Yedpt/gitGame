@@ -8,16 +8,18 @@ interface UserRequest extends Request {
 }
 
 // Middleware para autenticar el token
-export const authenticateToken = (req: UserRequest, res: Response, next: NextFunction): Response<any> | void => {
+export const authenticateToken = (req: UserRequest, res: Response, next: NextFunction): void => {
     const token = req.headers.authorization?.split(' ')[1];
 
     if (!token) {
-        return res.status(401).json({ message: 'Token no proporcionado' });
+        res.status(401).json({ message: 'Token no proporcionado' });
+        return; // Agrega un return explícito
     }
 
     jwt.verify(token, JWT_SECRET, (err, user) => {
         if (err) {
-            return res.status(403).json({ message: 'Token inválido' });
+            res.status(403).json({ message: 'Token inválido' });
+            return; // Agrega un return explícito
         }
         req.user = user; // Guarda el usuario decodificado en la solicitud
         next();
@@ -25,10 +27,11 @@ export const authenticateToken = (req: UserRequest, res: Response, next: NextFun
 };
 
 // Middleware para verificar si el usuario es administrador
-export const isAdmin = (req: UserRequest, res: Response, next: NextFunction): Response<any> | void => {
+export const isAdmin = (req: UserRequest, res: Response, next: NextFunction): void => {
     // Verifica si el usuario está definido y si tiene el rol de admin
     if (!req.user || req.user.rol !== 'admin') {
-        return res.status(403).json({ message: 'No tienes permisos de administrador' });
+        res.status(403).json({ message: 'No tienes permisos de administrador' });
+        return; // Agrega un return explícito
     }
     next();
 };
