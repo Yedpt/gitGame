@@ -1,9 +1,6 @@
-// context/AuthContext.js
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
-// Crear el contexto de autenticación
-// Este contexto almacenará el estado de autenticación y la función de inicio de sesión
-// y cierre de sesión.
+// IMPORTANTE!!!!!Este es el contexto bueno no borrar IMPORTANTE!!!!!
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -21,9 +18,14 @@ export const AuthProvider = ({ children }) => {
         sessionStorage.removeItem('user');
     };
 
+    // Nueva función para verificar si el usuario es admin
+    const isAdmin = () => {
+        return user && user.rol === 'admin'; // Devuelve true si el usuario tiene rol admin
+    };
+
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn,user, login, logout }}>
+        <AuthContext.Provider value={{ isLoggedIn,user, login, logout , isAdmin }}>
             {children}
         </AuthContext.Provider>
     );
