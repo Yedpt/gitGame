@@ -37,17 +37,20 @@ const Login = () => {
     }
 
     try {
+      // Enviar las credenciales para obtener el token
       const response = await axios.post('http://localhost:3000/api/login', { email, password });
-      const userData = response.data.user;
+      const { token, user: userData } = response.data; // Obtener token y userData
+
+      // Guardar el token en sessionStorage
+      sessionStorage.setItem('token', token); // Guarda el token para futuras solicitudes
 
       // Llama a login para almacenar el usuario en el contexto
       login(userData);
-      sessionStorage.setItem('user', JSON.stringify(userData)); // Almacena el usuario en sessionStorage
       console.log("Inicio de sesión exitoso!");
 
       // Redirige según el rol del usuario
       if (userData.rol === 'admin') {
-        navigate('/'); // Cambia a la ruta que corresponda a admin
+        navigate('/profile'); // Cambia a la ruta que corresponda a admin
       } else {
         navigate('/'); // Redirige al home si es un usuario regular
       }

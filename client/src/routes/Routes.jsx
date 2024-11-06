@@ -13,6 +13,13 @@ import Register from '../pages/Register'
 import Reviews from '../pages/Reviews'
 import Videos from '../pages/Videos'
 import CreateNew from '../pages/CreateNew'
+import CreateVideo from '../pages/CreateVideo'
+import ManageVideos from '../pages/ManageVideos'
+import ManageUsers from '../pages/ManageUsers'
+import ManageNews from '../pages/ManageNews'
+import ManageReviews from '../pages/ManageReviews'
+import CreateLaunch from '../pages/CreateLaunch'
+import ManageLaunch from '../pages/ManageLaunch'
 
 export const routes = createBrowserRouter([{
     path : '/',
@@ -27,6 +34,10 @@ export const routes = createBrowserRouter([{
             element: <CreateReview/>
         },
         {
+            path: 'managereviews',
+            element: <ManageReviews/>
+        },
+        {
             path: 'launch',
             element: <Launch/>
         },
@@ -35,8 +46,16 @@ export const routes = createBrowserRouter([{
             element: <Login/>
         },
         {
-            path: 'createnew',
+            path: 'createnews',
             element: <CreateNew/>
+        },
+        {
+            path: 'managenews',
+            element: <ManageNews/>
+        },
+        {
+            path: 'manageusers',
+            element: <ManageUsers/>
         },
         {
             path: 'news',
@@ -65,6 +84,22 @@ export const routes = createBrowserRouter([{
         {
             path: 'videos',
             element: <Videos/>
+        },
+        {
+            path: 'createvideos',
+            element: <CreateVideo/>
+        },
+        {
+            path: 'managevideos',
+            element: <ManageVideos/>
+        },
+        {
+           path: 'createlaunch',
+           element: <CreateLaunch/>
+        },
+        {
+            path: 'managelaunches',
+            element: <ManageLaunch/>
         }
 
     ]
