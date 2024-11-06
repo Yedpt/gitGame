@@ -35,9 +35,7 @@ const releases = connectionDb.define(
     },
     {
         timestamps: false,
-        tableName: 'reviews',
+        tableName: 'releases',
     });
-
-   
-
+    
 export default releases;

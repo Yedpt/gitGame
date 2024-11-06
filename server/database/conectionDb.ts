@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize';
-import { DB_PASSWORD, DB_HOST, DB_USER, DB_DEV_NAME, DB_TEST_NAME, PORT, DB_PORT, NODE_ENV } from '../config';
+import { DB_PASSWORD, DB_HOST, DB_USER, DB_DEV_NAME, DB_TEST_NAME, DB_PORT, NODE_ENV } from '../config';
 
 const DB_NAME = NODE_ENV === 'test' ? DB_TEST_NAME : DB_DEV_NAME;
 
