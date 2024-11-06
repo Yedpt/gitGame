@@ -14,7 +14,7 @@ const CreateReview = () => {
     title: '',
     review: '',
     author: '',
-    rating: '',
+    rating: null,
     image_url: null, // Debe ser null inicialmente para un archivo
   });
 
@@ -42,7 +42,10 @@ const handleChange = (e) => {
     if (!formData.review) newErrors.review = "El contenido de la reseña es obligatorio";
     if (!formData.image_url) newErrors.image_url = "Debes seleccionar una imagen";
     if (!formData.author) newErrors.author = "El autor es obligatorio";
-    if (user?.rol === 'admin' && !formData.rating) newErrors.rating = "ADMIN: la calificación es necesaria del 1 al 5";
+    // Solo los admins necesitan un rating
+    if (user?.rol === 'admin' && (!formData.rating || formData.rating < 1 || formData.rating > 5)) {
+      newErrors.rating = "ADMIN: la calificación es necesaria del 1 al 5";
+    }
     if (formData.review.length < 10) newErrors.review = "La reseña debe tener al menos 10 caracteres.";
     return newErrors;
   };
@@ -62,7 +65,10 @@ const handleChange = (e) => {
       formDataToSend.append('image_url', formData.image_url); // Usa el image_url del estado
       formDataToSend.append('author', formData.author);
       formDataToSend.append('num_likes', 0); // Inicialmente en 0
-      formDataToSend.append('rating', formData.rating);
+      // Solo los admins envían rating
+      if (user?.rol === 'admin' && formData.rating) {
+        formDataToSend.append('rating', formData.rating);
+      }
       
       
 
