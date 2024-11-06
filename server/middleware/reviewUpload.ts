@@ -4,7 +4,7 @@ import path from 'path';
 // Ruta absoluta a la carpeta de almacenamiento de imágenes
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.resolve('C:/Users/usuario/Desktop/bootcamp/gitGame/server/uploads/reviews'));
+    cb(null, path.resolve('C:/Users/Administrator/Desktop/bootcamp/gitGame/gitGame/server/uploads/reviews'));
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + '-' + file.originalname);

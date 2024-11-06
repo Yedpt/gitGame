@@ -3,7 +3,7 @@ import multer from 'multer';
 import path from 'path';
 import { 
   createReview, 
-  updateReview, 
+
   deleteReview, 
   getAllReviews, 
   getReviewById, 
@@ -11,7 +11,7 @@ import {
 } from "../controllers/reviewControllers";
 
 // Ruta absoluta para almacenar las imágenes de reseñas
-const UPLOADS_PATH = path.resolve('C:/Users/usuario/Desktop/bootcamp/gitGame/server/uploads/reviews');
+const UPLOADS_PATH = path.resolve('C:/Users/Administrator/Desktop/bootcamp/gitGame/gitGame/server/uploads/reviews');
 
 // Define el tipo de archivo de Multer
 interface MulterRequest extends Express.Request {
@@ -41,6 +41,6 @@ reviewRouter.post('/', upload.single('image_url'), createReview);
 reviewRouter.get('/', getAllReviews);
 reviewRouter.get('/:id', getReviewById);
 reviewRouter.delete('/:id', deleteReview);
-reviewRouter.put('/:id', updateReview);
+// reviewRouter.put('/:id', updateReview);
 reviewRouter.get('/user/:userId', getReviewsByUserId);
 

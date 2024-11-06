@@ -26,7 +26,7 @@ app.use(cors({
 }));
 
 // Configura la carpeta de uploads para archivos estáticos
-const uploadsPath = path.resolve('C:/Users/usuario/Desktop/bootcamp/gitGame/server/uploads/reviews');
+const uploadsPath = path.resolve('C:/Users/Administrator/Desktop/bootcamp/gitGame/gitGame/server/uploads/reviews');
 app.use('/uploads', express.static(uploadsPath));
 
 
