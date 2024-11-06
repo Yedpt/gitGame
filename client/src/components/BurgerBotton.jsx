@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/authContextsss";
 import logo from "../assets/img/ggLogo1.svg";
 
 const Navbar = () => {

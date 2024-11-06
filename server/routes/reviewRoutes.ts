@@ -1,31 +1,26 @@
-import express from 'express';
+import { Router } from "express";
 import multer from 'multer';
-import { createReview, updateReview, deleteReview, getAllReviews, getReviewById } from '../controllers/reviewControllers';
+import { uploadMiddleware } from "../middleware/multerMiddleware";
+import { 
+  createReview, 
+  updateReview, 
+  deleteReview, 
+  getAllReviews, 
+  getReviewById, 
+  getReviewsByUserId  
+} from "../controllers/reviewControllers";
 
-const router = express.Router();
+// Crea el router para las rutas de reviews
+export const reviewRouter = Router();
 
-export const uploadRouter = express.Router();
 
-// Configuración de almacenamiento de Multer
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/reviews/');
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + '-' + file.originalname);
-  },
-});
+// Configura la ruta para la subida de imágenes
+reviewRouter.post('/', uploadMiddleware, createReview);
+// reviewRouter.post('/', createReview); // Cambiado de '/reviews' a '/' para que coincida con el router
 
-const upload = multer({ storage });
-
-uploadRouter.post('/', upload.single('image_url'), createReview);
-
-// Ruta POST para crear un review, usando el middleware de carga de archivos
-
-router.get('/', getAllReviews);
-router.get('/:id', getReviewById);
-router.delete('/:id', deleteReview);
-router.put('/:id', updateReview)
-
-export default router;
+// Rutas de CRUD para reviews
+reviewRouter.get('/', getAllReviews);
+reviewRouter.get('/:id', getReviewById);
+reviewRouter.delete('/:id', deleteReview);
+reviewRouter.put('/:id', updateReview);
+reviewRouter.get('/user/:userId', getReviewsByUserId);

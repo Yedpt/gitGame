@@ -55,14 +55,21 @@ const Register = () => {
     e.preventDefault();
     const validationErrors = validateForm();
     setErrors(validationErrors);
-
+  
     if (Object.keys(validationErrors).length === 0) {
       try {
         await createUser(formData);
         setSuccessMessage("¡Registro exitoso! Serás redirigido al inicio de sesión.");
-        setTimeout(() => navigate('/login'), 3000); // Espera de 3 segundos antes de redirigir
+        setTimeout(() => navigate('/login'), 3000);
       } catch (error) {
-        console.error('Error al registrar', error);
+        if (error.message === 'Correo en uso') {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            email: 'El correo ya está en uso. Prueba con otro.',
+          }));
+        } else {
+          console.error('Error al registrar', error);
+        }
       }
     }
   };
