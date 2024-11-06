@@ -25,9 +25,8 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Configura la carpeta de uploads para archivos estáticos
-const uploadsPath = path.resolve('C:/Users/Administrator/Desktop/bootcamp/gitGame/gitGame/server/uploads/reviews');
-app.use('/uploads', express.static(uploadsPath));
+// Servir archivos estáticos desde la carpeta 'uploads' dentro de 'server'
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 // Middleware para procesar JSON

@@ -60,7 +60,7 @@ export const createReview = async (req: MulterRequest, res: Response): Promise<v
         // Normaliza la ruta de la imagen
         const imagePath = req.file?.path ? req.file.path.replace(/\\/g, '/') : ''; 
         const imageName = imagePath.split('/').pop(); 
-        const imageUrl = imageName ? `http://localhost:3000/uploads/reviews/${imageName}` : ''; 
+        const imageUrl = imageName ? `/uploads/reviews/${imageName}` : ''; 
 
         const newReview = await reviews.create({
             user_id: user_id,
