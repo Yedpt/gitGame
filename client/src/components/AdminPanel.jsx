@@ -30,7 +30,7 @@ const AdminPanel = ({ user }) => {
                 <h2 className="text-xl text-center text-light font-semibold">USUARIOS</h2>
                 {expandedCard === 'usuarios' && (
                     <div className="mt-4">
-                        <Link to="/admin/users">
+                        <Link to="/manageusers">
                             <button className="bg-green-500 text-dark py-2 px-4 rounded mb-2 w-full">Administrar Usuarios</button>
                         </Link>
                     </div>
@@ -42,7 +42,10 @@ const AdminPanel = ({ user }) => {
                 <h2 className="text-xl text-center text-light font-semibold">NOTICIAS</h2>
                 {expandedCard === 'noticias' && (
                     <div className="mt-4">
-                        <Link to="/admin/news">
+                         <Link to="/createnews">
+                            <button className="bg-green-500 text-dark py-2 px-4 rounded mb-2 w-full">Administrar Noticias</button>
+                        </Link>
+                        <Link to="/managenews">
                             <button className="bg-green-500 text-dark py-2 px-4 rounded mb-2 w-full">Administrar Noticias</button>
                         </Link>
                     </div>
@@ -54,10 +57,10 @@ const AdminPanel = ({ user }) => {
                 <h2 className="text-xl text-center text-light font-semibold">REVIEWS</h2>
                 {expandedCard === 'reviews' && (
                     <div className="mt-4 flex flex-col gap-2">
-                        <Link to="/createReview">
+                        <Link to="/createreview">
                             <button className="bg-green-500 text-dark py-2 px-4 rounded w-full">Crear Review</button>
                         </Link>
-                        <Link to="/manageReviews">
+                        <Link to="/managereviews">
                             <button className="bg-green-500 text-dark py-2 px-4 rounded w-full">Administrar Reviews</button>
                         </Link>
                     </div>
@@ -69,10 +72,10 @@ const AdminPanel = ({ user }) => {
                 <h2 className="text-xl text-center text-light font-semibold">LANZAMIENTOS</h2>
                 {expandedCard === 'lanzamientos' && (
                     <div className="mt-4 flex flex-col gap-2">
-                        <Link to="/createLaunch">
+                        <Link to="/createlaunch">
                             <button className="bg-green-500 text-dark py-2 px-4 rounded w-full">Crear Lanzamiento</button>
                         </Link>
-                        <Link to="/manageLaunches">
+                        <Link to="/managelaunches">
                             <button className="bg-green-500 text-dark py-2 px-4 rounded w-full">Administrar Lanzamientos</button>
                         </Link>
                     </div>
@@ -84,10 +87,10 @@ const AdminPanel = ({ user }) => {
                 <h2 className="text-xl text-center text-light font-semibold">VIDEOS</h2>
                 {expandedCard === 'videos' && (
                     <div className="mt-4">
-                         <Link to="/createvideo">
+                         <Link to="/createvideos">
                             <button className="bg-green-500 text-dark py-2 px-4 rounded w-full">Crear Video</button>
                         </Link>
-                        <Link to="/managevideo">
+                        <Link to="/managevideos">
                             <button className="bg-green-500 text-dark py-2 px-4 rounded w-full">Administrar Videos</button>
                         </Link>
                     </div>
