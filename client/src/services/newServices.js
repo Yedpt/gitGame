@@ -14,12 +14,12 @@ export const getAllNews = async () => {
 };
 
 // Obtener noticia por ID -- GET
-export const getNewById = async (newId) => {
+export const getNewById = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/${newId}`);
+    const response = await axios.get(`${API_URL}/${id}`);
     return response.data;
   } catch (error) {
-    console.error('Error al obtener usuario por ID', error);
+    console.error(`Error al obtener noticia con ID ${id}:`, error.message);
     throw error;
   }
 };

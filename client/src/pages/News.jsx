@@ -48,6 +48,7 @@ const GameNews = () => {
           news.map((item) => (
             <MainCard
               key={item.id}
+              id={item.id}
               title={item.title}
               news={item.news}
               image_url={item.image_url}

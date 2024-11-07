@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 const MainCard = ({ title, image_url, date, id }) => {
 
-  const formattedDate = new Date(date).toLocaleDateString('es-ES', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+  // const formattedDate = new Date(date).toLocaleDateString('es-ES', {
+  //   year: 'numeric',
+  //   month: 'long',
+  //   day: 'numeric',
+  // });
 
   return (
     <div >
