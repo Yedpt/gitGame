@@ -35,6 +35,17 @@ export const getNewsByUserId = async (userId) => {
   }
 };
 
+// Eliminar noticia -- DELETE
+export const deleteNew = async (id) => {
+  try {
+    const response = await axios.delete(`${API_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error al eliminar usuario', error);
+    throw error;
+  }
+};
+
 // Crear una noticia -- POST
 export const createNew = async (newData) => {
   const { title, news, image_url, image2_url } = newData;
@@ -55,17 +66,6 @@ export const updateNew = async (newId, updatedData) => {
     return response.data;
   } catch (error) {
     console.error('Error al actualizar usuario', error);
-    throw error;
-  }
-};
-
-// Eliminar noticia -- DELETE
-export const deleteNew = async (newId) => {
-  try {
-    const response = await axios.delete(`${API_URL}/${newId}`);
-    return response.data;
-  } catch (error) {
-    console.error('Error al eliminar usuario', error);
     throw error;
   }
 };
