@@ -1,6 +1,7 @@
 // models/videoModel.ts
 import { DataTypes, Model, Optional } from 'sequelize';
 import connectionDb from '../database/conectionDb';
+import UserModel from '../models/userModel';
 
 // Define la interfaz para los atributos del modelo
 interface VideoAttributes {
@@ -42,9 +43,8 @@ Video.init(
         },
         user_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             references: {
-                model: 'users', // Nombre de la tabla a la que hace referencia
+                model: UserModel,
                 key: 'id',
             },
         },

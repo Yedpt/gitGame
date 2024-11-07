@@ -51,6 +51,7 @@ const reviews = connectionDb.define(
         },
         rating: {
             type: DataTypes.STRING,
+            defaultValue: 0,
             allowNull: true,
         }
         
