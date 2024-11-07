@@ -2,7 +2,7 @@ import multer from 'multer';
 import path from 'path';
 
 // Ruta absoluta a la carpeta de almacenamiento de imágenes
-const UPLOADS_PATH = path.resolve('C:/Users/artur/OneDrive/Escritorio/factoriaf5/PROYECTOS/gitGame/server/uploads/video');
+const UPLOADS_PATH = path.resolve('./uploads/news/');
 
 
 // Configuración de almacenamiento de Multer
