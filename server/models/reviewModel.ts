@@ -1,5 +1,6 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes } from 'sequelize';
 import connectionDb from '../database/conectionDb';
+import UserModel from '../models/userModel';
 
 const reviews = connectionDb.define(
     'Reviews',
@@ -11,6 +12,10 @@ const reviews = connectionDb.define(
         },
         user_id: {
             type: DataTypes.INTEGER,
+            references: {
+                model: UserModel,
+                key: 'id',
+            },
         },
         rol: {
             type: DataTypes.STRING,
@@ -41,12 +46,13 @@ const reviews = connectionDb.define(
         },
         num_likes: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            defaultValue: 0,
+            allowNull: true,
         },
         rating: {
             type: DataTypes.STRING,
-            allowNull: false,
-        },
+            allowNull: true,
+        }
         
     },
     {
@@ -54,6 +60,6 @@ const reviews = connectionDb.define(
         tableName: 'reviews',
     });
 
-    console.log(reviews === connectionDb.models.Review);
+    console.log(reviews === connectionDb.models.Reviews);
 
 export default reviews;

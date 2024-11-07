@@ -1,54 +1,71 @@
+import { Sequelize } from 'sequelize';
 import conectionDb from './database/conectionDb';
 import UserModel from './models/userModel';
 import news from "./models/newsModel";
 import reviews from "./models/reviewModel";
 import Video from './models/videoModel';
-import express from 'express';
+import express, { Express } from 'express';
 import cors from 'cors';
-import {loginRouter, userRouter} from './routes/userRoutes';
+import path from 'path';
+import { loginRouter, userRouter } from './routes/userRoutes';
 import { newRouter } from './routes/newsRoutes';
 import { videoRouter } from './routes/videoRoutes';
+import { reviewRouter } from './routes/reviewRoutes';
 import { PORT } from './config';
-import reviewRoutes, { uploadRouter } from './routes/reviewRoutes';
 
-export const app = express();
+export const app: Express = express();
+
 // Hacer pública la carpeta de uploads para servir archivos
 
+// Configuración de CORS
 app.use(cors({
     origin: 'http://localhost:5173', // Cambia al puerto de tu frontend
+    credentials: true, // Permite cookies
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// Servir archivos estáticos desde la carpeta 'uploads' dentro de 'server'
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+
+// Middleware para procesar JSON
 app.use(express.json());
-app.use('/uploads', express.static('uploads'));
-app.use('/api/uploads', uploadRouter);
+
+// Rutas API
 app.use('/api/users', userRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/news', newRouter);
-app.use('/api/reviews', reviewRoutes);
+app.use('/api/reviews', reviewRouter);
 app.use('/api/videos', videoRouter);
 
+// Función para autenticar y sincronizar la base de datos
+const initializeDatabase = async (sequelize: Sequelize) => {
     try {
-        conectionDb.authenticate();
-        console.log("conexión exitosa a la bbdd");
+        await sequelize.authenticate();
+        console.log("Conexión exitosa a la base de datos.");
 
-        UserModel.sync({ force: false });
-        console.log("se ha creado la tabla de usuarios");
+        await UserModel.sync({ force: false });
+        console.log("Tabla de usuarios sincronizada.");
 
-        news.sync({ force: false });
-        console.log('Tabla de noticias creada');
+        await news.sync({ force: false });
+        console.log("Tabla de noticias sincronizada.");
 
-        reviews.sync({ force: false });
-        console.log('Tabla de reviews creada');
+        await reviews.sync({ force: false });
+        console.log("Tabla de reviews sincronizada.");
+
+        await Video.sync({ force: false });
+        console.log("Tabla de videos sincronizada.");
         
-        Video.sync({ force:false});
-        console.log('Tabla de videos creada');
-        
-
-    }catch (error) {
-        console.log("error al conectar la base de datos 😒", error);
+    } catch (error) {
+        console.error("Error al conectar la base de datos:", error);
     }
+};
 
+// Inicializa la base de datos
+initializeDatabase(conectionDb);
+
+// Iniciar servidor
 export const server = app.listen(PORT, () => {
-    console.log(`servidor corriendo en el puerto http://localhost:${PORT}`);
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
