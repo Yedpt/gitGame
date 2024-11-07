@@ -1,23 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Play } from 'lucide-react';
 import tanques from '../assets/img/tanques.svg';
 
-const videos = [
-  {
-    id: '1',
-    title: 'Trailer 2 GTA VI',
-    thumbnail: 'https://i.ytimg.com/vi/HocCuileO8A/maxresdefault.jpg',
-    link: 'https://www.youtube.com/watch?v=parzULurQg8',
-  },
-  {
-    id: '2',
-    title: 'Trailer nueva temporada Fornite',
-    thumbnail: 'https://impulsogeek.com/wp-content/uploads/2024/10/Fortnitemares-2024-Key-Art_ES-MX.webp',
-    link: 'https://www.youtube.com/watch?v=pryHqh0_nfo',
-  },
-];
-
 const VideoGallery = () => {
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/videos'); // Asegúrate de que la URL sea la correcta
+        const data = await response.json();
+        setVideos(data);
+      } catch (error) {
+        console.error('Error fetching videos:', error);
+      }
+    };
+
+    fetchVideos();
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#2D342D] text-white font-title">
       <div className="relative h-[100vh] mb-8">
@@ -34,11 +35,12 @@ const VideoGallery = () => {
         {videos.map((video) => (
           <div key={video.id} className="relative group max-w-4xl w-full">
             <div className="aspect-video relative">
-              <a href={video.link} target="_blank" rel="noopener noreferrer">
+              <a href={video.video_url} target="_blank" rel="noopener noreferrer">
                 <img
-                  src={video.thumbnail}
+                  src={`http://localhost:3000/uploads/video/${video.thumbnail}`}
+
                   alt={video.title}
-                  className="w-full h-full object-cover rounded-lg"
+                  className="w-full h-auto object-cover rounded-lg"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <Play className="w-24 h-24 text-white" />
@@ -54,3 +56,4 @@ const VideoGallery = () => {
 };
 
 export default VideoGallery;
+
