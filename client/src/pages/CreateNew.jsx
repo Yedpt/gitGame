@@ -1,22 +1,34 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/authContextsss';
 import { createNew } from '../services/newServices';
 
 const CreateNew = () => {
   const navigate = useNavigate();
+  const { user, isLoggedIn } = useAuth();
   const [formData, setFormData] = useState({
+    id: '',
+    user_id: user ? user.id : '',
     title: '',
     news: '',
-    image_url: '',
-    image2_url: '',
+    image_url: null,
+    image2_url: null,
   });
 
   const [errors, setErrors] = useState({});
+  const [submissionError, setSubmissionError] = useState('');
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate('/login');
+    }
+  }, [isLoggedIn, navigate]);
 
   const handleChange = (e) => {
+    const { name, value, files } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: files ? files[0] : value,
     });
   };
 
@@ -24,8 +36,8 @@ const CreateNew = () => {
     const newErrors = {};
     if (!formData.title) newErrors.title = "El título es obligatorio.";
     if (!formData.news) newErrors.news = "El contenido de la noticia es obligatorio.";
-    if (!formData.image_url) newErrors.image_url = "URL";
-    if (!formData.image2_url) newErrors.image2_url = "URL";
+    if (!formData.image_url) newErrors.image_url = "La imagen principal es obligatoria";
+    if (!formData.image2_url) newErrors.image2_url = "La imagen secundaria es obligatoria";
     if (!formData.news || formData.news.length < 10) newErrors.news = "La noticia debe tener al menos 10 caracteres.";
     return newErrors;
   };
@@ -36,11 +48,22 @@ const CreateNew = () => {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
+      const formDataToSend = new FormData();
+      formDataToSend.append('id', formData.id);
+      formDataToSend.append('user_id', user.id);
+      formDataToSend.append('title', formData.title);
+      formDataToSend.append('news', formData.news);
+      formDataToSend.append('num_likes', 0);
+      formDataToSend.append('image_url', formData.image_url);
+      formDataToSend.append('image2_url', formData.image2_url);
+
       try {
-        await createNew(formData);
-        setTimeout(() => navigate('/news'), 2000);
+        await createNew(formDataToSend);
+        alert('Noticia creada exitosamente');
+        navigate('/news');
       } catch (error) {
-        console.error('Error al registrar', error);
+        setSubmissionError('Error al registrar la noticia: ' + error.message);
+        console.error('Error al registrar la noticia:', error);
       }
     }
   };
@@ -85,7 +108,7 @@ const CreateNew = () => {
               <input
                 type="file"
                 name="image_url"
-                value={formData.image_url}
+                // value={formData.image_url}
                 onChange={handleChange}
                 className="w-full p-2 rounded-md bg-gray-100 text-gray-900 font-paragraph"
               />
@@ -97,7 +120,7 @@ const CreateNew = () => {
               <input
                 type="file"
                 name="image2_url"
-                value={formData.image2_url}
+                // value={formData.image2_url}
                 onChange={handleChange}
                 className="w-full p-2 rounded-md bg-gray-100 text-gray-900 font-paragraph"
               />

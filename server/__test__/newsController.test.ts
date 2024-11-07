@@ -16,16 +16,17 @@ describe('crud news', () => {
         const report = {
             user_id: 1,
             title: "test",
-            news: "DESCRIPCION DE LA NOTICIA",
+            news: "test",
             published_at: "2024-10-25T00:00:00.000Z",
             updated_at: "2024-10-25T00:00:00.000Z",
             num_likes: 100,
-            image_url: "URL"
+            image_url: "URL",
+            image2_url: "URL"
         };
 
         const response = await request(app).post('/api/news').send(report);
         expect(response.statusCode).toBe(200);
-        expect(response.body.title).toBe(report.title);
+        expect(response.body.title).toEqual(report.title);
         expect(response.body.news).toBe(report.news);
         expect(response.body.num_likes).toBe(report.num_likes);
     });
@@ -39,7 +40,8 @@ describe('crud news', () => {
             published_at: "2024-10-25T00:00:00.000Z",
             updated_at: "2024-10-25T00:00:00.000Z",
             num_likes: 100,
-            image_url: "test"
+            image_url: "test",
+            image2_url: "test"
         });
 
         const id = newToDelete?.get('id')?.toString();
@@ -58,7 +60,8 @@ describe('crud news', () => {
             published_at: "2024-10-25T00:00:00.000Z",
             updated_at: "2024-10-25T00:00:00.000Z",
             num_likes: 100,
-            image_url: "test"
+            image_url: "test",
+            image2_url: "test"
         });
 
         const id = newForUpdate?.get('id')?.toString();

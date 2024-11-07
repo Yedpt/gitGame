@@ -47,6 +47,6 @@ const NewsModel = connectionDb.define(
         timestamps: false,
     });
 
-    // console.log(news === connectionDb.models.New);
+// console.log(news === connectionDb.models.New);
 
 export default NewsModel;
