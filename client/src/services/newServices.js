@@ -2,45 +2,18 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:3000/api/news';
 
-
 //Get all news -- GET
 export const getAllNews = async () => {
-    try {
-      const res = await axios.get(API_URL);
-      return res.data;
-    } catch (error) {
-      console.error('getAllNews error ', error.message);
-      throw error;
-    }
-  };
-
-// Crear una noticia
-export const createNew = async (newData) => {
-  const { title, news, image_url, image2_url } = newData;
-  const user_id = 1; // LIGADO A LA TABLA DE USUARIOS
-  const published_at = new Date(); // Fecha de creación
-  const updated_at = new Date(); // Fecha de actualización
-  const num_likes = 5; //LIKES DE LAS NOTICIAS
-
   try {
-    const response = await axios.post(API_URL, {
-        user_id,
-        title,
-        news,
-        published_at,
-        updated_at,
-        num_likes,
-        image_url,
-        image2_url,
-    });
-    return response.data;
+    const res = await axios.get(API_URL);
+    return res.data;
   } catch (error) {
-    console.error('Error al crear usuario', error);
+    console.error('getAllNews error ', error.message);
     throw error;
   }
 };
 
-// Obtener noticia por ID
+// Obtener noticia por ID -- GET
 export const getNewById = async (newId) => {
   try {
     const response = await axios.get(`${API_URL}/${newId}`);
@@ -51,7 +24,31 @@ export const getNewById = async (newId) => {
   }
 };
 
-// Actualizar noticia
+//Obtener noticias por user ID -- GET
+export const getNewsByUserId = async (userId) => {
+  try {
+    const response = await axios.get(`${API_URL}/user/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error al obtener las reseñas del usuario con ID ${userId}:`, error.message);
+    throw error;
+  }
+};
+
+// Crear una noticia -- POST
+export const createNew = async (newData) => {
+  const { title, news, image_url, image2_url } = newData;
+
+  try {
+    const response = await axios.post(API_URL, newData);
+    return response.data;
+  } catch (error) {
+    console.error('Error al crear la noticia', error);
+    throw error;
+  }
+};
+
+// Actualizar noticia -- PUT
 export const updateNew = async (newId, updatedData) => {
   try {
     const response = await axios.put(`${API_URL}/${newId}`, updatedData);
@@ -62,7 +59,7 @@ export const updateNew = async (newId, updatedData) => {
   }
 };
 
-// Eliminar noticia
+// Eliminar noticia -- DELETE
 export const deleteNew = async (newId) => {
   try {
     const response = await axios.delete(`${API_URL}/${newId}`);
