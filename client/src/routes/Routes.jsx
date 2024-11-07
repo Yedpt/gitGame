@@ -3,7 +3,7 @@ import {createBrowserRouter} from 'react-router-dom'
 import Layout from '../layout/Layout'
 import Home from '../pages/Home'
 import CreateReview from '../pages/CreateReview'
-import Launch from '../pages/Launch'
+
 import Login from '../pages/Login'
 import News from '../pages/News'
 import PageUnderConstruction from '../pages/PageUnderConstruction'
@@ -13,9 +13,7 @@ import Register from '../pages/Register'
 import Reviews from '../pages/Reviews'
 import Videos from '../pages/Videos'
 import CreateNew from '../pages/CreateNew'
-<<<<<<< HEAD
 import UpcomingReleases from '../components/UpcomingReleases'
-=======
 import CreateVideo from '../pages/CreateVideo'
 import ManageVideos from '../pages/ManageVideos'
 import ManageUsers from '../pages/ManageUsers'
@@ -23,7 +21,6 @@ import ManageNews from '../pages/ManageNews'
 import ManageReviews from '../pages/ManageReviews'
 import CreateLaunch from '../pages/CreateLaunch'
 import ManageLaunch from '../pages/ManageLaunch'
->>>>>>> 164b13155e04dde1bb1f3a631be40defa2f3dc0b
 
 export const routes = createBrowserRouter([{
     path : '/',
@@ -43,7 +40,7 @@ export const routes = createBrowserRouter([{
         },
         {
             path: 'launch',
-            element: <Launch/>
+            element: <UpcomingReleases/>
         },
         {
             path: 'login',
@@ -90,10 +87,6 @@ export const routes = createBrowserRouter([{
             element: <Videos/>
         },
         {
-<<<<<<< HEAD
-            path: 'upcoming',
-            element: <UpcomingReleases/>
-=======
             path: 'createvideos',
             element: <CreateVideo/>
         },
@@ -101,6 +94,7 @@ export const routes = createBrowserRouter([{
             path: 'managevideos',
             element: <ManageVideos/>
         },
+       
         {
            path: 'createlaunch',
            element: <CreateLaunch/>
@@ -108,7 +102,6 @@ export const routes = createBrowserRouter([{
         {
             path: 'managelaunches',
             element: <ManageLaunch/>
->>>>>>> 164b13155e04dde1bb1f3a631be40defa2f3dc0b
         }
 
 

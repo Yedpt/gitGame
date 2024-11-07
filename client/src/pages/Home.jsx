@@ -125,10 +125,6 @@ export default function Home() {
         </section>
 
 
-
-
-
-
         {/* Contacto */}
         <section className="p-4 sm:p-8" style={{ backgroundColor: '#2D342D' }}>
           <h2 className="text-3xl font-bold mb-6 text-green-500 font-title">CONTACTO</h2>

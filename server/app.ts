@@ -4,18 +4,12 @@ import UserModel from './models/userModel';
 import news from "./models/newsModel";
 import reviews from "./models/reviewModel";
 import Video from './models/videoModel';
-<<<<<<< HEAD
 import releases from './models/releasesModels';
-import express from 'express';
-import cors from 'cors';
 import releasesRoutes from './routes/releasesRoutes';
 import {loginRouter, userRouter} from './routes/userRoutes';
-=======
 import express, { Express } from 'express';
 import cors from 'cors';
 import path from 'path';
-import { loginRouter, userRouter } from './routes/userRoutes';
->>>>>>> 164b13155e04dde1bb1f3a631be40defa2f3dc0b
 import { newRouter } from './routes/newsRoutes';
 import { videoRouter } from './routes/videoRoutes';
 import { reviewRouter } from './routes/reviewRoutes';
@@ -66,20 +60,14 @@ const initializeDatabase = async (sequelize: Sequelize) => {
         await Video.sync({ force: false });
         console.log("Tabla de videos sincronizada.");
         
-<<<<<<< HEAD
         Video.sync({ force:false});
         console.log('Tabla de videos creada');
 
         releases.sync({force:true});
-        console.log('Tabla de proximos lanzamientos');
-        
+        console.log('Tabla de proximos lanzamientos');  
 
     }catch (error) {
         console.log("error al conectar la base de datos 😒", error);
-=======
-    } catch (error) {
-        console.error("Error al conectar la base de datos:", error);
->>>>>>> 164b13155e04dde1bb1f3a631be40defa2f3dc0b
     }
 };
 
