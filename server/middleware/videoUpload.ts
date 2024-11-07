@@ -2,7 +2,7 @@ import multer from 'multer';
 import path from 'path';
 
 // Ruta absoluta a la carpeta de almacenamiento de imágenes
-const UPLOADS_PATH = path.resolve('./uploads/news/');
+const UPLOADS_PATH = path.resolve('./uploads/video/');
 
 
 // Configuración de almacenamiento de Multer
