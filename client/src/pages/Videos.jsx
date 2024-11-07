@@ -5,11 +5,10 @@ import tanques from '../assets/img/tanques.svg';
 const VideoGallery = () => {
   const [videos, setVideos] = useState([]);
 
- 
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/videos'); 
+        const response = await fetch('http://localhost:3000/api/videos'); // Asegúrate de que la URL sea la correcta
         const data = await response.json();
         setVideos(data);
       } catch (error) {
@@ -38,9 +37,10 @@ const VideoGallery = () => {
             <div className="aspect-video relative">
               <a href={video.video_url} target="_blank" rel="noopener noreferrer">
                 <img
-                  src={video.thumbnail} // Asegúrate de que este es el campo correcto
+                  src={`http://localhost:3000/uploads/video/${video.thumbnail}`}
+
                   alt={video.title}
-                  className="w-full h-full object-cover rounded-lg"
+                  className="w-full h-auto object-cover rounded-lg"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <Play className="w-24 h-24 text-white" />
@@ -56,3 +56,4 @@ const VideoGallery = () => {
 };
 
 export default VideoGallery;
+

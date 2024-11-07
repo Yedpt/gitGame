@@ -1,6 +1,6 @@
 // controllers/videoController.ts
 import { Request, Response } from 'express';
-import Video from '../models/videoModel'; // Asegúrate de que este modelo esté correctamente definido
+import Video from '../models/videoModel'; 
 
 // GET: Obtener todos los videos
 export const getAllVideos = async (req: Request, res: Response) => {
@@ -15,7 +15,8 @@ export const getAllVideos = async (req: Request, res: Response) => {
 
 // POST: Crear un nuevo video
 export const createVideo = async (req: Request, res: Response) => {
-    const { user_id, title, video_url, published_at, thumbnail } = req.body; // Asegúrate de incluir el campo thumbnail
+    const { user_id, title, video_url, published_at } = req.body;
+    const thumbnail = req.file ? req.file.filename : null; // Solo guarda el nombre del archivo
 
     try {
         const newVideo = await Video.create({ user_id, title, video_url, published_at, thumbnail });
@@ -27,9 +28,11 @@ export const createVideo = async (req: Request, res: Response) => {
 };
 
 
+
+
 // DELETE: Eliminar un video por ID
 export const deleteVideo = async (req: Request, res: Response) => {
-    const videoId = Number(req.params.id); // Convertir a número
+    const videoId = Number(req.params.id); 
     try {
         const deletedCount = await Video.destroy({
             where: { id: videoId }
@@ -47,7 +50,7 @@ export const deleteVideo = async (req: Request, res: Response) => {
 
 // Actualizar un video por ID
 export const updateVideo = async (req: Request, res: Response) => {
-    const videoId = Number(req.params.id); // Convertir a número
+    const videoId = Number(req.params.id); 
     const { user_id, title, video_url, published_at } = req.body;
     try {
         const [updatedCount] = await Video.update(

@@ -1,3 +1,4 @@
+// models/videoModel.ts
 import { DataTypes, Model, Optional } from 'sequelize';
 import connectionDb from '../database/conectionDb';
 
@@ -7,33 +8,25 @@ interface VideoAttributes {
     user_id: number;
     title: string;
     video_url: string;
-    thumbnail: string; 
     published_at?: Date;
     updated_at?: Date;
+    thumbnail?: string | null;
 }
 
 // Define la interfaz para los atributos opcionales (para crear un video)
-interface VideoCreationAttributes extends Optional<VideoAttributes, 'id' | 'published_at' | 'updated_at'> {}
+interface VideoCreationAttributes extends Optional<VideoAttributes, 'id' | 'published_at' | 'updated_at' | 'thumbnail'> {}
 
-// Extiende la clase Model
 class Video extends Model<VideoAttributes, VideoCreationAttributes> implements VideoAttributes {
     public id!: number;
     public user_id!: number;
     public title!: string;
     public video_url!: string;
-    public thumbnail!: string; 
     public published_at!: Date;
     public updated_at!: Date;
-
-    // Para manejar la actualización automática de updated_at
-    public static initialize() {
-        Video.beforeUpdate((video) => {
-            video.updated_at = new Date();
-        });
-    }
+    public thumbnail!: string | null;
 }
 
-
+// Inicializa el modelo con hooks y atributos
 Video.init(
     {
         id: {
@@ -45,7 +38,7 @@ Video.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'users', 
+                model: 'users',
                 key: 'id',
             },
         },
@@ -57,27 +50,29 @@ Video.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        thumbnail: { 
-            type: DataTypes.STRING,
-            allowNull: true, 
-        },
         published_at: {
             type: DataTypes.DATE,
             defaultValue: DataTypes.NOW,
         },
         updated_at: {
             type: DataTypes.DATE,
-            allowNull: true, 
+            allowNull: true,
+        },
+        thumbnail: {
+            type: DataTypes.STRING,
+            allowNull: true,
         },
     },
     {
         tableName: 'videos',
-        sequelize: connectionDb, 
-        timestamps: false, 
+        sequelize: connectionDb,
+        timestamps: false,
+        hooks: {
+            beforeUpdate: (video: Video) => {
+                video.updated_at = new Date();
+            }
+        }
     }
 );
-
-
-Video.initialize();
 
 export default Video;
