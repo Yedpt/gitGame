@@ -1,5 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import connectionDb from '../database/conectionDb';
+import UserModel from './userModel';
 
 const NewsModel = connectionDb.define(
     'News',
@@ -11,6 +12,10 @@ const NewsModel = connectionDb.define(
         },
         user_id: {
             type: DataTypes.INTEGER,
+            references: {
+                model: UserModel,
+                key: 'id',
+            },
         },
         title: {
             type: DataTypes.STRING,
@@ -47,6 +52,6 @@ const NewsModel = connectionDb.define(
         timestamps: false,
     });
 
-// console.log(news === connectionDb.models.New);
+console.log(NewsModel === connectionDb.models.New);
 
 export default NewsModel;

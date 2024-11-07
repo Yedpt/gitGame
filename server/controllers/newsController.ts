@@ -15,8 +15,21 @@ export const getAllNews = async (req: Request, res: Response) => {
   try {
     const report = await NewsModel.findAll();
     res.json(report);
-  } catch (error) {
+  } catch (error) 
+  {
     res.json({ message: "Ha ocurrido un error", error });
+  }
+};
+
+//GET by ID
+export const getNewById = async (req: Request, res: Response) => {
+  try {
+      const { id } = req.params;
+      const report = await NewsModel.findByPk(id);
+      res.json(report);
+  } catch (error)
+  {
+      res.json({ message: "No se ha encontrado el review", error });
   }
 };
 
