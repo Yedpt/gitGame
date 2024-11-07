@@ -43,7 +43,7 @@ const AdminPanel = ({ user }) => {
                 {expandedCard === 'noticias' && (
                     <div className="mt-4">
                          <Link to="/createnews">
-                            <button className="bg-green-500 text-dark py-2 px-4 rounded mb-2 w-full">Administrar Noticias</button>
+                            <button className="bg-green-500 text-dark py-2 px-4 rounded mb-2 w-full">Crear Noticias</button>
                         </Link>
                         <Link to="/managenews">
                             <button className="bg-green-500 text-dark py-2 px-4 rounded mb-2 w-full">Administrar Noticias</button>
