@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import image from '../assets/images/image.png';
-import CopyMainCard from '../components/CopyMainCard';
+import MainCard from '../components/MainCard';
 import { getAllNews } from '../services/newServices';
 
 
@@ -11,7 +11,18 @@ const GameNews = () => {
     const dataNews = await getAllNews();
     console.log('Datos de noticias:', dataNews); // Agrega esto
     if (Array.isArray(dataNews)) {
-      setNews(dataNews);
+      const formattedNews = dataNews.map(item => {
+        console.log('Image URL:', item.image_url);
+        const formattedDate = new Date(item.published_at).toLocaleDateString(); // Formatear solo la fecha
+        const imageUrl = `http://localhost:3000${item.image_url}`;
+
+        return {
+          ...item,
+          image_url: imageUrl,
+          published_at: formattedDate, // Reemplazar la fecha original por la formateada
+        };
+      });
+      setNews(formattedNews);
     } else {
       console.error('La respuesta no es un array:', dataNews);
       setNews([]); // En caso de que no sea un array, establece `news` como un array vacío
@@ -24,23 +35,23 @@ const GameNews = () => {
 
   return (
     <div div className="w-full min-h-screen flex flex-col items-center bg-dark">
-      {/* <div className="w-full">
+      <div className="w-full">
         <img
           src={image}
           alt="fondo verde"
           className="absolute w-full"
         />
-      </div> */}
+      </div>
 
-      <div className="grid sm:grid-cols-1 w-5/6 mt-24">
+      <div className="grid gap-y-10 sm:grid-cols-1 w-5/6 mt-24 mb-2">
         {Array.isArray(news) && news.length > 0 ? (
           news.map((item) => (
-            <CopyMainCard
+            <MainCard
               key={item.id}
               title={item.title}
               news={item.news}
-              imageUrl={item.image_url}
-              date={item.date}
+              image_url={item.image_url}
+              date={item.published_at}
             />
           ))
         ) : (
