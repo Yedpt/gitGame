@@ -16,11 +16,11 @@ export default function Home() {
 
   const fetchData = async () => {
     const dataNews = await getAllNews();
-    console.log('Datos de noticias:', dataNews); // Agrega esto
+    console.log('Datos de noticias:', dataNews);
     if (Array.isArray(dataNews)) {
       const formattedNews = dataNews.map(item => {
         console.log('Image URL:', item.image_url);
-        const formattedDate = new Date(item.published_at).toLocaleDateString(); // Formatear solo la fecha
+        const formattedDate = new Date(item.published_at).toLocaleDateString(); 
         const imageUrl = `http://localhost:3000${item.image_url}`;
 
         return {
@@ -29,7 +29,13 @@ export default function Home() {
           published_at: formattedDate, // Reemplazar la fecha original por la formateada
         };
       });
-      setNews(formattedNews);
+
+      // Ordenar las noticias por 'published_at' de forma descendente
+      const sortedNews = formattedNews.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
+
+      // Establecer el estado con solo la primera noticia (más reciente)
+      setNews([sortedNews[0]]);
+
     } else {
       console.error('La respuesta no es un array:', dataNews);
       setNews([]); // En caso de que no sea un array, establece `news` como un array vacío
