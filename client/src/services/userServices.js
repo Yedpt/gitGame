@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_URL = 'http://localhost:3000/api/users';
+const API_URL = "http://localhost:3000/api/users";
 
 // Crear un nuevo usuario
 export const createUser = async (userData) => {
   const { name, email, birth_date, password, bio, avatar } = userData;
-  const role = 'usuario'; // Asigna el rol por defecto
+  const role = "usuario"; // Asigna el rol por defecto
   const create_at = new Date(); // Fecha de creación
 
   try {
@@ -18,12 +18,12 @@ export const createUser = async (userData) => {
       avatar,
       role,
       create_at,
-      status: 'active', // Estado por defecto
+      status: "active", // Estado por defecto
     });
     return response.data;
   } catch (error) {
     if (error.response && error.response.status === 409) {
-      throw new Error('Correo en uso');
+      throw new Error("Correo en uso");
     }
     throw error;
   }
@@ -35,7 +35,7 @@ export const getUserById = async (userId) => {
     const response = await axios.get(`${API_URL}/${userId}`);
     return response.data;
   } catch (error) {
-    console.error('Error al obtener usuario por ID', error);
+    console.error("Error al obtener usuario por ID", error);
     throw error;
   }
 };
@@ -46,7 +46,7 @@ export const updateUser = async (userId, updatedData) => {
     const response = await axios.put(`${API_URL}/${userId}`, updatedData);
     return response.data;
   } catch (error) {
-    console.error('Error al actualizar usuario', error);
+    console.error("Error al actualizar usuario", error);
     throw error;
   }
 };
@@ -57,7 +57,7 @@ export const deleteUser = async (userId) => {
     const response = await axios.delete(`${API_URL}/${userId}`);
     return response.data;
   } catch (error) {
-    console.error('Error al eliminar usuario', error);
+    console.error("Error al eliminar usuario", error);
     throw error;
   }
 };
