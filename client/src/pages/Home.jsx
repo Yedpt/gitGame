@@ -11,7 +11,7 @@ import MainCard from '../components/MainCard.jsx';
 import SecondaryCard from '../components/SecondaryCard.jsx';
 
 export default function Home() {
-
+  // prueba
   const [news, setNews] = useState([]);
 
   const fetchData = async () => {

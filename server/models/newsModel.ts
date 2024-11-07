@@ -1,6 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import connectionDb from '../database/conectionDb';
-import UserModel from './userModel';
+import UserModel from '../models/userModel';
 
 const NewsModel = connectionDb.define(
     'News',
