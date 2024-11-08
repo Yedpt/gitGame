@@ -60,9 +60,9 @@ export const createNew = async (newData) => {
 };
 
 // Actualizar noticia -- PUT
-export const updateNew = async (newId, updatedData) => {
+export const updateNew = async (id, updatedData) => {
   try {
-    const response = await axios.put(`${API_URL}/${newId}`, updatedData);
+    const response = await axios.put(`${API_URL}/${id}`, updatedData);
     return response.data;
   } catch (error) {
     console.error('Error al actualizar usuario', error);

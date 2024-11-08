@@ -182,7 +182,7 @@ const ManageNews = () => {
                 </td>
                 <td className="px-4 py-2 border border-gray-200 text-center">
                   <button
-                    onClick={() => navigate('/')}
+                    onClick={() => navigate('/editnew')}
                     className="text-blue-500 mr-2"
                     title="Editar"
                   >
