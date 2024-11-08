@@ -48,20 +48,20 @@ export default function Home() {
 
   return (
     <div className="min-h-screen font-orbitron bg-dark text-white">
-      <main className="pt-16 ms:pt-16">
+      <main className="pt-16">
         {/* Hero Section */}
         <section className="relative h-64 md:min-h-screen md:flex items-center justify-center overflow-hidden">
           <img
             src={home}
             alt="Fantasy landscape"
             className="w-full absolute object-contain inset-0" />
-          <div className="absolute inset-0 "></div>
-          <div className="z-10 text-center relative px-4 md:px-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/80"></div>
+          <div className="z-0 text-center relative px-4 md:px-0">
             <h2 className="text-2xl md:text-4xl font-bold mb-2 font-title mt-8 md:mt-2">Bienvenido a</h2>
             <img
               src={logo}
               alt="Descripción de la imagen SVG"
-              className="w-2/3 sm:w-2/3 md:w-2/4 lg:w-3/5 xl:w-4/6 mx-auto"
+              className="w-2/3 sm:w-2/3 md:w-2/4 lg:w-3/5 xl:w-5/6 mx-auto"
             />
           </div>
         </section>
