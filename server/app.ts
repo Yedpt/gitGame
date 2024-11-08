@@ -14,6 +14,7 @@ import { newRouter } from './routes/newsRoutes';
 import { videoRouter } from './routes/videoRoutes';
 import { reviewRouter } from './routes/reviewRoutes';
 import { PORT } from './config';
+import { createRelease } from './controllers/releasesController';
 
 export const app = express();
 
@@ -41,7 +42,7 @@ app.use('/api/news', newRouter);
 app.use('/api/reviews', reviewRouter);
 app.use('/api/videos', videoRouter);
 app.use('/api/releases', releasesRoutes); // para Usar las rutas de los juegos
-
+app.use('/api/relesases', createRelease);
 // Función para autenticar y sincronizar la base de datos
 const initializeDatabase = async (sequelize: Sequelize) => {
     try {

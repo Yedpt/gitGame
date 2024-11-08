@@ -17,7 +17,7 @@ interface UserIdRequest extends Request {
 export const getUpcomingReleases = async (req: Request, res: Response) => {
     try {
         const upcomingReleases = await releases.findAll();
-        res.json(upcomingReleases); // Utilisez upcomingReleases ici
+        res.json(upcomingReleases); 
     } catch (error) {
         res.status(500).json({ message: "Lanzamiento no encontrado", error });
     }
@@ -27,19 +27,19 @@ export const getReleasesByMonth = async (req: Request, res: Response) => {
     const { month } = req.params;
     try {
         const releasesByMonth = await releases.findAll({ where: { month } });
-        res.json(releasesByMonth); // Corrigez ici aussi
+        res.json(releasesByMonth); 
     } catch (error) {
         res.status(500).json({ message: "Lanzamiento mensual no encontrado", error });
     }
 };
 
 export const createRelease = async (req: Request, res: Response) => {
-    const { user_id, title, release_date, rating, image_url, month } = req.body; // Corrigé relese_date
+    const { user_id, title, release_date, rating, image_url, month } = req.body;
     try {
         const newRelease = await releases.create({
             user_id,
             title,
-            release_date, // Corrigé ici
+            release_date, 
             rating,
             image_url,
             month
@@ -50,7 +50,7 @@ export const createRelease = async (req: Request, res: Response) => {
     }
 };
 
-export const getReleaseById = async (req: UserIdRequest, res: Response) => { // Utilisez UserIdRequest ici
+export const getReleaseById = async (req: UserIdRequest, res: Response) => { 
     const { userId } = req.params;
     try {
         const release = await releases.findByPk(userId);
@@ -63,7 +63,7 @@ export const getReleaseById = async (req: UserIdRequest, res: Response) => { // 
     }
 };
 
-export const updateRelease = async (req: UserIdRequest, res: Response) => { // Utilisez UserIdRequest ici
+export const updateRelease = async (req: UserIdRequest, res: Response) => { 
     const { userId } = req.params;
     try {
         const [updated] = await releases.update(req.body, {
@@ -79,7 +79,7 @@ export const updateRelease = async (req: UserIdRequest, res: Response) => { // U
     }
 };
 
-export const deleteRelease = async (req: UserIdRequest, res: Response) => { // Utilisez UserIdRequest ici
+export const deleteRelease = async (req: UserIdRequest, res: Response) => { 
     const { userId } = req.params;
     try {
         const deleted = await releases.destroy({
