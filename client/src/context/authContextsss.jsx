@@ -4,12 +4,17 @@ import { createContext, useContext, useState, useEffect } from "react";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(() => {
+        // Intenta cargar el usuario desde sessionStorage
+        const savedUser = sessionStorage.getItem("user");
+        return savedUser ? JSON.parse(savedUser) : null;
+    });
+    const [isLoggedIn, setIsLoggedIn] = useState(!!user);
 
     const login = (userData) => {
         setIsLoggedIn(true);
         setUser(userData);
+        sessionStorage.setItem("user", JSON.stringify(userData)); // Guarda en sessionStorage
     };
 
     const logout = () => {

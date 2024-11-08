@@ -2,6 +2,17 @@ import axios from "axios";
 
 const API_URL = "http://localhost:3000/api/users";
 
+// listar todos los usuarios
+export const getUsers = async () => {
+  try {
+    const response = await axios.get(API_URL);
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener usuario por ID", error);
+    throw error;
+  }
+}
+
 // Crear un nuevo usuario
 export const createUser = async (userData) => {
   const { name, email, birth_date, password, bio, avatar } = userData;
@@ -39,6 +50,7 @@ export const getUserById = async (userId) => {
     throw error;
   }
 };
+
 
 // Actualizar usuario
 export const updateUser = async (userId, updatedData) => {
