@@ -2,7 +2,7 @@ import multer from 'multer';
 import path from 'path';
 
 // Ruta absoluta a la carpeta de almacenamiento de imágenes
-const UPLOADS_PATH = path.resolve('C:/Users/usuario/Desktop/bootcamp/gitGame/server/uploads/reviews');
+const UPLOADS_PATH = path.resolve('uploads/reviews');
 
 // Configuración de almacenamiento de Multer
 const storage = multer.diskStorage({

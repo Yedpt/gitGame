@@ -118,29 +118,29 @@ export const deleteReview = async (req: Request, res: Response) => {
 
 
 //PUT
-// export const updateReview = async (req: Request, res: Response) => {
-//     try {
-//         const reviewId = req.params.id;
-//         const { user_id, rol, title, review, published_at,  updated_at, image_url, author, num_likes, rating } = req.body;
-//         const updatedReview = await reviews.update(
-//             {
-//                 user_id,
-//                 rol,
-//                 title,
-//                 review,
-//                 published_at,
-//                 updated_at,
-//                 image_url,
-//                 author,
-//                 num_likes,
-//                 rating,
-//             },
-//             {
-//                 where: { id: reviewId }
-//             });
-//         const report = await reviews.findByPk(reviewId);
-//         res.status(200).json(report);
-//     } catch (error) {
-//         res.json({ message: "No se ha podido actualizar el review", error });
-//     }
-// };
+export const updateReview = async (req: Request, res: Response) => {
+        try {
+            const reviewId = req.params.id;
+            const { user_id, rol, title, review, published_at,  updated_at, image_url, author, num_likes, rating } = req.body;
+            const updatedReview = await reviews.update(
+                {
+                    user_id: user_id,
+                    rol: rol,
+                    title,
+                    review,
+                    published_at,
+                    updated_at: new Date(),
+                    image_url,
+                    author,
+                    num_likes,
+                    rating,
+                },
+                {
+                    where: { id: reviewId }
+                });
+            const report = await reviews.findByPk(reviewId);
+            res.status(200).json(report);
+        } catch (error) {
+            res.json({ message: "No se ha podido actualizar el review", error });
+        }
+    };
