@@ -22,6 +22,10 @@ const GameNews = () => {
           published_at: formattedDate, // Reemplazar la fecha original por la formateada
         };
       });
+
+      // Ordenar las noticias de forma descendente (última noticia primero)
+      formattedNews.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
+
       setNews(formattedNews);
     } else {
       console.error('La respuesta no es un array:', dataNews);
