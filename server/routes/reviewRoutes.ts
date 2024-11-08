@@ -3,7 +3,7 @@ import { upload } from "../middleware/reviewUpload";
 import path from 'path';
 import { 
   createReview, 
-
+  updateReview,
   deleteReview, 
   getAllReviews, 
   getReviewById, 
@@ -22,6 +22,6 @@ reviewRouter.post('/', upload.single('image_url'), createReview);
 reviewRouter.get('/', getAllReviews);
 reviewRouter.get('/:id', getReviewById);
 reviewRouter.delete('/:id', deleteReview);
-// reviewRouter.put('/:id', updateReview);
+reviewRouter.put('/:id', updateReview);
 reviewRouter.get('/user/:userId', getReviewsByUserId);
 
