@@ -8,7 +8,6 @@ interface MulterRequest extends Request {
         rol: string;
     };
 }
-
 interface UserIdRequest extends Request {
     params: {
         userId: string;
