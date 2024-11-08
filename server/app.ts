@@ -54,16 +54,13 @@ const initializeDatabase = async (sequelize: Sequelize) => {
         await news.sync({ force: false });
         console.log("Tabla de noticias sincronizada.");
 
-        await reviews.sync({ force: false });
+        await reviews.sync({ force: true });
         console.log("Tabla de reviews sincronizada.");
 
-        await Video.sync({ force: true });
+        await Video.sync({ force: false });
         console.log("Tabla de videos sincronizada.");
-        
-        Video.sync({ force:false});
-        console.log('Tabla de videos creada');
 
-        releases.sync({force:true});
+        await releases.sync({force:false});
         console.log('Tabla de proximos lanzamientos');
         
 

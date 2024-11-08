@@ -3,7 +3,6 @@ import {createBrowserRouter} from 'react-router-dom'
 import Layout from '../layout/Layout'
 import Home from '../pages/Home'
 import CreateReview from '../pages/CreateReview'
-import Launch from '../pages/Launch'
 import Login from '../pages/Login'
 import News from '../pages/News'
 import PageUnderConstruction from '../pages/PageUnderConstruction'
@@ -37,10 +36,6 @@ export const routes = createBrowserRouter([{
         {
             path: 'managereviews',
             element: <ManageReviews/>
-        },
-        {
-            path: 'launch',
-            element: <Launch/>
         },
         {
             path: 'login',

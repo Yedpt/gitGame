@@ -31,7 +31,7 @@ const releasesData = [
         title: "Indiana Jones and the Great Circle",
         date: "Décembre 11, 2024",
         rating: "PegI 16",
-        imageUrl: "client\src\assets\img\indianaJones.svg",
+        imageUrl: "client/src/assets/img/indianaJones.svg",
       },
     ],
   },
