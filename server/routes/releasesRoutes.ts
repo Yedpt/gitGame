@@ -3,10 +3,10 @@ import { getUpcomingReleases, getReleasesByMonth } from '../controllers/releases
 
 const router = Router();
 
-// Route pour récupérer tous les jeux à venir
+// Route para cargar los lanzamientos
 router.get('/', getUpcomingReleases);
 
-// Route pour récupérer les jeux d’un mois spécifique
+// Route para cargar los lanzamientos del mes
 router.get('/:month', getReleasesByMonth);
 
 export default router;
