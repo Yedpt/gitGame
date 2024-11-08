@@ -121,7 +121,12 @@ const ManageReviews = () => {
 
   return (
     <div className="min-h-screen flex flex-col justify-between bg-dark">
-    <div className="container mx-auto p-4 flex-grow">
+      <div 
+        className="w-full h-40 bg-[url('../src/assets/img/pattern.png')] bg-repeat bg-center bg-origin-center md:block hidden"
+        style={{ backgroundSize: '80%' }}
+      >
+</div>
+    <div className="container drop-shadow-xl mx-auto p-4 flex-grow">
       <div className="pt-10">
         <h1 className="text-4xl text-greenLight font-bold mb-4 py-8">Hola Admin!</h1>
         <h4 className="text-2xl text-light font-light mb-4 py-0">Ve la información de todas las reseñas</h4>
@@ -139,13 +144,13 @@ const ManageReviews = () => {
           <input
             type="text"
             placeholder="Buscar..."
-            className="border border-gray-300 rounded-md px-2 py-1 w-full"
+            className="border border-gray-300 rounded-md bg-light px-2 py-1 w-full"
             value={searchQuery}
             onChange={handleSearch}
           />
         </div>
         <select 
-          className="border border-gray-300 rounded-md px-2 py-1"
+          className="border font-semibold border-dark rounded-md bg-greenLight px-2 py-1"
           value={filterRole}
           onChange={handleFilterChange}
         >
@@ -156,8 +161,8 @@ const ManageReviews = () => {
       </div>
       {/* Tabla responsive */}
       <div className="overflow-x-auto">
-        <table className="min-w-full bg-light border border-greenMid rounded-md shadow-md">
-          <thead>
+        <table className="min-w-full bg-light border rounded-md shadow-md">
+          <thead className='font-semibold text-sm' >
             <tr>
               {[
                 { label: 'ID', key: 'id' },
@@ -170,18 +175,20 @@ const ManageReviews = () => {
                 { label: 'Author', key: 'author' },
                 { label: 'Rating', key: 'rating' }
               ].map((column) => (
-                <th key={column.key} className="px-4 py-2 border font-bold border-gray-200 bg-gray-100 cursor-pointer"
+                <th key={column.key} className="px-4 py-2 border text-light border-dark bg-greenMid cursor-pointer"
                     onClick={() => handleSort(column.key)}>
-                  {column.label}
-                  <LuChevronsUpDown className="inline-block ml-1" />
+                  <div className="flex justify-between items-center">
+                    <span>{column.label}</span>
+                      <LuChevronsUpDown className="ml-1 text-green-400" />
+                  </div>
                 </th>
               ))}
-              <th className="px-4 py-2 border font-bold border-gray-200 bg-gray-100">Review</th>
-              <th className="px-4 py-2 border font-bold border-gray-200 bg-gray-100">Image</th>
-              <th className="px-4 py-2 border font-bold border-gray-200 bg-gray-100">Manage</th>
+              <th className="px-4 py-2 border font-bold text-light border-dark bg-greenMid">Review</th>
+              <th className="px-4 py-2 border font-bold text-light border-dark bg-greenMid">Image</th>
+              <th className="px-4 py-2 border font-bold text-light border-dark bg-greenMid">Manage</th>
             </tr>
           </thead>
-          <tbody className="font-paragraph border font-thin">
+          <tbody className="font-paragraph border text-sm font-thin">
             {sortedAndFilteredReviews.map((review) => (
               <tr key={review.id}>
                 <td className="px-4 py-2 border border-gray-200 text-center">{review.id}</td>
