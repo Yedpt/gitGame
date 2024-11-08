@@ -22,3 +22,5 @@ export const getReleasesByMonth = async (month) => {
         throw error;
     }
 };
+
+// crear una petición post createReleases.
