@@ -13,7 +13,6 @@ import Register from '../pages/Register'
 import Reviews from '../pages/Reviews'
 import Videos from '../pages/Videos'
 import CreateNew from '../pages/CreateNew'
-import EditNew from '../pages/EditNew'
 import CreateVideo from '../pages/CreateVideo'
 import ManageVideos from '../pages/ManageVideos'
 import ManageUsers from '../pages/ManageUsers'
@@ -49,10 +48,7 @@ export const routes = createBrowserRouter([{
         {
             path: 'createnews',
             element: <CreateNew/>
-        },        {
-            path: 'editnew',
-            element: <EditNew/>
-        },
+        },        
         {
             path: 'managenews',
             element: <ManageNews/>
