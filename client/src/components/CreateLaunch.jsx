@@ -1,17 +1,34 @@
-import { useState, useState} from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { createRelease } from '../services/releasesServices';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 const CreateLaunch = () => {
     const navigate = useNavigate();
+    const { user } = useContext(AuthContext);
+    
     const [formData, setFormData] = useState({
         title: '',
         relese_date: '',
         rating: '',
         month: '',
-        user_id: 1, // Default user_id or get from auth context
+        user_id: user?.id, // Using the user id from context
     });
     const [image, setImage] = useState(null);
+    const [preview, setPreview] = useState(null);
+
+    useEffect(() => {
+        if (!image) {
+            setPreview(null);
+            return;
+        }
+
+        const objectUrl = URL.createObjectURL(image);
+        setPreview(objectUrl);
+
+        // Cleanup function
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [image]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -22,7 +39,12 @@ const CreateLaunch = () => {
     };
 
     const handleImageChange = (e) => {
-        setImage(e.target.files[0]);
+        const file = e.target.files[0];
+        if (file && file.type.substring(0, 5) === "image") {
+            setImage(file);
+        } else {
+            setImage(null);
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -31,14 +53,13 @@ const CreateLaunch = () => {
         const submitFormData = new FormData();
         submitFormData.append('image_url', image);
         
-        // Append other form data
         Object.keys(formData).forEach(key => {
             submitFormData.append(key, formData[key]);
         });
 
         try {
             await createRelease(submitFormData);
-            navigate('/releases'); // Adjust route as needed
+            navigate('/releases');
         } catch (error) {
             console.error('Error creating launch:', error);
         }
@@ -123,6 +144,11 @@ const CreateLaunch = () => {
                         accept="image/*"
                         required
                     />
+                    {preview && (
+                        <div className="image-preview">
+                            <img src={preview} alt="Preview" style={{ maxWidth: '200px' }} />
+                        </div>
+                    )}
                 </div>
 
                 <button type="submit" className="submit-button">Create Launch</button>
