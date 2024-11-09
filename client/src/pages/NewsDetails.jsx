@@ -8,6 +8,8 @@ const NewsDetails = () => {
   const { id } = useParams(); 
   const [news, setNews] = useState(null);
 
+  useEffect(() => {
+    console.log("ID de la noticia:", id);  // Verifica el valor de `id`
   const fetchData = async () => {
     try {
       const dataNews = await getNewById(id); // Pasa el ID aquí
@@ -30,21 +32,12 @@ const NewsDetails = () => {
     }
   };
 
-  useEffect(() => {
     fetchData();
   }, [id]); 
 
   return (
-    <div div className="w-full min-h-screen flex flex-col items-center bg-dark">
-      {/* <div className="w-full">
-        <img
-          src={image}
-          alt="fondo verde"
-          className="absolute w-full"
-        />
-      </div> */}
-
-      <div className="grid gap-y-10 sm:grid-cols-1 w-5/6 mt-24 mb-2">
+    <div className="bg-dark">
+      <div className="">
           {news ? (
             <CardNewDetail
               key={news.id}
@@ -57,7 +50,7 @@ const NewsDetails = () => {
             />
         
         ) : (
-          <p>No hay noticias disponibles.</p>
+          <p>No hay noticias disponibles</p>
         )}
       </div>
     </div>

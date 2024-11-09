@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { getNewById } from '../services/newServices';
+import { useAuth } from '../context/authContextsss';
 
-const CardNewDetail = ({ title, image_url, date, id, news, image2_url }) => {
+const CardNewDetail = ({ image_url, title, news, date, image2_url }) => {
 
   // const formattedDate = new Date(date).toLocaleDateString('es-ES', {
   //   year: 'numeric',
@@ -9,35 +11,43 @@ const CardNewDetail = ({ title, image_url, date, id, news, image2_url }) => {
   //   day: 'numeric',
   // });
 
+  const { user } = useAuth(); // Obtén el usuario del contexto
+  const [report, setReport] = useState([]);
+
+  useEffect(() => {
+    if (user && user.id) {
+      const loadNews = async () => {
+        try {
+          const userNews = await getNewById(id);
+          setReport(userNews);
+        } catch (error) {
+          console.error('Error al cargar las reseñas:', error);
+        }
+      };
+      loadNews();
+    }
+  }, [user]);
+
+
   return (
     <div >
-      <div className="bg-dark rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 relative">
+      <div className="pt-16">
         <img
           src={image_url}
-          alt={title}
-          className="w-full object-cover"
+          alt="Imagen principal"
+          className="w-full object-contain"
         />
       </div>
-
-      <div className="col-span-9">
-          <h2 className="sm:text-xl font-bold font-title text-white">{title}</h2>
+        <h2 className="pt-10 text-xl font-bold font-title text-white w-80 md:w-11/12 justify-self-center">{title}</h2>
+      <div className='font-title text-greenLight text-l font-bold justify-self-center pt-4 pb-10'>
+        {date}
       </div>
-
-      <div className="grid grid-cols-10">
-        <div className='row-span-2 font-title text-white text-xs font-bold justify-self-center py-12'>
-          {date}
-        </div>
-      </div>
-
-      <div className="col-span-9">
-          <p className="sm:text-xl font-bold font-title text-white">{news}</p>
-      </div>
-
+        <p className="sm:text-xl font-paragraph text-white w-80 md:w-11/12 justify-self-center pb-10">{news}</p>
       <div className="bg-dark rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 relative">
         <img
           src={image2_url}
-          alt={title}
-          className="w-full object-cover"
+          alt="Imagen secundaria"
+          className="w-80 md:w-11/12 justify-self-center object-cover"
         />
       </div>
     </div>

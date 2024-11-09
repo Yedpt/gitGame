@@ -16,11 +16,16 @@ export const getAllNews = async () => {
 // Obtener noticia por ID -- GET
 export const getNewById = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/${id}`);
-    return response.data;
+    const res = await axios.get(`${API_URL}/${id}`);
+    return res.data;
   } catch (error) {
-    console.error(`Error al obtener noticia con ID ${id}:`, error.message);
-    throw error;
+    // Verifica si el error es por un 404
+    if (error.response && error.response.status === 404) {
+      console.error(`Noticia con ID ${id} no encontrada.`);
+    } else {
+      console.error(`Error al obtener noticia con ID ${id}:`, error.message);
+    }
+    throw error;  // Re-lanza el error para manejarlo en el frontend
   }
 };
 
@@ -65,7 +70,7 @@ export const updateNew = async (id, updatedData) => {
     const response = await axios.put(`${API_URL}/${id}`, updatedData);
     return response.data;
   } catch (error) {
-    console.error('Error al actualizar usuario', error);
+    console.error(`Error al actualizar la reseña con ID ${id}:`, error.message);
     throw error;
   }
 };
