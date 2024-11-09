@@ -124,12 +124,12 @@ export const updateReview = async (req: Request, res: Response) => {
             const { user_id, rol, title, review, published_at,  updated_at, image_url, author, num_likes, rating } = req.body;
             const updatedReview = await reviews.update(
                 {
-                    user_id,
-                    rol,
+                    user_id: user_id,
+                    rol: rol,
                     title,
                     review,
                     published_at,
-                    updated_at,
+                    updated_at: new Date(),
                     image_url,
                     author,
                     num_likes,
