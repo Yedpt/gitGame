@@ -4,16 +4,19 @@ import UserModel from './models/userModel';
 import news from "./models/newsModel";
 import reviews from "./models/reviewModel";
 import Video from './models/videoModel';
-import express, { Express } from 'express';
+import releases from './models/releasesModels';
+import express from 'express';
 import cors from 'cors';
 import path from 'path';
-import { loginRouter, userRouter } from './routes/userRoutes';
+import releasesRoutes from './routes/releasesRoutes';
+import {loginRouter, userRouter} from './routes/userRoutes';
 import { newRouter } from './routes/newsRoutes';
 import { videoRouter } from './routes/videoRoutes';
 import { reviewRouter } from './routes/reviewRoutes';
 import { PORT } from './config';
+import { createRelease } from './controllers/releasesController';
 
-export const app: Express = express();
+export const app = express();
 
 // Hacer pública la carpeta de uploads para servir archivos
 
@@ -38,7 +41,8 @@ app.use('/api/login', loginRouter);
 app.use('/api/news', newRouter);
 app.use('/api/reviews', reviewRouter);
 app.use('/api/videos', videoRouter);
-
+app.use('/api/releases', releasesRoutes); // para Usar las rutas de los juegos
+app.use('/api/relesases', createRelease);
 // Función para autenticar y sincronizar la base de datos
 const initializeDatabase = async (sequelize: Sequelize) => {
     try {
@@ -51,14 +55,18 @@ const initializeDatabase = async (sequelize: Sequelize) => {
         await news.sync({ force: false });
         console.log("Tabla de noticias sincronizada.");
 
-        await reviews.sync({ force: false });
+        await reviews.sync({ force: true });
         console.log("Tabla de reviews sincronizada.");
 
         await Video.sync({ force: false });
         console.log("Tabla de videos sincronizada.");
+
+        await releases.sync({force:false});
+        console.log('Tabla de proximos lanzamientos');
         
-    } catch (error) {
-        console.error("Error al conectar la base de datos:", error);
+
+    }catch (error) {
+        console.log("error al conectar la base de datos 😒", error);
     }
 };
 

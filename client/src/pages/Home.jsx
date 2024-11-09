@@ -18,29 +18,32 @@ export default function Home() {
     const dataNews = await getAllNews();
     console.log('Datos de noticias:', dataNews);
     if (Array.isArray(dataNews)) {
-      const formattedNews = dataNews.map(item => {
-        console.log('Image URL:', item.image_url);
-        const formattedDate = new Date(item.published_at).toLocaleDateString(); 
-        const imageUrl = `http://localhost:3000${item.image_url}`;
+        const formattedNews = dataNews.map(item => {
+            console.log('Image URL:', item.image_url);
+            const formattedDate = new Date(item.published_at).toLocaleDateString(); 
+            const imageUrl = `http://localhost:3000${item.image_url}`;
 
-        return {
-          ...item,
-          image_url: imageUrl,
-          published_at: formattedDate, // Reemplazar la fecha original por la formateada
-        };
-      });
+            return {
+                ...item,
+                image_url: imageUrl,
+                published_at: formattedDate,
+            };
+        });
 
-      // Ordenar las noticias por 'published_at' de forma descendente
-      const sortedNews = formattedNews.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
+        const sortedNews = formattedNews.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
 
-      // Establecer el estado con solo la primera noticia (más reciente)
-      setNews([sortedNews[0]]);
-
+        if (sortedNews.length > 0) {
+            setNews([sortedNews[0]]);
+        } else {
+            console.error('Aucune nouvelle disponible');
+            setNews([]);
+        }
     } else {
-      console.error('La respuesta no es un array:', dataNews);
-      setNews([]); // En caso de que no sea un array, establece `news` como un array vacío
+        console.error('La respuesta no es un array:', dataNews);
+        setNews([]);
     }
-  };
+};
+
 
   useEffect(() => {
     fetchData();
@@ -123,11 +126,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-
-
-
-
 
         {/* Contacto */}
         <section className="p-4 sm:p-8" style={{ backgroundColor: '#2D342D' }}>

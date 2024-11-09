@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const BASE_URL = 'http://localhost:3000/api/reviews'; // Cambia esta URL si tu endpoint es diferente
 
 //GET all reviews -- GET
@@ -12,7 +11,7 @@ export const  getAllReviews = async () => {
         throw error;
     }
 };
-
+                                                                                                                                                                                                                                                      
 
 //GET one review by ID -- GET
 export const getOneReview = async (id) => {
