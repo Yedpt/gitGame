@@ -8,7 +8,7 @@ const SecondaryCard = ({ image_url, title, id }) => {
         <h3 className="text-xs md:text-l font-bold mb-2 font-title text-white overflow-hidden">{title}</h3>
         <div className='col-span-9' >
           <Link to={`/newsdetails/${id}`}>
-            <button className='font-title text-white text-xs font-bold '>LEER MÁS  </button>
+            <button className='font-title text-white text-xs font-bold '>LEER MÁS</button>
           </Link>
         </div>
       </div>
@@ -23,7 +23,7 @@ const SecondaryCard = ({ image_url, title, id }) => {
         <h3 className="md:text-l  md:font-title md:text-white ">{title}</h3>
         <div className='' >
           <Link to={`/newsdetails/${id}`}>
-            <button className='md:font-title md:text-white md:text-xs md:font-bold '>LEER MÁS  </button>
+            <button className='md:font-title md:text-white md:text-xs md:font-bold '>LEER MÁS</button>
           </Link>
         </div>
       </div>

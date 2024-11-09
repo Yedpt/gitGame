@@ -17,13 +17,14 @@ export default function Home() {
     if (Array.isArray(dataNews)) {
       const formattedNews = dataNews.map(item => {
         console.log('Image URL:', item.image_url);
-        const formattedDate = new Date(item.published_at).toLocaleDateString();
+
+        const formattedDateTime = new Date(item.published_at).toISOString();
         const imageUrl = `http://localhost:3000${item.image_url}`;
 
         return {
           ...item,
           image_url: imageUrl,
-          published_at: formattedDate,
+          published_at: formattedDateTime,
         };
       });
 

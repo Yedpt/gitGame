@@ -129,8 +129,8 @@ const ManageNews = () => {
 
       <div className="container drop-shadow-xl mx-auto p-4 flex-grow">
         <div className="pt-10">
-        <h1 className="text-4xl text-greenLight font-bold mb-4 py-8">Hola Admin!</h1>
-        <h4 className="text-2xl text-light font-light mb-4 py-0">Ve la información de todas las noticias</h4>
+        <h1 className="text-4xl text-greenLight font-bold mb-4 py-8">Hola {user.name}!</h1>
+        <h4 className="text-2xl text-light font-light mb-4 py-0">Administra la información de todas las noticias</h4>
         </div>
         <div className="flex flex-wrap items-center gap-2 mb-6 justify-between">
           <Link to="/createNew">

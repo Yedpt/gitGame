@@ -19,13 +19,12 @@ export const getNewById = async (id) => {
     const res = await axios.get(`${API_URL}/${id}`);
     return res.data;
   } catch (error) {
-    // Verifica si el error es por un 404
     if (error.response && error.response.status === 404) {
       console.error(`Noticia con ID ${id} no encontrada.`);
     } else {
       console.error(`Error al obtener noticia con ID ${id}:`, error.message);
     }
-    throw error;  // Re-lanza el error para manejarlo en el frontend
+    throw error;
   }
 };
 

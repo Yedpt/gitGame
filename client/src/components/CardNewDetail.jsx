@@ -4,13 +4,6 @@ import { getNewById } from '../services/newServices';
 import { useAuth } from '../context/authContextsss';
 
 const CardNewDetail = ({ image_url, title, news, date, image2_url }) => {
-
-  // const formattedDate = new Date(date).toLocaleDateString('es-ES', {
-  //   year: 'numeric',
-  //   month: 'long',
-  //   day: 'numeric',
-  // });
-
   const { user } = useAuth(); // Obtén el usuario del contexto
   const [report, setReport] = useState([]);
 

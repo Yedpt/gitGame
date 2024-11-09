@@ -16,6 +16,7 @@ const CreateNew = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState('');
   const [submissionError, setSubmissionError] = useState('');
 
   useEffect(() => {
@@ -38,7 +39,7 @@ const CreateNew = () => {
     if (!formData.news) newErrors.news = "El contenido de la noticia es obligatorio.";
     if (!formData.image_url) newErrors.image_url = "La imagen principal es obligatoria";
     if (!formData.image2_url) newErrors.image2_url = "La imagen secundaria es obligatoria";
-    if (!formData.news || formData.news.length < 10) newErrors.news = "La noticia debe tener al menos 10 caracteres.";
+    if (!formData.news || formData.news.length < 20) newErrors.news = "La noticia debe tener al menos 20 caracteres.";
     return newErrors;
   };
 
@@ -59,8 +60,8 @@ const CreateNew = () => {
 
       try {
         await createNew(formDataToSend);
-        alert('Noticia creada exitosamente');
-        navigate('/news');
+        setSuccessMessage('Noticia creada exitosamente');
+        setTimeout(() => navigate('/news'), 2000);
       } catch (error) {
         setSubmissionError('Error al registrar la noticia: ' + error.message);
         console.error('Error al registrar la noticia:', error);
@@ -132,7 +133,7 @@ const CreateNew = () => {
                 Enviar
               </button>
             </div>
-
+            {successMessage && <p className="text-green-500 mt-4 text-l">{successMessage}</p>}
           </form>
         </div>
       </div>

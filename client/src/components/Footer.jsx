@@ -14,8 +14,8 @@ const Footer = () => {
       {/* Links centrados */}
       <div className="flex justify-center space-x-6 text-light text-sm font-title font-normal mb-4 md:mb-0">
         <a href="/" className="hover:text-greenLight">Noticias</a>
-        <a href="/" className="hover:text-greenLight">Memes</a>
-        <a href="/" className="hover:text-greenLight">Galería</a>
+        <a href="/" className="hover:text-greenLight">Videos</a>
+        <a href="/" className="hover:text-greenLight">Reviews</a>
         <a href="/" className="hover:text-greenLight">Contacto</a>
       </div>
 

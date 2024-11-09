@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../context/authContextsss';
 import { getNewById, updateNew } from '../services/newServices';
 
-const EditNew = () => {
+const Edit = () => {
     const navigate = useNavigate();
     const { user, isLoggedIn } = useAuth();
     const { id } = useParams();
@@ -161,4 +161,4 @@ const EditNew = () => {
         </div>
     );
 };
-export default EditNew
+export default Edit

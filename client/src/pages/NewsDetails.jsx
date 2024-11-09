@@ -9,11 +9,11 @@ const NewsDetails = () => {
   const [news, setNews] = useState(null);
 
   useEffect(() => {
-    console.log("ID de la noticia:", id);  // Verifica el valor de `id`
+    console.log("ID de la noticia:", id);
   const fetchData = async () => {
     try {
-      const dataNews = await getNewById(id); // Pasa el ID aquí
-      console.log('Datos de noticia:', dataNews); // Agrega esto para depurar
+      const dataNews = await getNewById(id);
+      console.log('Datos de noticia:', dataNews);
 
       if (dataNews) {
         const formattedNews = {
