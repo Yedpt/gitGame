@@ -82,7 +82,7 @@ export default function Home() {
                   title={mainCardNews.title}
                   news={mainCardNews.news}
                   image_url={mainCardNews.image_url}
-                  date={mainCardNews.published_at}
+                  date={new Date(mainCardNews.published_at).toLocaleDateString()}
                 />
               ) : (
                 <p>No hay noticias disponibles.</p>
