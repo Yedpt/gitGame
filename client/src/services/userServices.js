@@ -1,17 +1,22 @@
 import axios from "axios";
+import { useAuth } from "../context/authContextsss";
 
 const API_URL = "http://localhost:3000/api/users";
 
 // listar todos los usuarios
-export const getUsers = async () => {
+export const getUsers = async (token) => {
   try {
-    const response = await axios.get(API_URL);
+    const response = await axios.get(API_URL, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Incluye el token en los headers
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error al obtener usuario por ID", error);
     throw error;
   }
-}
+};
 
 // Crear un nuevo usuario
 export const createUser = async (userData) => {
@@ -53,7 +58,7 @@ export const getUserById = async (userId) => {
 
 
 // Actualizar usuario
-export const updateUser = async (userId, updatedData) => {
+export const updateUser = async (userId, updatedData) => { // recuerda que me esta pidiendo el token como en getUser
   try {
     const response = await axios.put(`${API_URL}/${userId}`, updatedData);
     return response.data;
