@@ -7,9 +7,10 @@ import {
   deleteReview, 
   getAllReviews, 
   getReviewById, 
-  getReviewsByUserId  
+  getReviewsByUserId,
+  getAllAdminReviews,
+  getAllUserReviews,
 } from "../controllers/reviewControllers";
-
 
 
 // Crea el router para las rutas de reviews
@@ -18,10 +19,15 @@ export const reviewRouter = Router();
 // Ruta para la creación de una reseña con imagen
 reviewRouter.post('/', upload.single('image_url'), createReview);
 
-// Rutas CRUD para reviews
-reviewRouter.get('/', getAllReviews);
+// Rutas específicas y dinámicas
+reviewRouter.get('/admin', getAllAdminReviews);
+reviewRouter.get('/user', getAllUserReviews);
 reviewRouter.get('/:id', getReviewById);
+reviewRouter.get('/user/:userId', getReviewsByUserId);
+reviewRouter.get('/', getAllReviews);
+
+// Rutas CRUD
 reviewRouter.delete('/:id', deleteReview);
 reviewRouter.put('/:id', updateReview);
-reviewRouter.get('/user/:userId', getReviewsByUserId);
+
 

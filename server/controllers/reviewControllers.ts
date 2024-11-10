@@ -17,7 +17,7 @@ interface UserIdRequest extends Request {
     };
 }
 
-//GET
+//GET ALL
 export const getAllReviews = async (req: Request, res: Response) => {
     try {
         const report = await reviews.findAll();
@@ -45,6 +45,30 @@ export const getReviewsByUserId = async (req: UserIdRequest, res: Response) => {
         const { userId } = req.params;
         const report = await reviews.findAll({
             where: { user_id: userId },
+        });
+        res.json(report);
+    } catch (error) {
+        res.json({ message: "No se han encontrado reviews", error });
+    }
+};
+
+//GET ALL ADMIN REVIEWS
+export const getAllAdminReviews = async (req: Request, res: Response) => {
+    try {
+        const report = await reviews.findAll({
+            where: { rol: 'admin' },
+        });
+        res.json(report);
+    } catch (error) {
+        res.json({ message: "No se han encontrado reviews", error });
+    }
+};
+
+//GET ALL USER REVIEWS
+export const getAllUserReviews = async (req: Request, res: Response) => {
+    try {
+        const report = await reviews.findAll({
+            where: { rol: 'usuario' },
         });
         res.json(report);
     } catch (error) {
@@ -144,3 +168,5 @@ export const updateReview = async (req: Request, res: Response) => {
             res.json({ message: "No se ha podido actualizar el review", error });
         }
     };
+
+
