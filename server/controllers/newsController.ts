@@ -15,14 +15,31 @@ export const getAllNews = async (req: Request, res: Response) => {
   try {
     const report = await NewsModel.findAll();
     res.json(report);
-  } catch (error) {
+  } catch (error) 
+  {
     res.json({ message: "Ha ocurrido un error", error });
+  }
+};
+
+//GET by ID
+export const getNewById = async (req: Request, res: Response) => {
+  try {
+      const { id } = req.params;
+      const report = await NewsModel.findByPk(id);
+      res.json(report);
+  } catch (error)
+  {
+      res.json({ message: "No se ha encontrado el review", error });
   }
 };
 
 //POST
 export const createNew = async (req: Request, res: Response) => {
+  console.log('Cuerpo de la solicitud:', req.body);   // Verifica los datos
+  console.log('Archivos recibidos:', req.files); 
+
   try {
+    console.log(res)
     const { user_id, title, news, published_at, updated_at, num_likes, image_url, image2_url } = req.body;
 
     const files = req.files as Files | undefined;
@@ -73,6 +90,7 @@ export const updateNew = async (req: Request, res: Response) => {
   try {
     const newId = req.params.id;
     const { user_id, title, news, published_at, updated_at, num_likes, image_url, image2_url } = req.body;
+    console.log(req.body)
     const updatedNew = await NewsModel.update(
       {
         user_id,
@@ -93,3 +111,24 @@ export const updateNew = async (req: Request, res: Response) => {
     res.json({ message: "Ha ocurrido un error", error });
   }
 };
+
+// export const updateNew = async (req: Request, res: Response) => {
+//   try {
+//     const newId = req.params.id;
+//     const { user_id, title, news, published_at, updated_at, num_likes, image_url, image2_url } = req.body;
+//     const report = await NewsModel.findByPk(newId);
+//     await report?.update({
+//         user_id,
+//         title,
+//         news,
+//         published_at,
+//         updated_at,
+//         num_likes,
+//         image_url,
+//         image2_url,
+//     });
+//     res.json(report);
+//   } catch (error) {
+//     console.log('El meme no se pudo actualizar', error);
+//   }
+// }

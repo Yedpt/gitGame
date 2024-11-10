@@ -48,7 +48,7 @@ export const routes = createBrowserRouter([{
         {
             path: 'createnews',
             element: <CreateNew/>
-        },
+        },        
         {
             path: 'managenews',
             element: <ManageNews/>

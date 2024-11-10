@@ -1,5 +1,4 @@
 import multer from 'multer';
-import path from 'path';
 
 // Configuración de almacenamiento de Multer
 const storage = multer.diskStorage({

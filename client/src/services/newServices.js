@@ -2,6 +2,17 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:3000/api/news';
 
+  // Obtener el token de autorización
+  const token = sessionStorage.getItem('token');
+  console.log('Token:', token);
+
+  // Configuración de los headers
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  };
+
 //Get all news -- GET
 export const getAllNews = async () => {
   try {
@@ -14,12 +25,16 @@ export const getAllNews = async () => {
 };
 
 // Obtener noticia por ID -- GET
-export const getNewById = async (newId) => {
+export const getNewById = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/${newId}`);
-    return response.data;
+    const res = await axios.get(`${API_URL}/${id}`);
+    return res.data;
   } catch (error) {
-    console.error('Error al obtener usuario por ID', error);
+    if (error.response && error.response.status === 404) {
+      console.error(`Noticia con ID ${id} no encontrada.`);
+    } else {
+      console.error(`Error al obtener noticia con ID ${id}:`, error.message);
+    }
     throw error;
   }
 };
@@ -35,12 +50,23 @@ export const getNewsByUserId = async (userId) => {
   }
 };
 
+// Eliminar noticia -- DELETE
+export const deleteNew = async (id) => {
+  try {
+    const response = await axios.delete(`${API_URL}/${id}`, config);
+    return response.data;
+  } catch (error) {
+    console.error('Error al eliminar usuario', error);
+    throw error;
+  }
+};
+
 // Crear una noticia -- POST
 export const createNew = async (newData) => {
   const { title, news, image_url, image2_url } = newData;
 
   try {
-    const response = await axios.post(API_URL, newData);
+    const response = await axios.post(API_URL, newData, config);
     return response.data;
   } catch (error) {
     console.error('Error al crear la noticia', error);
@@ -49,23 +75,12 @@ export const createNew = async (newData) => {
 };
 
 // Actualizar noticia -- PUT
-export const updateNew = async (newId, updatedData) => {
+export const updateNew = async (id, updatedData) => {
   try {
-    const response = await axios.put(`${API_URL}/${newId}`, updatedData);
+    const response = await axios.put(`${API_URL}/${id}`, updatedData, config);
     return response.data;
   } catch (error) {
-    console.error('Error al actualizar usuario', error);
-    throw error;
-  }
-};
-
-// Eliminar noticia -- DELETE
-export const deleteNew = async (newId) => {
-  try {
-    const response = await axios.delete(`${API_URL}/${newId}`);
-    return response.data;
-  } catch (error) {
-    console.error('Error al eliminar usuario', error);
+    console.error(`Error al actualizar la reseña con ID ${id}:`, error.message);
     throw error;
   }
 };

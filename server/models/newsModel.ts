@@ -52,6 +52,6 @@ const NewsModel = connectionDb.define(
         timestamps: false,
     });
 
-// console.log(news === connectionDb.models.New);
+console.log(NewsModel === connectionDb.models.New);
 
 export default NewsModel;
