@@ -2,6 +2,17 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:3000/api/news';
 
+  // Obtener el token de autorización desde el localStorage (ajusta según tu caso)
+  const token = sessionStorage.getItem('token');
+  console.log('Token:', token);
+
+  // Configuración de los headers, incluyendo Authorization
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${token}` // Asegúrate de que el tipo de contenido sea el adecuado
+    }
+  };
+
 //Get all news -- GET
 export const getAllNews = async () => {
   try {
@@ -42,7 +53,7 @@ export const getNewsByUserId = async (userId) => {
 // Eliminar noticia -- DELETE
 export const deleteNew = async (id) => {
   try {
-    const response = await axios.delete(`${API_URL}/${id}`);
+    const response = await axios.delete(`${API_URL}/${id}`, config);
     return response.data;
   } catch (error) {
     console.error('Error al eliminar usuario', error);
@@ -55,7 +66,7 @@ export const createNew = async (newData) => {
   const { title, news, image_url, image2_url } = newData;
 
   try {
-    const response = await axios.post(API_URL, newData);
+    const response = await axios.post(API_URL, newData, config);
     return response.data;
   } catch (error) {
     console.error('Error al crear la noticia', error);
@@ -66,7 +77,7 @@ export const createNew = async (newData) => {
 // Actualizar noticia -- PUT
 export const updateNew = async (id, updatedData) => {
   try {
-    const response = await axios.put(`${API_URL}/${id}`, updatedData);
+    const response = await axios.put(`${API_URL}/${id}`, updatedData, config);
     return response.data;
   } catch (error) {
     console.error(`Error al actualizar la reseña con ID ${id}:`, error.message);
