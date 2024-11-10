@@ -20,8 +20,8 @@ const Navbar = () => {
 
     return (
         <header className="font-title">
-            <nav className="bg-dark p-1 fixed w-full top-0 z-10">
-                <div className="max-w-screen-2xl mt-4 flex justify-between items-center mx-auto px-4">
+            <nav className="bg-dark p-1 fixed mb-4 w-full top-0 z-10">
+                <div className="max-w-screen-2xl mt-4 mb-4 flex justify-between items-center mx-auto px-4">
                     <Link to="/">
                         <img className="max-w-14" src={logo} alt="logo" />
                     </Link>
