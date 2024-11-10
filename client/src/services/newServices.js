@@ -2,14 +2,14 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:3000/api/news';
 
-  // Obtener el token de autorización desde el localStorage (ajusta según tu caso)
+  // Obtener el token de autorización
   const token = sessionStorage.getItem('token');
   console.log('Token:', token);
 
-  // Configuración de los headers, incluyendo Authorization
+  // Configuración de los headers
   const config = {
     headers: {
-      'Authorization': `Bearer ${token}` // Asegúrate de que el tipo de contenido sea el adecuado
+      'Authorization': `Bearer ${token}`
     }
   };
 
