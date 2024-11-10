@@ -2,8 +2,12 @@ import { React, useEffect, useState } from 'react';
 import { getUsers, deleteUser, updateUser } from '../services/userServices';
 import { useAuth } from '../context/authContextsss';
 import { useNavigate } from 'react-router-dom';
+import { Collapse } from 'react-collapse';
 import { FaEdit, FaTrashAlt, FaSearch } from 'react-icons/fa';
+import { IoIosAddCircle } from "react-icons/io";
 import { LuChevronsUpDown } from "react-icons/lu";
+import { useForm } from "react-hook-form";
+
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -70,6 +74,11 @@ const ManageUsers = () => {
       console.error("Error al actualizar el usuario:", error);
     }
   };
+
+  const handleSearch = (event) => {
+    setSearchQuery(event.target.value.toLowerCase());
+  };
+
   const sortedAndFilteredUsers = users
   .filter((user) => 
     (filterRole === 'all' || user.rol === filterRole) &&
@@ -86,10 +95,18 @@ const ManageUsers = () => {
   // ... El resto del código permanece igual para el renderizado de tabla y formulario de edición
 
   return (
-    <div className="container bg-dark mx-auto p-4">
-      <div className="py-8">
-        <h1 className="text-2xl font-bold mb-4 py-8">Hola Admin</h1>
-        <h4 className="text-xl font-bold mb-4 py-2">Gestión de Usuarios</h4>
+    <div className="min-h-screen flex flex-col justify-between bg-dark">
+       <div 
+        className="w-full h-40 bg-[url('../src/assets/img/pattern.png')] bg-repeat bg-center bg-origin-center md:block hidden"
+        style={{ backgroundSize: '80%' }}
+      >
+    </div>
+      <div className="container drop-shadow-xl mx-auto p-4 flex-grow">
+
+
+      <div className="pt-10">
+        <h1 className="text-4xl text-greenLight font-bold mb-4 py-8">Hola Admin</h1>
+        <h4 className="text-2xl text-light font-light mb-4 py-0">Gestión de Usuarios</h4>
       </div>
       
       {/* Buscador y Filtro */}
@@ -99,13 +116,13 @@ const ManageUsers = () => {
           <input
             type="text"
             placeholder="Buscar..."
-            className="border border-gray-300 rounded-md px-2 py-1"
+            className="border border-gray-300 rounded-md bg-light px-2 py-1 w-full"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value.toLowerCase())}
+            onChange={handleSearch}
           />
         </div>
         <select 
-          className="border border-gray-300 rounded-md px-2 py-1"
+          className="border font-semibold border-dark rounded-md bg-greenLight px-2 py-1"
           value={filterRole}
           onChange={(e) => setFilterRole(e.target.value)}
         >
@@ -208,6 +225,7 @@ const ManageUsers = () => {
           </form>
         </div>
       )}
+      </div>
     </div>
   );
 };
