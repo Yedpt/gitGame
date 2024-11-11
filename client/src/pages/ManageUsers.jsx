@@ -8,6 +8,49 @@ import { IoIosAddCircle } from "react-icons/io";
 import { LuChevronsUpDown } from "react-icons/lu";
 import { useForm } from "react-hook-form";
 
+// Notification component for better user feedback
+const Notification = ({ message, type, onClose }) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onClose();
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [onClose]);
+
+  return (
+    <div
+      className={`fixed top-5 right-5 px-4 py-2 rounded shadow-md text-white ${
+        type === 'success' ? 'bg-green-500' : 'bg-red-500'
+      }`}
+    >
+      {message}
+    </div>
+  );
+};
+
+// Confirm Delete Modal component
+const ConfirmDeleteModal = ({ onConfirm, onCancel }) => (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="bg-white p-6 rounded shadow-lg text-center">
+      <h2 className="text-lg font-semibold mb-4">¿Estás seguro de que quieres eliminar este usuario?</h2>
+      <div className="flex justify-center gap-4">
+        <button
+          onClick={onConfirm}
+          className="bg-red-500 text-white px-4 py-2 rounded font-bold hover:bg-red-600"
+        >
+          Eliminar
+        </button>
+        <button
+          onClick={onCancel}
+          className="bg-gray-300 text-gray-800 px-4 py-2 rounded font-bold hover:bg-gray-400"
+        >
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+);
+
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,6 +61,8 @@ const ManageUsers = () => {
   const [filterRole, setFilterRole] = useState('all');
   const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
   const [editUser, setEditUser] = useState(null);
+  const [notification, setNotification] = useState(null);
+  const [userToDelete, setUserToDelete] = useState(null); // State for user to be deleted
 
   useEffect(() => {
     if (!user || user.rol !== 'admin') {
@@ -34,7 +79,7 @@ const ManageUsers = () => {
       const data = await getUsers(user.token);
       setUsers(data);
     } catch (error) {
-      console.error('Error al cargar usuarios:', error.message);
+      setNotification({ message: 'Error al cargar usuarios', type: 'error' });
     } finally {
       setLoading(false);
     }
@@ -44,13 +89,20 @@ const ManageUsers = () => {
     fetchUsers();
   }, []);
 
-  const handleDelete = async (id) => {
-    if (window.confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
+  const handleDeleteRequest = (id) => {
+    setUserToDelete(id); // Set the user to delete and show the modal
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (userToDelete) {
       try {
-        await deleteUser(id, user.token);
-        setUsers(users.filter((user) => user.id !== id));
+        await deleteUser(userToDelete, user.token);
+        setUsers(users.filter((user) => user.id !== userToDelete));
+        setNotification({ message: 'Usuario eliminado exitosamente', type: 'success' });
       } catch (error) {
-        console.error('Error al eliminar el usuario:', error);
+        setNotification({ message: 'Error al eliminar el usuario', type: 'error' });
+      } finally {
+        setUserToDelete(null); // Hide the modal after deleting
       }
     }
   };
@@ -69,8 +121,9 @@ const ManageUsers = () => {
       await updateUser(editUser.id, editUser, user.token);
       setUsers(users.map((u) => (u.id === editUser.id ? editUser : u)));
       setEditUser(null);
+      setNotification({ message: 'Usuario actualizado exitosamente', type: 'success' });
     } catch (error) {
-      console.error("Error al actualizar el usuario:", error);
+      setNotification({ message: 'Error al actualizar el usuario', type: 'error' });
     }
   };
 
@@ -165,7 +218,7 @@ const ManageUsers = () => {
                       <FaEdit />
                     </button>
                     <button
-                      onClick={() => handleDelete(user.id)}
+                      onClick={() => handleDeleteRequest(user.id)}
                       className="text-red-500"
                       title="Eliminar"
                     >
@@ -224,6 +277,21 @@ const ManageUsers = () => {
               </button>
             </form>
           </div>
+        )}
+
+        {notification && (
+          <Notification
+            message={notification.message}
+            type={notification.type}
+            onClose={() => setNotification(null)}
+          />
+        )}
+
+        {userToDelete && (
+          <ConfirmDeleteModal
+            onConfirm={handleDeleteConfirm}
+            onCancel={() => setUserToDelete(null)}
+          />
         )}
       </div>
     </div>
