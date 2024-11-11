@@ -58,9 +58,17 @@ export const getUserById = async (userId) => {
 
 
 // Actualizar usuario
-export const updateUser = async (userId, updatedData) => { // recuerda que me esta pidiendo el token como en getUser
+export const updateUser = async (userId, updatedData, token) => {
   try {
-    const response = await axios.put(`${API_URL}/${userId}`, updatedData);
+    const response = await axios.put(
+      `${API_URL}/${userId}`,
+      updatedData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error("Error al actualizar usuario", error);
@@ -69,9 +77,16 @@ export const updateUser = async (userId, updatedData) => { // recuerda que me es
 };
 
 // Eliminar usuario
-export const deleteUser = async (userId) => {
+export const deleteUser = async (userId, token) => {
   try {
-    const response = await axios.delete(`${API_URL}/${userId}`);
+    const response = await axios.delete(
+      `${API_URL}/${userId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error("Error al eliminar usuario", error);
