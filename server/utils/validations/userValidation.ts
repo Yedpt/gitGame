@@ -1,6 +1,5 @@
 // UserValidator.ts
-import { Request, Response, NextFunction } from 'express';
-import { check, validationResult } from 'express-validator';
+import { check, param } from 'express-validator';
 
 export const validateCreateUser = [
   check('name').notEmpty().withMessage('El nombre es requerido'),
@@ -19,13 +18,23 @@ export const validateCreateUser = [
   check('avatar')
     .isURL().withMessage('El avatar debe ser una URL válida')
     .optional(),
-
-  // Middleware para capturar y manejar los errores de validación
-  (req: Request, res: Response, next: NextFunction) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    next();
-  },
 ];
+
+export const validateUpdateUser = [
+  check('name')
+    .optional()
+    .notEmpty().withMessage('El nombre no debe estar vacío'),
+  check('rol')
+  .optional()
+  .notEmpty().withMessage('El rol no debe estar vacío'),
+  check('email')
+    .optional()
+    .isEmail().withMessage('Debe ser un correo electrónico válido'),
+  
+];
+
+// UserValidator.ts
+export const validateDeleteUser = [
+  param('id').isInt().withMessage('El ID del usuario debe ser un número entero válido')
+];
+
