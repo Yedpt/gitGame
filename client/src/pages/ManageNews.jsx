@@ -133,7 +133,7 @@ const ManageNews = () => {
         <h4 className="text-2xl text-light font-light mb-4 py-0">Administra la información de todas las noticias</h4>
         </div>
         <div className="flex flex-wrap items-center gap-2 mb-6 justify-between">
-          <Link to="/createNew">
+          <Link to="/createnews">
             <button className="flex items-center gap-3 p-2 bg-greenLight hover:bg-green-700 text-dark py-2 px-4 rounded-lg mt-4 font-bold shadow-md transition-all duration-200 ease-in-out ">
               <IoIosAddCircle className="h-4 w-4 text-greenMid"/>
               Añadir Noticia
