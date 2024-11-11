@@ -81,15 +81,6 @@ export const createReview = async (req: Request, res: Response) => {
     try {
         const { user_id, rol, title, review, author, rating } = req.body;
 
-        // Verifica que los datos estén correctamente enviados
-        console.log("User ID:", user_id);
-        console.log("Role:", rol);
-        console.log("Title:", title);
-        console.log("Review:", review);
-        console.log("Author:", author);
-        console.log("Rating:", rating);
-
-
         // Verifica si el campo rating está presente solo si el rol es "admin"
         if (rol === 'admin' && (rating === undefined || rating < 1 || rating > 5)) {
             res.status(400).json({ message: 'El rating debe estar entre 1 y 5 para el rol admin' });
