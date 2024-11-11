@@ -10,6 +10,7 @@ import {
   getReviewsByUserId,
   getAllAdminReviews,
   getAllUserReviews,
+  addLike,
 } from "../controllers/reviewControllers";
 
 
@@ -29,5 +30,6 @@ reviewRouter.get('/', getAllReviews);
 // Rutas CRUD
 reviewRouter.delete('/:id', deleteReview);
 reviewRouter.put('/:id', updateReview);
+reviewRouter.patch("/:id/like", addLike);
 
 
