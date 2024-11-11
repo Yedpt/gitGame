@@ -21,25 +21,16 @@ export const validateCreateUser = [
 ];
 
 export const validateUpdateUser = [
-  param('id').isInt().withMessage('El ID del usuario debe ser un número entero'),
   check('name')
     .optional()
     .notEmpty().withMessage('El nombre no debe estar vacío'),
+  check('rol')
+  .optional()
+  .notEmpty().withMessage('El rol no debe estar vacío'),
   check('email')
     .optional()
     .isEmail().withMessage('Debe ser un correo electrónico válido'),
-  check('birth_date')
-    .optional()
-    .isISO8601().withMessage('Debe ser una fecha válida en formato ISO'),
-  check('password')
-    .optional()
-    .isLength({ min: 6 }).withMessage('La contraseña debe tener al menos 6 caracteres'),
-  check('bio')
-    .optional()
-    .isLength({ max: 200 }).withMessage('La biografía no debe superar los 200 caracteres'),
-  check('avatar')
-    .optional()
-    .isURL().withMessage('El avatar debe ser una URL válida'),
+  
 ];
 
 // UserValidator.ts
