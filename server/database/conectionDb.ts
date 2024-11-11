@@ -1,8 +1,8 @@
 import { Sequelize } from 'sequelize';
 import { DB_DEV_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_TEST_NAME, NODE_ENV } from '../config';
                           
-const DB_NAME = NODE_ENV === 'test' ? DB_TEST_NAME : DB_DEV_NAME;
-
+//DB CONNECTION VARIABLE
+const database = process.env.NODE_ENV === 'test' ? process.env.DB_TEST_NAME : process.env.DB_DEV_NAME;
 
 const connectionDb = new Sequelize( DB_NAME , DB_USER, DB_PASSWORD , {
   host: DB_HOST ,

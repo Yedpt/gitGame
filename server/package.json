@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "NODE_ENV=test jest --watchAll",     
+    "test:once": "NODE_ENV=test jest",           
+    "_comment": "--silent --verbose",
     "dev": "ts-node-dev --respawn ./app.ts"
   },
   "keywords": [],
