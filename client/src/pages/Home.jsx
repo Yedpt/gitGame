@@ -15,7 +15,6 @@ export default function Home() {
     console.log('Datos de noticias:', dataNews);
 
     if (Array.isArray(dataNews)) {
-<<<<<<< HEAD
         const formattedNews = dataNews.map(item => {
             console.log('Image URL:', item.image_url);
             const formattedDate = new Date(item.published_at).toLocaleDateString(); 
@@ -29,26 +28,6 @@ export default function Home() {
         });
 
         const sortedNews = formattedNews.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
-=======
-      const formattedNews = dataNews.map(item => {
-        console.log('Image URL:', item.image_url);
-
-        const formattedDateTime = new Date(item.published_at).toISOString();
-        const imageUrl = `http://localhost:3000${item.image_url}`;
-
-        return {
-          ...item,
-          image_url: imageUrl,
-          published_at: formattedDateTime,
-        };
-      });
-
-      // Ordenar las noticias por 'published_at' de forma descendente
-      const sortedNews = formattedNews.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
-
-      // Establecer el estado con solo la primera noticia (más reciente)
-      setNews(sortedNews);
->>>>>>> 5c1f085fbb9ac71f2d434d122c48d9f047d043a7
 
         if (sortedNews.length > 0) {
             setNews([sortedNews[0]]);
@@ -57,13 +36,8 @@ export default function Home() {
             setNews([]);
         }
     } else {
-<<<<<<< HEAD
         console.error('La respuesta no es un array:', dataNews);
         setNews([]);
-=======
-      console.error('La respuesta no es un array:', dataNews);
-      setNews([]); 
->>>>>>> 5c1f085fbb9ac71f2d434d122c48d9f047d043a7
     }
 };
 
