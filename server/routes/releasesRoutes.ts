@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getUpcomingReleases, getReleasesByMonth } from '../controllers/releasesController';
+import { getUpcomingReleases, getReleasesByMonth, createRelease } from '../controllers/releasesController';
 
 const router = Router();
 
@@ -8,5 +8,7 @@ router.get('/', getUpcomingReleases);
 
 // Route para cargar los lanzamientos del mes
 router.get('/:month', getReleasesByMonth);
+
+router.post('/', createRelease)
 
 export default router;
