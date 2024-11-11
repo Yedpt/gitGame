@@ -1,11 +1,22 @@
 import { React, useEffect, useState } from 'react';
 import { Collapse } from 'react-collapse';
 import { FaHeart } from 'react-icons/fa';
+import { addLikeToReview } from '../services/reviewServices';
 
-const UserReviewCard = ({ title, imageUrl, review, num_likes, onLike, author, bgColor }) => {
+const UserReviewCard = ({title, imageUrl, review, num_likes, author, bgColor }) => {
 
   const [expanded, setExpanded] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+  const [likes, setLikes] = useState(num_likes || 0);
+
+  const handleLike = async (reviewId) => {
+    try {
+      const updatedReview = await addLikeToReview(reviewId);
+      setLikes(updatedReview.num_likes); // Actualiza los likes con la respuesta del backend
+    } catch (error) {
+      console.error("Error al dar like:", error);
+    }
+  };
 
   // Detectar tamaño de pantalla
   useEffect(() => {
@@ -42,10 +53,10 @@ const UserReviewCard = ({ title, imageUrl, review, num_likes, onLike, author, bg
             <p className="mt-2 mr-3 text-light font-paragraph">{review}</p>
             <p className="text-light font-bold my-4">Autor: {author}</p>
             <div className="flex items-center">
-              <button onClick={onLike} className="mr-2 text-red-500 hover:text-red-700">
+              <button onClick={() => handleLike(review.id)} className="mr-2 text-red-500 hover:text-red-700">
                 <FaHeart />
               </button>
-              <span className="text-light mr-9">{num_likes ? num_likes : 0}</span>
+              <span className="text-light mr-9">{likes}</span>
             </div>
           </div>
         )}
@@ -59,10 +70,10 @@ const UserReviewCard = ({ title, imageUrl, review, num_likes, onLike, author, bg
       {/* Likes siempre visibles debajo de la imagen en pantallas pequeñas */}
       {isSmallScreen && (
         <div className="flex justify-start items-center mt-3 w-full">
-          <button onClick={onLike} className="mr-2 text-red-500 hover:text-red-700">
+          <button onClick={() => handleLike(review.id)} className="mr-2 text-red-500 hover:text-red-700">
             <FaHeart />
           </button>
-          <span className="text-light">{num_likes ? num_likes : 0}</span>
+          <span className="text-light mr-9">{likes}</span>
         </div>
       )}
     </div>
