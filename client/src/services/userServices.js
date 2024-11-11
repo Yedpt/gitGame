@@ -1,17 +1,22 @@
 import axios from "axios";
+import { useAuth } from "../context/authContextsss";
 
 const API_URL = "http://localhost:3000/api/users";
 
 // listar todos los usuarios
-export const getUsers = async () => {
+export const getUsers = async (token) => {
   try {
-    const response = await axios.get(API_URL);
+    const response = await axios.get(API_URL, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Incluye el token en los headers
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error al obtener usuario por ID", error);
     throw error;
   }
-}
+};
 
 // Crear un nuevo usuario
 export const createUser = async (userData) => {
@@ -53,9 +58,17 @@ export const getUserById = async (userId) => {
 
 
 // Actualizar usuario
-export const updateUser = async (userId, updatedData) => {
+export const updateUser = async (userId, updatedData, token) => {
   try {
-    const response = await axios.put(`${API_URL}/${userId}`, updatedData);
+    const response = await axios.put(
+      `${API_URL}/${userId}`,
+      updatedData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error("Error al actualizar usuario", error);
@@ -64,9 +77,16 @@ export const updateUser = async (userId, updatedData) => {
 };
 
 // Eliminar usuario
-export const deleteUser = async (userId) => {
+export const deleteUser = async (userId, token) => {
   try {
-    const response = await axios.delete(`${API_URL}/${userId}`);
+    const response = await axios.delete(
+      `${API_URL}/${userId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error("Error al eliminar usuario", error);
