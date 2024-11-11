@@ -171,7 +171,7 @@ export const updateReview = async (req: Request, res: Response) => {
     };
 
 
-//PUT  LIKE
+//PATCH LIKE
 // Controlador para agregar un like a una reseña
 export const addLike = async (req: Request, res: Response): Promise<void> => {
     try {
