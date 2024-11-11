@@ -35,7 +35,7 @@ const Profile = () => {
             </p>
             <Link to="/createReview">
                 <button className="bg-greenLight hover:bg-green-700 text-dark py-2 px-4 rounded-lg mt-4 font-bold shadow-md transition-all duration-200 ease-in-out">
-                    Crear review
+                    Crear reseña
                 </button>
             </Link>
         </div>

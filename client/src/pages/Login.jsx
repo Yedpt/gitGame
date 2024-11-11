@@ -37,28 +37,28 @@ const Login = () => {
     }
 
     try {
-      // Enviar las credenciales para obtener el token
       const response = await axios.post('http://localhost:3000/api/login', { email, password });
-      const { token, user: userData } = response.data; // Obtener token y userData
+      const { token, user: userData } = response.data;
 
-      // Guardar el token en sessionStorage
-      sessionStorage.setItem('token', token); // Guarda el token para futuras solicitudes
+      // Incluye el token en userData antes de llamarlo
+      const userWithToken = { ...userData, token };
 
-      // Llama a login para almacenar el usuario en el contexto
-      login(userData);
-      console.log("Inicio de sesión exitoso!");
+      // Guarda el token en sessionStorage
+      sessionStorage.setItem('token', token);
 
-      // Redirige según el rol del usuario
+      // Llama a login en el contexto con el usuario completo
+      login(userWithToken);
+
       if (userData.rol === 'admin') {
-        navigate('/profile'); // Cambia a la ruta que corresponda a admin
+        navigate('/profile');
       } else {
-        navigate('/'); // Redirige al home si es un usuario regular
+        navigate('/');
       }
 
     } catch (error) {
       setError('Error al iniciar sesión. Verifica tus credenciales.');
     }
-  };
+};
 
   return (
     <div className="min-h-screen flex flex-col justify-between px-8 mt-8 bg-cover bg-center bg-no-repeat"

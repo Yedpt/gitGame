@@ -12,19 +12,18 @@ const Navbar = () => {
     const toggleMenu = () => setIsOpen(!isOpen);
     const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
-    // Nueva función que llama a logout() y luego redirige
     const handleLogout = () => {
-        logout();               // Cierra sesión
+        logout();
         setIsDropdownOpen(false);
-        navigate("/login");     // Redirige al login
+        navigate("/login");
     };
 
     return (
         <header className="font-title">
-            <nav className="bg-dark p-1 fixed w-full top-0 z-10">
-                <div className="max-w-screen-2xl mt-4 flex justify-between items-center mx-auto px-4">
+            <nav className="bg-dark p-1 fixed mb-4 w-full top-0 z-10">
+                <div className="max-w-screen-2xl mt-4 mb-4 flex justify-between items-center mx-auto px-4">
                     <Link to="/">
-                    <img className="max-w-14" src={logo} alt="logo" />
+                        <img className="max-w-14" src={logo} alt="logo" />
                     </Link>
 
                     <div className="md:hidden">

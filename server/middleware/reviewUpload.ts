@@ -1,13 +1,10 @@
 import multer from 'multer';
 import path from 'path';
 
-// Ruta absoluta a la carpeta de almacenamiento de imágenes
-const UPLOADS_PATH = path.resolve('./uploads/reviews');
-
 // Configuración de almacenamiento de Multer
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, UPLOADS_PATH);  // Ruta donde se guardarán los archivos
+    cb(null, "./uploads/reviews/");  // Ruta donde se guardarán los archivos
   },
   filename: (req, file, cb) => {
     // Usar el nombre original del archivo para el nombre

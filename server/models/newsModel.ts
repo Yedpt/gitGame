@@ -2,7 +2,6 @@ import { DataTypes, Model } from 'sequelize';
 import connectionDb from '../database/conectionDb';
 import UserModel from '../models/userModel';
 
-
 const NewsModel = connectionDb.define(
     'News',
     {
@@ -53,6 +52,6 @@ const NewsModel = connectionDb.define(
         timestamps: false,
     });
 
-// console.log(news === connectionDb.models.New);
+console.log(NewsModel === connectionDb.models.New);
 
 export default NewsModel;

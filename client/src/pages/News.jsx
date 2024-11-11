@@ -3,29 +3,33 @@ import image from '../assets/images/image.png';
 import MainCard from '../components/MainCard';
 import { getAllNews } from '../services/newServices';
 
-
 const GameNews = () => {
   const [news, setNews] = useState([]);
 
   const fetchData = async () => {
     const dataNews = await getAllNews();
-    console.log('Datos de noticias:', dataNews); // Agrega esto
+    console.log('Datos de noticias:', dataNews);
     if (Array.isArray(dataNews)) {
       const formattedNews = dataNews.map(item => {
         console.log('Image URL:', item.image_url);
-        const formattedDate = new Date(item.published_at).toLocaleDateString(); // Formatear solo la fecha
+
+        const formattedDateTime = new Date(item.published_at).toISOString();
         const imageUrl = `http://localhost:3000${item.image_url}`;
 
         return {
           ...item,
           image_url: imageUrl,
-          published_at: formattedDate, // Reemplazar la fecha original por la formateada
+          published_at: formattedDateTime,
         };
       });
+
+      // Ordena las noticias de forma descendente (última noticia primero)
+      formattedNews.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
+
       setNews(formattedNews);
     } else {
       console.error('La respuesta no es un array:', dataNews);
-      setNews([]); // En caso de que no sea un array, establece `news` como un array vacío
+      setNews([]);
     }
   };
 
@@ -48,10 +52,11 @@ const GameNews = () => {
           news.map((item) => (
             <MainCard
               key={item.id}
+              id={item.id}
               title={item.title}
               news={item.news}
               image_url={item.image_url}
-              date={item.published_at}
+              date={new Date(item.published_at).toLocaleDateString()}
             />
           ))
         ) : (
