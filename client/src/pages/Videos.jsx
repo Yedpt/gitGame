@@ -20,7 +20,7 @@ const VideoGallery = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#2D342D] text-white font-title">
+    <div className="min-h-screen bg-dark text-light font-title">
       <div className="relative h-[100vh] mb-8">
         <img
           src={tanques}

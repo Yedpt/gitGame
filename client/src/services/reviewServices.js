@@ -37,6 +37,29 @@ export const getReviewsByUserId = async (userId) => {
     }
 };
 
+//GET all reviews by admin -- GET
+export const getAllReviewsAdmin = async () => {
+    try {
+        const response = await axios.get(`${BASE_URL}/admin`);
+        return response;
+    } catch (error) {
+        console.error('Error al obtener las reseñas de los administradores:', error);
+        throw error;
+    }
+};
+
+//GET all reviews by user -- GET
+export const getAllReviewsUser = async () => {
+    try {
+        const response = await axios.get(`${BASE_URL}/user`);
+        return response;
+    } catch (error) {
+        console.error('Error al obtener las reseñas de los usuarios:', error);
+        throw error;
+    }
+};
+
+
 
 
 //CREATE new review -- POST
