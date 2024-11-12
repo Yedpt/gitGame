@@ -20,6 +20,7 @@ const CreateReview = () => {
 
   const [errors, setErrors] = useState({});
   const [submissionError, setSubmissionError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -74,8 +75,8 @@ const CreateReview = () => {
 
       try {
         await createReview(formDataToSend);
-        alert('Reseña creada exitosamente');
-        navigate('/');
+        setSuccessMessage("¡Registro de reseña exitoso!");
+        setTimeout(() => navigate('/reviews'), 3000);
       } catch (error) {
         setSubmissionError('Error al registrar reseña: ' + error.message);
         console.error('Error al registrar reseña:', error);
@@ -163,6 +164,7 @@ const CreateReview = () => {
                     Enviar
                 </button>
               </div>
+              {successMessage && <p className="text-green-500 mt-4 text-sm">{successMessage}</p>}
             </form>
           </div>
         </div>

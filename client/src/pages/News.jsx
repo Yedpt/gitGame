@@ -36,16 +36,17 @@ const GameNews = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen flex flex-col items-center bg-dark">
+    <div div className="w-full min-h-screen flex flex-col items-center bg-dark">
+      <h1 className='font-title md:mt-32 mt-20 drop-shadow-lg md:text-6xl text-2xl font-bold text-light z-10'>NOTICIAS</h1>
       <div className="w-full">
         <img
           src={image}
           alt="fondo verde"
-          className="absolute w-full"
+          className="absolute top-0 w-full"
         />
       </div>
 
-      <div className="grid gap-y-10 sm:grid-cols-1 w-5/6 mt-24 mb-2">
+      <div className="grid gap-10 md:grid-cols-2 w-5/6 mt-20 mb-2">
         {Array.isArray(news) && news.length > 0 ? (
           news.map((item) => (
             <MainCard

@@ -20,6 +20,33 @@ const ManageReviews = () => {
   const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
   const [editReview, setEditReview] = useState(null);
 
+  // Estado para el modal de confirmación
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [reviewToDelete, setReviewToDelete] = useState(null);
+
+  // Confirm Delete Modal component
+  const ConfirmDeleteModal = ({ onConfirm, onCancel }) => (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+      <div className="bg-white p-6 rounded shadow-lg text-center">
+        <h2 className="text-lg font-semibold mb-4">¿Estás seguro de que quieres eliminar esta reseña?</h2>
+        <div className="flex justify-center gap-4">
+          <button
+            onClick={onConfirm}
+            className="bg-red-500 text-white px-4 py-2 rounded font-bold hover:bg-red-600"
+          >
+            Eliminar
+          </button>
+          <button
+            onClick={onCancel}
+            className="bg-gray-300 text-gray-800 px-4 py-2 rounded font-bold hover:bg-gray-400"
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
   const {register, handleSubmit, setValue, reset, formState: { errors } } = useForm();
 
   useEffect(() => {
@@ -115,6 +142,17 @@ const ManageReviews = () => {
       }
     };
 
+    const handleDeleteConfirm = () => {
+      handleDelete(reviewToDelete);
+      setShowDeleteModal(false);
+      reviewToDelete(null);
+    };
+  
+    const handleDeleteCancel = () => {
+      setShowDeleteModal(false);
+      reviewToDelete(null);
+    };
+
   if (loading) {
     return <p>Cargando...</p>;
   }
@@ -125,11 +163,11 @@ const ManageReviews = () => {
         className="w-full h-40 bg-[url('../src/assets/img/pattern.png')] bg-repeat bg-center bg-origin-center md:block hidden"
         style={{ backgroundSize: '80%' }}
       >
-</div>
+      </div>
     <div className="container drop-shadow-xl mx-auto p-4 flex-grow">
       <div className="pt-10">
         <h1 className="text-4xl text-greenLight font-bold mb-4 py-8">Hola Admin!</h1>
-        <h4 className="text-2xl text-light font-light mb-4 py-0">Ve la información de todas las reseñas</h4>
+        <h4 className="text-2xl text-light font-light mb-4 py-0">Administra la información de todas las reseñas</h4>
       </div>
       {/* Botones de búsqueda, filtro y añadir */}
       <div className="flex flex-wrap items-center gap-2 mb-6 justify-between">
@@ -227,7 +265,10 @@ const ManageReviews = () => {
                     <FaEdit />
                   </button>
                   <button
-                    onClick={() => handleDelete(review.id)}
+                    onClick={() => {
+                      setReviewToDelete(review.id);
+                      setShowDeleteModal(true);
+                    }}
                     className="text-red-500"
                     title="Eliminar"
                   >
@@ -295,6 +336,13 @@ const ManageReviews = () => {
           </button>
         </form>
       )}
+      {/* Modal de confirmación de eliminación */}
+      {showDeleteModal && (
+          <ConfirmDeleteModal
+            onConfirm={handleDeleteConfirm}
+            onCancel={handleDeleteCancel}
+          />
+        )}
     </div>
     </div>
   );
