@@ -48,7 +48,7 @@ export default function Home() {
   const secondaryCardNews = news.length > 1 ? news.slice(1, 4) : []; // Las tres siguientes
 
   return (
-    <div className="min-h-screen font-orbitron bg-dark text-white">
+    <div className="min-h-screen font-orbitron bg-dark text-light">
       <main className="pt-16">
         {/* Hero Section */}
         <section className="relative h-64 md:min-h-screen md:flex items-center justify-center overflow-hidden">
@@ -112,79 +112,83 @@ export default function Home() {
         </section>
 
         {/* Sobre Nosotros */}
-        <section className="p-8 mt-6">
-          <h2 className="md:text-6xl text-3xl font-bold mb-4 text-greenLight  font-title">SOBRE NOSOTROS</h2>
+        <section className="p-8 md:mt-16">
+          <h2 className="md:text-5xl text-3xl font-bold mb-8 text-greenLight  font-title">SOBRE NOSOTROS</h2>
           <div className="flex flex-col md:flex-row items-center md:items-stretch">
             {/* Contenedor de texto */}
             <div className="md:w-1/2 mb-6 md:mb-0 md:pr-8 flex flex-col justify-center">
-              <p className="mb-4 font-paragraph md:font-extralight text-base md:text-2xl leading-relaxed md:leading-snug">
-                Somos un grupo de apasionados por los videojuegos, dedicados a compartir nuestras experiencias y
-                conocimientos con la comunidad gamer. Nuestro objetivo es mantenerte informado sobre las últimas
-                novedades, análisis y noticias del fascinante mundo de los videojuegos.
+              <p className="mb-4 font-paragraph md:font-extralight text-base md:text-lg leading-relaxed md:leading-normal">
+              Somos un grupo apasionado por los videojuegos, dedicados a compartir nuestras experiencias y conocimientos con la comunidad gamer. Nuestro objetivo es mantenerte informado sobre las últimas novedades, análisis y noticias en el fascinante mundo de los videojuegos.
                 <br /><br />
-                Nuestra misión es proporcionarte información actualizada, análisis detallados y contenido exclusivo sobre tus videojuegos favoritos y los
-                próximos lanzamientos, para que estés siempre al día con las novedades de la industria.
+              Nos comprometemos a proporcionarte información actualizada, análisis detallados y contenido exclusivo sobre tus videojuegos favoritos y los próximos lanzamientos, para que siempre estés al día con lo mejor de la industria del entretenimiento digital.
+                <br /><br />
+              Valoramos la inclusión y el respeto en nuestra comunidad, por lo que invitamos a todos los amantes de los videojuegos a unirse a nosotros, siempre que sea con respeto y transparencia. ¡Bienvenidos a nuestro espacio gamer!
               </p>
             </div>
             {/* Contenedor de imagen */}
-            <div className="md:w-1/2 flex items-center justify-center">
+            <div className="md:w-90% flex items-center justify-center">
               <img src={team} alt="Gamers playing" className="w-full h-auto rounded-lg shadow-lg" />
             </div>
           </div>
         </section>
 
         {/* Contacto */}
-        <section className="p-4 sm:p-8">
-          <h2 className="text-3xl font-bold mb-6 text-greenLight font-title">CONTACTO</h2>
-          <div className="flex flex-col lg:flex-row items-start gap-8 max-w-6xl mx-auto">
-            <div className="lg:w-1/2 w-full hidden md:inline">
-              <img
-                src={contacto}
-                alt="Persona jugando videojuegos"
-                className="rounded-lg object-cover w-full h-auto shadow-lg"
-              />
-            </div>
-            <div className="lg:w-1/2 w-full">
-              <form className="space-y-6">
-                <div>
-                  <input
-                    id="nombre"
-                    type="text"
-                    placeholder="Nombre"
-                    className="w-full p-3 bg-greenMidsec text-white rounded-xl placeholder-white focus:outline-none focus:ring-2 focus:ring-greenLight text-base"
-                    required
-                  />
-                </div>
-                <div>
-                  <input
-                    id="email"
-                    type="email"
-                    placeholder="Correo electrónico"
-                    className="w-full p-3 bg-greenMidsec text-white rounded-xl placeholder-white focus:outline-none focus:ring-2 focus:ring-greenLight text-base"
-                    required
-                  />
-                </div>
-                <div>
-                  <textarea
-                    id="mensaje"
-                    placeholder="¿En qué podemos ayudarte?"
-                    rows={6}
-                    className="w-full p-3 bg-greenMidsec text-white rounded-xl placeholder-white focus:outline-none focus:ring-2 focus:ring-greenLight resize-y text-base"
-                    required
-                  ></textarea>
-                </div>
-                <div className='flex items-center justify-center'>
-                  <button
-                    type="submit"
-                    className="w-1/3 bg-white text-black px-4 py-2 rounded-xl text-lg hover:bg-greenMidsec transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-                  >
-                    Enviar 
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </section>
+<section className="p-4 mt-14 sm:p-8">
+  <h2 className="md:text-5xl text-3xl font-bold mb-8 text-greenLight font-title">CONTACTO</h2>
+  <div className="flex flex-col lg:flex-row items-start gap-10 max-w-8xl mx-auto">
+    
+    <div className="md:w-1/2 w-full hidden md:inline">
+      <img
+        src={contacto}
+        alt="Persona jugando videojuegos"
+        className="rounded-lg object-cover w-full h-auto shadow-lg"
+      />
+    </div>
+    
+    <div className="lg:w-1/2 w-full">
+      <p className=" md:text-lg text-base font-paragraph font-medium mb-8">Si tienes alguna idea, retroalimentación o pregunta, no dudes en contactar. Tu opinión e ideas son muy importantes para todos nosotros.</p>
+      
+      <form className="space-y-6">
+        <div>
+          <input
+            id="nombre"
+            type="text"
+            placeholder="Nombre"
+            className="w-full p-3 bg-greenMidsec text-light rounded-xl placeholder-light focus:outline-none focus:ring-2 focus:ring-greenLight text-base"
+            required
+          />
+        </div>
+        <div>
+          <input
+            id="email"
+            type="email"
+            placeholder="Correo electrónico"
+            className="w-full p-3 bg-greenMidsec text-light rounded-xl placeholder-light focus:outline-none focus:ring-2 focus:ring-greenLight text-base"
+            required
+          />
+        </div>
+        <div>
+          <textarea
+            id="mensaje"
+            placeholder="¿En qué podemos ayudarte?"
+            rows={6}
+            className="w-full p-3 bg-greenMidsec text-light rounded-xl placeholder-light focus:outline-none focus:ring-2 focus:ring-greenLight resize-y text-base"
+            required
+          ></textarea>
+        </div>
+        <div className="flex items-center justify-center">
+          <button
+            type="submit"
+            className="w-1/3 bg-light text-black px-4 py-2 rounded-xl text-lg hover:bg-greenMidsec font-semibold transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+          >
+            Enviar
+          </button>
+        </div>
+      </form>
+    </div>
+    
+  </div>
+</section>
       </main>
     </div>
   );

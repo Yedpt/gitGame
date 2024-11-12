@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const SecondaryCard = ({ image_url, title, id }) => {
   return (
     <div className="grid grid-cols-2 md:grid-cols-1">
-      <div className="inset-0 flex flex-col justify-end p-4 bg-greenMid bg-opacity-50 h-28 rounded-l-lg md:hidden">
+      <div className="inset-0 flex flex-col justify-end p-4 bg-greenMid h-28 rounded-l-lg md:hidden">
         <h3 className="text-xs md:text-l font-bold mb-2 font-title text-light overflow-hidden">{title}</h3>
         <div className='col-span-9' >
           <Link to={`/newsdetails/${id}`}>
@@ -19,7 +19,7 @@ const SecondaryCard = ({ image_url, title, id }) => {
           className="w-full h-28  object-cover"
         />
       </div>
-      <div className="md:p-2 md:bg-greenDark md:bg-opacity-30 md:rounded-lg hidden md:inline">
+      <div className="md:p-2 md:bg-gradient-to-t from-greenDark to-greenMidsec bg-opacity-30 md:bg-opacity-30 md:rounded-lg hidden md:inline">
         <h3 className="md:text-lg md:mt-4 md:font-semibold md:font-title md:text-light ">{title}</h3>
         <div className='' >
           <Link to={`/newsdetails/${id}`}>
