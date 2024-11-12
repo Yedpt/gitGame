@@ -29,7 +29,7 @@ export const getNewById = async (req: Request, res: Response) => {
       res.json(report);
   } catch (error)
   {
-      res.json({ message: "No se ha encontrado el review", error });
+      res.json({ message: "No se ha encontrado la noticia", error });
   }
 };
 
@@ -81,7 +81,7 @@ export const deleteNew = async (req: Request, res: Response) => {
     res.status(200).json(deletedNew)
 
   } catch (error) {
-    console.log('El meme no se pudo eliminar', error);
+    console.log('La noticia no se pudo eliminar', error);
   }
 };
 

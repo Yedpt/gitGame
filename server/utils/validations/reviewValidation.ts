@@ -8,6 +8,7 @@ export const validateCreateReview = [
   check('review').notEmpty().withMessage('La reseña es requerida'),
   check('author').notEmpty().withMessage('El autor es requerido'),
   check('rating')
+    .optional()
     .custom((value, { req }) => {
       if (req.body.rol === 'admin' && (value === undefined || value < 1 || value > 5)) {
         throw new Error('El rating debe estar entre 1 y 5 para el rol admin');
