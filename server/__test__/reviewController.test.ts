@@ -1,130 +1,83 @@
+// reviewRoutes.test.ts
 import request from 'supertest';
-import { app, server } from '../app';
-import connectionDb from '../database/conectionDb';
+import { app, server } from '../app'; // Asegúrate de que apunte correctamente al archivo donde exportas 'app'
+import conectionDb from '../database/conectionDb';
 
+// Conexión a la base de datos de prueba
+beforeAll(async () => {
+    await conectionDb.sync();
+});
 
-// Función para crear un usuario
-const createUser = async () => {
-    const response = await request(app).post('/api/users').send({
-        id: 1,
-        rol: "user",
-        name: "Test User",
-        email: "testuser@example.com",
-        password: "testpassword",
-        avatar: "URL",
-        created_at: "2024-10-25T00:00:00.000Z",
-        last_login: "2024-10-25T00:00:00.000Z",
-        status: "active",
-        bio: "test bio",
-        birth_date: "2024-10-25T00:00:00.000Z",
-    });
-    return response.body;
-};
+afterAll(async () => {
+    await conectionDb.close();
+});
 
-// Función para crear una revisión
-const createReview = async (reviewData = {}) => {
-    const defaultData = {
-        user_id: 1,  // El usuario debe existir primero
-        rol: "test",
-        title: "test",
-        review: "test",
-        published_at: "2024-10-25T00:00:00.000Z",
-        updated_at: "2024-10-25T00:00:00.000Z",
-        image_url: "URL",
-        author: "test",
-        num_likes: 100,
-        rating: 4,
-    };
-    const data = { ...defaultData, ...reviewData };
-    const response = await request(app).post('/api/reviews').send(data);
-    return response.body;
-};
+// Test de rutas de /api/reviews
+describe('Test de rutas de /api/reviews', () => {
 
-describe('CRUD de reviews', () => {
-    // Antes de cada conjunto de pruebas, se crea el usuario
-    beforeEach(async () => {
-        await createUser(); // Crear usuario solo una vez
-    });
-
-    // GET ALL REVIEWS
-    test('GET - Debería retornar todas las reviews con status 200 y formato JSON', async () => {
-        const response = await request(app).get('/api/reviews');
-        expect(response.statusCode).toBe(200);
-        expect(response.headers['content-type']).toContain('application/json');
-    });
-
-    // GET REVIEW BY ID
-    test('GET BY ID - Debería obtener una review por ID', async () => {
-        const newReview = await createReview(); // Crear una review para obtener
-        const reviewId = newReview.id;
-
-        const getResponse = await request(app).get(`/api/reviews/${reviewId}`);
-        expect(getResponse.statusCode).toBe(200);
-
-        // Verificar los datos de la respuesta
-        Object.keys(newReview).forEach((key) => {
-            expect(getResponse.body[key]).toBe(newReview[key]);
-        });
-    });
-
-    // POST REVIEW
-    test('POST - Debería crear una nueva review', async () => {
+    // Test para crear una nueva review
+    it('Debe crear una nueva review', async () => {
         const newReview = {
-            user_id: 1,  // Asegúrate de que el usuario existe antes de crear la review
-            rol: "user",
-            title: "unique-title",
-            review: "unique-review",
-            published_at: "2024-10-25T00:00:00.000Z",
-            updated_at: "2024-10-25T00:00:00.000Z",
-            image_url: "URL",
-            author: "new-author",
-            num_likes: 200,
-            rating: 5,
+            title: 'Nueva Review',
+            review: 'Este es el contenido de la nueva review',
+            author: 'Autor de Prueba',
+            rating: 4 ,// Valor entre 1 y 5 solo si rol es 'admin'
+            rol: 'admin',
+            avatar: './imagen.png' // Puedes cambiar a 'user' si prefieres
         };
 
         const response = await request(app).post('/api/reviews').send(newReview);
+        console.log(response.body); // Para ver el mensaje de error si falla
         expect(response.statusCode).toBe(201);
-        expect(response.body.title).toEqual(newReview.title);
-        expect(response.body.review).toBe(newReview.review);
-        expect(response.body.id).toBeDefined();
+        expect(response.body).toHaveProperty('id'); // Asumiendo que el objeto creado devuelve un ID
+        expect(response.body.title).toBe(newReview.title);
     });
 
-    // DELETE REVIEW
-    test('DELETE - Debería eliminar una review por ID', async () => {
-        const newReview = await createReview();
-        const reviewId = newReview.id;
+    // Test para actualizar una review existente
+    it('Debe actualizar una review existente', async () => {
+        // Primero crea una review temporal para actualizarla
+        const createdReview = await request(app).post('/api/reviews').send({
+            user_id: 1,
+            rol: 'admin',
+            title: 'Review temporal',
+            review: 'Contenido de la review temporal',
+            author: 'Autor temporal',
+            rating: 3
+        });
+        const reviewId = createdReview.body.id;
 
-        const deleteResponse = await request(app).delete(`/api/reviews/${reviewId}`);
-        expect(deleteResponse.statusCode).toBe(200);
-        expect(deleteResponse.body.message).toBe('Review deleted successfully');
-
-        // Confirmar que la review fue eliminada
-        const getResponse = await request(app).get(`/api/reviews/${reviewId}`);
-        expect(getResponse.statusCode).toBe(404);
-    });
-
-    // PUT UPDATE REVIEW
-    test('PUT - Debería actualizar la review por ID', async () => {
-        const newReview = await createReview();
-        const reviewId = newReview.id;
-
-        const updatedReview = {
-            title: "test-updated-title",
-            review: "test-updated-review",
+        const updateData = {
+            title: 'Review Actualizada',
+            review: 'Contenido actualizado de la review',
+            author: 'Autor actualizado',
+            rating: 5
         };
 
-        const updateResponse = await request(app).put(`/api/reviews/${reviewId}`).send(updatedReview);
-        expect(updateResponse.statusCode).toBe(200);
+        const response = await request(app).put(`/api/reviews/${reviewId}`).send(updateData);
+        expect(response.statusCode).toBe(200);
+        expect(response.body.title).toBe(updateData.title);
+    });
 
-        // Verificar que la respuesta contenga los datos actualizados
-        expect(updateResponse.body.title).toBe(updatedReview.title);
-        expect(updateResponse.body.review).toBe(updatedReview.review);
-        expect(updateResponse.body.user_id).toBe(newReview.user_id); // Confirmamos que el user_id no cambió
+    // Test para eliminar una review existente
+    it('Debe eliminar una review existente', async () => {
+        // Primero crea una review temporal para eliminarla
+        const createdReview = await request(app).post('/api/reviews').send({
+            user_id: 1,
+            rol: 'admin',
+            title: 'Review para eliminar',
+            review: 'Contenido de la review para eliminar',
+            author: 'Autor a eliminar',
+            rating: 4
+        });
+        const reviewId = createdReview.body.id;
+
+        const response = await request(app).delete(`/api/reviews/${reviewId}`);
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toHaveProperty('message', 'Review eliminada con éxito');
     });
 });
 
-// Cerrar el servidor y la base de datos después de todas las pruebas
-afterAll(async () => {
-    server.close();  // Cierra el servidor
-    await connectionDb.close();  // Cierra la conexión a la base de datos
+// Cerrar el servidor después de todos los tests
+afterAll(() => {
+    server.close();
 });

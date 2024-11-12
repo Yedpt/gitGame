@@ -27,7 +27,6 @@ describe('CRUD usuarios', () => {
       password: 'Password123',  // Contraseña actualizada con mayúscula al inicio
     });
     token = loginResponse.body.token;
-    console.log('Token recibido:', token);
   });
 
   test('Debería crear un usuario correctamente', async () => {
