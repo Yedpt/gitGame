@@ -14,7 +14,7 @@ const MainCard = ({ title, image_url, date, id }) => {
       </div>
 
       <div className=" bg-gradient-to-b from-dark to-greenMid rounded-b-lg grid grid-cols-10">
-        <div className='row-span-2 rotate-[270deg] font-title text-greenMidsec text-xs font-semibold justify-self-center mt-14 py-12'>
+        <div className='row-span-2 rotate-[270deg] font-title text-greenMidsec text-xs font-semibold justify-self-center mt-10 py-12'>
           {date}
         </div>
         <div className='col-span-9' >
