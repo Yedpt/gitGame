@@ -9,7 +9,7 @@ const API_URL = 'http://localhost:3000/api/news';
   // Configuración de los headers
   const config = {
     headers: {
-      'Authorization': `Bearer ${token}`
+      'Authorization': token ? `Bearer ${token}` : ''
     }
   };
 
