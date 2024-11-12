@@ -19,19 +19,11 @@ export const validateCreateUser = [
     .notEmpty().withMessage('La contraseña es requerida'),
 
   check('bio')
-    .optional()
-    .isLength({ max: 200 }).withMessage('La biografía no debe superar los 200 caracteres'),
-
-  check('avatar')
-    .optional()
-    .custom((value) => {
-      // Si avatar es una ruta local, puedes saltar la validación de URL
-      if (typeof value === 'string' && value.startsWith('avatar')) {
-        return true;
-      }
-      // Si no es local, valida que sea una URL
-      return value ? check(value).isURL().withMessage('El avatar debe ser una URL válida') : true;
-    }),
+    .isLength({ max: 200 }).withMessage('La biografía no debe superar los 200 caracteres')
+    .optional(),
+    check('avatar')
+    .isString().withMessage('El avatar debe ser una cadena de texto válida')
+    .notEmpty().withMessage('El avatar es obligatorio'),
 ];
 
 

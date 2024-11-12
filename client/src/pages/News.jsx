@@ -8,10 +8,8 @@ const GameNews = () => {
 
   const fetchData = async () => {
     const dataNews = await getAllNews();
-    console.log('Datos de noticias:', dataNews);
     if (Array.isArray(dataNews)) {
       const formattedNews = dataNews.map(item => {
-        console.log('Image URL:', item.image_url);
 
         const formattedDateTime = new Date(item.published_at).toISOString();
         const imageUrl = `http://localhost:3000${item.image_url}`;
@@ -38,7 +36,7 @@ const GameNews = () => {
   }, []);
 
   return (
-    <div div className="w-full min-h-screen flex flex-col items-center bg-dark">
+    <div className="w-full min-h-screen flex flex-col items-center bg-dark">
       <div className="w-full">
         <img
           src={image}
