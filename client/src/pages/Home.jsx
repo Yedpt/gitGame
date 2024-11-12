@@ -69,7 +69,7 @@ export default function Home() {
 
         {/* Noticias Destacadas */}
         <section className="p-8">
-          <h2 className="text-3xl font-bold mb-6 text-greenLight font-title">NOTICIAS DESTACADAS</h2>
+          <h2 className="text-4xl md:text-6xl md:mb-14 font-bold my-10 text-greenLight font-title">NOTICIAS DESTACADAS</h2>
 
           {/* Ajuste de cuadrícula */}
           <div className="md:flex">
@@ -112,12 +112,12 @@ export default function Home() {
         </section>
 
         {/* Sobre Nosotros */}
-        <section className="p-8">
-          <h2 className="text-3xl font-bold mb-6 text-greenLight  font-title">SOBRE NOSOTROS</h2>
+        <section className="p-8 mt-6">
+          <h2 className="md:text-6xl text-3xl font-bold mb-4 text-greenLight  font-title">SOBRE NOSOTROS</h2>
           <div className="flex flex-col md:flex-row items-center md:items-stretch">
             {/* Contenedor de texto */}
             <div className="md:w-1/2 mb-6 md:mb-0 md:pr-8 flex flex-col justify-center">
-              <p className="mb-4 font-paragraph text-lg md:text-2xl lg:text-2xl leading-relaxed md:leading-loose">
+              <p className="mb-4 font-paragraph md:font-extralight text-base md:text-2xl leading-relaxed md:leading-snug">
                 Somos un grupo de apasionados por los videojuegos, dedicados a compartir nuestras experiencias y
                 conocimientos con la comunidad gamer. Nuestro objetivo es mantenerte informado sobre las últimas
                 novedades, análisis y noticias del fascinante mundo de los videojuegos.

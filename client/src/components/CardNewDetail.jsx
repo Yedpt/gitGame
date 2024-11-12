@@ -32,7 +32,7 @@ const CardNewDetail = ({ image_url, title, news, date, image2_url }) => {
         />
       </div>
         <h2 className="pt-10 text-xl font-bold font-title text-white w-80 md:w-11/12 justify-self-center">{title}</h2>
-      <div className='font-title text-greenLight text-l font-bold justify-self-center pt-4 pb-10'>
+      <div className='font-title text-greenLight text-lg font-bold justify-self-center pt-4 pb-10'>
         {date}
       </div>
         <p className="sm:text-xl font-paragraph text-white w-80 md:w-11/12 justify-self-center pb-10">{news}</p>
