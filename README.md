@@ -1,7 +1,10 @@
 # GitGame 🎮
 
 Bienvenidos a **GitGame**, una plataforma completa para los apasionados de los videojuegos. Aquí encontrarás noticias, videos, lanzamientos y reseñas de los títulos más actuales y relevantes. Nuestra plataforma ofrece una experiencia personalizada con contenido exclusivo para usuarios registrados.
-![image](https://github.com/user-attachments/assets/7ecb2be9-43e5-4955-a04c-be01ca1cd1ea)
+
+![image](https://github.com/user-attachments/assets/ee5b4c35-8c61-4dfe-a992-d7d48d590963)
+
+
 
 ## Índice
 - [Características](#características)
@@ -88,7 +91,7 @@ Inicia el cliente desde el directorio client:
           npm run dev
 
 
-### Roles y Permisos
+## Roles y Permisos
 
 La plataforma define permisos específicos según el rol del usuario:
 
@@ -97,7 +100,7 @@ La plataforma define permisos específicos según el rol del usuario:
 | **Usuario**   | Puede ver contenido y crear reseñas de videojuegos.                                       |
 | **Admin**     | Puede crear, editar y eliminar noticias, videos, lanzamientos y reseñas.                           |
 
-### Estructura
+## Estructura
 
             gitgame/
           ├── client/                  # Código del frontend (interfaz de usuario)
@@ -126,7 +129,7 @@ La plataforma define permisos específicos según el rol del usuario:
           │   └── .env                 # Variables de entorno para el servidor
           └── README.md                # Documentación del proyecto
 
-### Uso
+## Uso
 
 Para usar GitGame, sigue los pasos a continuación:
 
@@ -137,7 +140,7 @@ Acciones del Administrador: Los administradores pueden crear, editar y eliminar 
 
 
 
-### Herramientas y Utilidades
+## Herramientas y Utilidades
 - **Git**: Sistema de control de versiones para seguimiento de cambios en el código.
 - **GitHub**: Plataforma para alojar el repositorio, colaborar y gestionar issues.
 - **dotenv**: Librería para manejar variables de entorno, manteniendo la configuración sensible segura y separada del código fuente.
@@ -146,6 +149,9 @@ Acciones del Administrador: Los administradores pueden crear, editar y eliminar 
 
 Estas tecnologías fueron seleccionadas para ofrecer un equilibrio entre rendimiento, escalabilidad y facilidad de desarrollo, permitiendo que GitGame sea una plataforma rápida, segura y fácil de mantener.
 
-### Visionado de la web
+## Visionado de la web
 
-![image](https://github.com/user-attachments/assets/0f6a4829-f3fe-422f-881d-c75fb2f15e57) ![image](https://github.com/user-attachments/assets/52b2533f-8b10-4f67-96f6-381a69168b70) ![image](https://github.com/user-attachments/assets/3097400d-5c90-47a9-8890-8dac78a754f7) ![image](https://github.com/user-attachments/assets/a5ae141b-c87d-48d8-b6e9-056b85c7ffb5)
+![image](https://github.com/user-attachments/assets/0f6a4829-f3fe-422f-881d-c75fb2f15e57) ![image](https://github.com/user-attachments/assets/52b2533f-8b10-4f67-96f6-381a69168b70) ![image](https://github.com/user-attachments/assets/3097400d-5c90-47a9-8890-8dac78a754f7) ![image](https://github.com/user-attachments/assets/a5ae141b-c87d-48d8-b6e9-056b85c7ffb5) ![image](https://github.com/user-attachments/assets/090e68c8-2056-4eb7-a9d1-a4561774c89d)
+
+
+
