@@ -8,10 +8,8 @@ const GameNews = () => {
 
   const fetchData = async () => {
     const dataNews = await getAllNews();
-    console.log('Datos de noticias:', dataNews);
     if (Array.isArray(dataNews)) {
       const formattedNews = dataNews.map(item => {
-        console.log('Image URL:', item.image_url);
 
         const formattedDateTime = new Date(item.published_at).toISOString();
         const imageUrl = `http://localhost:3000${item.image_url}`;
