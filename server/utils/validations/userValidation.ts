@@ -15,9 +15,9 @@ export const validateCreateUser = [
   check('bio')
     .isLength({ max: 200 }).withMessage('La biografía no debe superar los 200 caracteres')
     .optional(),
-  check('avatar')
-    .isURL().withMessage('El avatar debe ser una URL válida')
-    .optional(),
+    check('avatar')
+    .isString().withMessage('El avatar debe ser una cadena de texto válida')
+    .notEmpty().withMessage('El avatar es obligatorio'),
 ];
 
 export const validateUpdateUser = [
