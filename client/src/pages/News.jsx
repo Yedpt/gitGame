@@ -38,7 +38,7 @@ const GameNews = () => {
   }, []);
 
   return (
-    <div div className="w-full min-h-screen flex flex-col items-center bg-dark">
+    <div className="w-full min-h-screen flex flex-col items-center bg-dark">
       <div className="w-full">
         <img
           src={image}
