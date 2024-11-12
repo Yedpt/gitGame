@@ -20,6 +20,33 @@ const ManageNews = () => {
   const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
   const [editNew, setEditNew] = useState(null);
 
+  // Estado para el modal de confirmación
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [newToDelete, setNewToDelete] = useState(null);
+
+  // Confirm Delete Modal component
+const ConfirmDeleteModal = ({ onConfirm, onCancel }) => (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="bg-white p-6 rounded shadow-lg text-center">
+      <h2 className="text-lg font-semibold mb-4">¿Estás seguro de que quieres eliminar esta noticia?</h2>
+      <div className="flex justify-center gap-4">
+        <button
+          onClick={onConfirm}
+          className="bg-red-500 text-white px-4 py-2 rounded font-bold hover:bg-red-600"
+        >
+          Eliminar
+        </button>
+        <button
+          onClick={onCancel}
+          className="bg-gray-300 text-gray-800 px-4 py-2 rounded font-bold hover:bg-gray-400"
+        >
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+);
+
   const { register, handleSubmit, setValue, reset, formState: { errors } } = useForm();
 
   useEffect(() => {
@@ -48,6 +75,19 @@ const ManageNews = () => {
       ...prev,
       [id]: !prev[id],
     }));
+  };
+
+  
+
+  const handleDeleteConfirm = () => {
+    handleDelete(newToDelete);
+    setShowDeleteModal(false);
+    newToDelete(null);
+  };
+
+  const handleDeleteCancel = () => {
+    setShowDeleteModal(false);
+    newToDelete(null);
   };
 
   const handleDelete = async (id) => {
@@ -172,7 +212,7 @@ const ManageNews = () => {
                   { label: 'Updated', key: 'updated_at' },
                   { label: 'Likes', key: 'num_likes' },
                 ].map((column) => (
-                  <th key={column.key} className="px-4 py-2 border font-bold border-gray-200 bg-gray-100 cursor-pointer"
+                  <th key={column.key} className="px-4 py-2 border text-light font-bold border-dark bg-greenMid cursor-pointer"
                     onClick={() => handleSort(column.key)}>
                   <div className="flex justify-between items-center">
                     <span>{column.label}</span>
@@ -188,7 +228,7 @@ const ManageNews = () => {
             <tbody className="font-paragraph border font-thin">
               {sortedAndFilteredNews.map((report) => (
                 <tr key={report.id}>
-                  <td className="px-4 py-2 border border-gray-200 text-center">{report.id}</td>
+                  <td className="px-4 py-2 border border-gray-200  text-center">{report.id}</td>
                   <td className="px-4 py-2 border border-gray-200 text-center">{report.user_id}</td>
                   <td className="px-4 py-2 border border-gray-200">{report.title}</td>
                   <td className="px-4 py-2 border border-gray-200 w-96">
@@ -228,7 +268,10 @@ const ManageNews = () => {
                       <FaEdit />
                     </button>
                     <button
-                      onClick={() => handleDelete(report.id)}
+                      onClick={() => {
+                        setNewToDelete(report.id);
+                        setShowDeleteModal(true);
+                      }}
                       className="text-red-500"
                       title="Eliminar"
                     >
@@ -280,6 +323,13 @@ const ManageNews = () => {
           </button>
         </form>
       )}
+      {/* Modal de confirmación de eliminación */}
+      {showDeleteModal && (
+          <ConfirmDeleteModal
+            onConfirm={handleDeleteConfirm}
+            onCancel={handleDeleteCancel}
+          />
+        )}
     </div>
     </div>
   );

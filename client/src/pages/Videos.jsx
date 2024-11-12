@@ -20,7 +20,7 @@ const VideoGallery = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-dark text-light font-title">
+    <div className="min-h-screen bg-dark text-light">
   <div className="relative h-64 md:h-[100vh] h-11/12 mb-8">
     <img
       src={tanques}
@@ -30,6 +30,7 @@ const VideoGallery = () => {
     <div className="absolute inset-x-0 top-0 p-4 flex items-center justify-center h-full">
       <h1 className="text-3xl md:text-6xl font-bold text-white font-orbitron drop-shadow-lg">VIDEOS</h1>
     </div>
+    
   </div>
   <div className="container mx-auto px-4 space-y-12 flex flex-col items-center">
     {videos.map((video) => (
