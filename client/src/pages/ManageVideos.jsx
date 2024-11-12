@@ -1,15 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import { Trash, Edit } from 'lucide-react'; // Iconos de editar y eliminar
-import { useNavigate } from 'react-router-dom'; // Para redirigir a la página de edición (no necesario si todo es en la misma página)
+import { useNavigate } from 'react-router-dom'; 
 
 const ManageVideos = () => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isEditing, setIsEditing] = useState(false); // Para saber si estamos editando
-  const [editVideo, setEditVideo] = useState(null); // Video que estamos editando
+  const [isEditing, setIsEditing] = useState(false); 
+  const [editVideo, setEditVideo] = useState(null);
 
-  // Cargar los videos
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [videoToDelete, setVideoToDelete] = useState(null);
+  
+// Confirm Delete Modal component
+const ConfirmDeleteModal = ({ onConfirm, onCancel }) => (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="bg-light p-6 rounded shadow-lg text-center">
+      <h2 className="text-lg font-semibold text-dark mb-4">¿Estás seguro de que quieres eliminar este video?</h2>
+      <div className="flex justify-center gap-4">
+        <button
+          onClick={onConfirm}
+          className="bg-red-500 text-white px-4 py-2 rounded font-bold hover:bg-red-600"
+        >
+          Eliminar
+        </button>
+        <button
+          onClick={onCancel}
+          className="bg-gray-300 text-gray-800 px-4 py-2 rounded font-bold hover:bg-gray-400"
+        >
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+);
+
+  
   useEffect(() => {
     const fetchVideos = async () => {
       try {
@@ -32,7 +58,6 @@ const ManageVideos = () => {
         method: 'DELETE',
       });
       if (response.ok) {
-        // Eliminar el video del estado sin recargar la página
         setVideos(videos.filter((video) => video.id !== id));
       } else {
         console.error('Error al eliminar el video');
@@ -43,8 +68,8 @@ const ManageVideos = () => {
   };
 
   const handleEdit = (video) => {
-    setEditVideo(video); // Asignamos el video a editar
-    setIsEditing(true); // Mostramos el formulario de edición
+    setEditVideo(video);
+    setIsEditing(true);
   };
 
   const handleSave = async (updatedVideo) => {
@@ -57,17 +82,29 @@ const ManageVideos = () => {
         body: JSON.stringify(updatedVideo),
       });
       const data = await response.json();
-      setVideos(videos.map((video) => (video.id === updatedVideo.id ? data : video))); // Actualizamos el video en el listado
-      setIsEditing(false); // Cerrar el formulario de edición
-      setEditVideo(null); // Limpiar el video editado
+      setVideos(videos.map((video) => (video.id === updatedVideo.id ? data : video)));
+      setIsEditing(false); 
+      setEditVideo(null); 
     } catch (error) {
       console.error('Error al guardar el video:', error);
     }
   };
 
+
+  const handleDeleteConfirm = () => {
+    handleDelete(videoToDelete);
+    setShowDeleteModal(false);
+    setVideoToDelete(null);
+  };
+
+  const handleDeleteCancel = () => {
+    setShowDeleteModal(false);
+    setVideoToDelete(null);
+  };
+
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-[#2D342D] text-white">
+      <div className="flex justify-center items-center min-h-screen bg-dark text-light">
         <div className="text-xl">Cargando videos...</div>
       </div>
     );
@@ -75,31 +112,32 @@ const ManageVideos = () => {
 
   if (error) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-[#2D342D] text-white">
+      <div className="flex justify-center items-center min-h-screen bg-dark text-light">
         <div className="text-xl">{error}</div>
       </div>
     );
   }
-
+  
   return (
-    <div className="min-h-screen bg-[#2D342D] text-white font-title">
-      <div className="relative h-[30vh] mb-8">
-        <div className="absolute inset-x-0 top-0 p-4 pt-24 flex items-center justify-center">
-          <h1 className="text-6xl font-bold text-white font-orbitron drop-shadow-lg">
-            Administracion de Videos
-          </h1>
-        </div>
+    <div className="min-h-screen bg-dark text-light flex flex-col justify-between">
+      <div 
+        className="w-full h-32 md:h-40 bg-[url('../src/assets/img/pattern.png')] bg-repeat bg-center "
+        style={{ backgroundSize: '80%' }}
+      ></div>
+      <div className="relative h-40 md:h-40 flex flex-col md:ml-6 md:items-start items-center justify-center mt-2 mb-1 text-center">
+        <h1 className="text-3xl md:text-4xl  text-greenLight font-bold mb-2">Hola Admin!</h1>
+        <h4 className="text-lg md:text-2xl text-light font-light">Administración de Vídeos</h4>
       </div>
 
-      <div className="container mx-auto px-4 space-y-12">
+      <div className="container bg-dark mx-auto px-4">
         {videos.length === 0 ? (
-          <p className="text-center text-xl text-white">No hay videos disponibles</p>
+          <p className="text-center text-xl text-light">No hay videos disponibles</p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {videos.map((video) => (
               <div
                 key={video.id}
-                className="relative group max-w-sm w-full bg-[#1F262F] rounded-lg p-4 shadow-xl"
+                className="relative group max-w-sm w-full bg-greenMid rounded-lg p-4 shadow-xl mx-auto"
               >
                 <div className="aspect-video relative">
                   <img
@@ -109,23 +147,26 @@ const ManageVideos = () => {
                   />
                 </div>
 
-                <div className="mt-2 text-center"> {/* Reducido el margen superior */}
+                <div className="mt-2 text-center"> 
                   <h2 className="text-2xl font-semibold">{video.title}</h2>
-                  <p className="text-sm text-gray-300">{video.video_url}</p>
+                  <p className="text-sm text-greenLight">{video.video_url}</p>
                 </div>
 
-                <div className="flex justify-around mt-4 space-x-4"> {/* Añadido espacio entre los botones */}
+                <div className="flex justify-around mt-4 space-x-4"> 
                   <button
                     onClick={() => handleEdit(video)}
-                    className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-lg flex items-center space-x-2"
+                    className="bg-greenLight hover:bg-greenMidsec font-bold text-light p-2 rounded-lg flex items-center space-x-2"
                   >
                     <Edit className="w-5 h-5" />
                     <span>Editar</span>
                   </button>
 
                   <button
-                    onClick={() => handleDelete(video.id)}
-                    className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg flex items-center space-x-2"
+                    onClick={() => {
+                      setVideoToDelete(video.id);
+                      setShowDeleteModal(true);
+                    }}
+                    className="bg-red-500 hover:bg-red-600 text-light p-2 rounded-lg flex items-center space-x-2"
                   >
                     <Trash className="w-5 h-5" />
                     <span>Eliminar</span>
@@ -138,46 +179,46 @@ const ManageVideos = () => {
 
         {/* Formulario de edición que se muestra cuando isEditing es true */}
         {isEditing && (
-          <div className="mt-8 max-w-lg mx-auto bg-[#1F262F] p-6 rounded-lg shadow-xl">
+          <div className="mt-8 md:mb-6 max-w-lg mx-auto bg-greenMid p-6 rounded-lg shadow-xl">
             <h2 className="text-2xl font-semibold text-center mb-4">Editar Video</h2>
             <form
-  onSubmit={(e) => {
-    e.preventDefault();
-    handleSave(editVideo); // Guardar los cambios al hacer submit
-  }}
->
-  <div className="mb-4">
-    <label className="block text-sm font-semibold text-white">Título</label>
+              onSubmit={(e) => {
+              e.preventDefault();
+              handleSave(editVideo); // Guardar los cambios al hacer submit
+              }}
+              >
+    <div className="mb-4">
+    <label className="block text-lg font-semibold text-light">Título</label>
     <input
       type="text"
       value={editVideo.title}
       onChange={(e) => setEditVideo({ ...editVideo, title: e.target.value })}
-      className="w-full px-4 py-2 border rounded text-black bg-white" // Cambié el color de texto a negro y el fondo a blanco
+      className="w-full px-4 font-paragraph py-2 border rounded text-dark bg-light" // Cambié el color de texto a negro y el fondo a blanco
     />
   </div>
 
   <div className="mb-4">
-    <label className="block text-sm font-semibold text-white">URL del Video</label>
+    <label className="block text-lg font-semibold text-light">URL del Video</label>
     <input
       type="text"
       value={editVideo.video_url}
       onChange={(e) => setEditVideo({ ...editVideo, video_url: e.target.value })}
-      className="w-full px-4 py-2 border rounded text-black bg-white" // Cambié el color de texto a negro y el fondo a blanco
+      className="w-full px-4 py-2 border font-paragraph rounded text-dark bg-light" // Cambié el color de texto a negro y el fondo a blanco
     />
   </div>
 
   <div className="mb-4">
-    <label className="block text-sm font-semibold text-white">Imagen del Video (Thumbnail)</label>
+    <label className="block text-lg font-semibold text-light">Imagen del Video (Thumbnail)</label>
     <input
       type="file"
       onChange={(e) => setEditVideo({ ...editVideo, thumbnail: e.target.files[0] })}
-      className="w-full px-4 py-2 border rounded text-black bg-white" // Cambié el color de texto a negro y el fondo a blanco
+      className="w-full px-4 py-2 border font-paragraph rounded text-dark bg-light" // Cambié el color de texto a negro y el fondo a blanco
     />
   </div>
 
   <button
     type="submit"
-    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+    className="bg-greenLight font-paragrap text-light px-4 py-2 rounded hover:bg-greenMidsec"
   >
     Guardar
   </button>
@@ -188,11 +229,17 @@ const ManageVideos = () => {
                 setIsEditing(false); // Cerrar el formulario de edición
                 setEditVideo(null); // Limpiar el video en edición
               }}
-              className="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
+              className="mt-4 bg-red-500 text-light px-4 py-2 rounded hover:bg-red-700"
             >
               Cancelar
             </button>
           </div>
+        )}
+        {showDeleteModal && (
+          <ConfirmDeleteModal
+            onConfirm={handleDeleteConfirm}
+            onCancel={handleDeleteCancel}
+          />
         )}
       </div>
     </div>
