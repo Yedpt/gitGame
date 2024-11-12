@@ -31,7 +31,7 @@ Además, GitGame ofrece un sistema de autenticación y control de usuarios para 
 
 GitGame está construido con una variedad de tecnologías modernas para ofrecer una experiencia de usuario rápida y una arquitectura robusta en el servidor. A continuación, se listan las principales herramientas y frameworks utilizados en el proyecto.
 
-### Frontend (Cliente)
+### Frontend (Client)
 - **React**: Biblioteca de JavaScript para construir interfaces de usuario interactivas y dinámicas.
 - **Vite**: Herramienta de construcción rápida y ligera para desarrollar proyectos con React.
 - **Tailwind CSS**: Framework de CSS basado en utilidades para diseñar de forma rápida y eficiente.
@@ -39,7 +39,7 @@ GitGame está construido con una variedad de tecnologías modernas para ofrecer 
 - **ESLint**: Herramienta de análisis estático para identificar y solucionar problemas en el código JavaScript.
 - **PostCSS**: Herramienta para transformar CSS mediante plugins, usada aquí para personalizar Tailwind CSS.
 
-### Backend (Servidor)
+### Backend (Server)
 - **Node.js**: Entorno de ejecución de JavaScript en el servidor.
 - **Express**: Framework de servidor para Node.js que simplifica la gestión de rutas y peticiones HTTP.
 - **MongoDB**: Base de datos NoSQL orientada a documentos, ideal para manejar datos flexibles de la aplicación.
@@ -133,14 +133,15 @@ La plataforma define permisos específicos según el rol del usuario:
 
 Para usar GitGame, sigue los pasos a continuación:
 
-Registro e Inicio de Sesión: Los usuarios deben registrarse o iniciar sesión para interactuar con la plataforma.
-Explorar Secciones: Los usuarios pueden explorar noticias, videos y lanzamientos de forma libre.
-Crear Reseñas: Los usuarios registrados pueden crear y ver reseñas.
-Acciones del Administrador: Los administradores pueden crear, editar y eliminar noticias, videos, lanzamientos y reseñas.
+**Registro e Inicio de Sesión**: Los usuarios deben registrarse o iniciar sesión para interactuar con la plataforma.
+**Explorar Secciones**: Los usuarios pueden explorar noticias, videos y lanzamientos de forma libre.
+**Crear Reseñas**: Los usuarios registrados pueden crear y ver reseñas.
+**Acciones del Administrador**: Los administradores pueden crear, editar y eliminar noticias, videos, lanzamientos y reseñas.
 
 
 
 ## Herramientas y Utilidades
+
 - **Git**: Sistema de control de versiones para seguimiento de cambios en el código.
 - **GitHub**: Plataforma para alojar el repositorio, colaborar y gestionar issues.
 - **dotenv**: Librería para manejar variables de entorno, manteniendo la configuración sensible segura y separada del código fuente.
