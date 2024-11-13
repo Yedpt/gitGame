@@ -3,10 +3,30 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const getPageNumbers = () => {
-    if (totalPages <= 2) return [...Array(totalPages).keys()].map(i => i + 1);
-    if (currentPage === 1) return [1, 2];
-    if (currentPage === totalPages) return [totalPages - 1, totalPages];
-    return [currentPage - 1, currentPage];
+    const pageNumbers = [];
+
+    if (totalPages <= 5) {
+      // Si el total de páginas es menor o igual a 5, mostrar todas
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+      }
+    } else {
+      // Si hay muchas páginas, muestra solo algunas con "..." en medio
+      if (currentPage > 2) pageNumbers.push(1);
+      if (currentPage > 3) pageNumbers.push('...');
+
+      const startPage = Math.max(2, currentPage - 1);
+      const endPage = Math.min(totalPages - 1, currentPage + 1);
+
+      for (let i = startPage; i <= endPage; i++) {
+        pageNumbers.push(i);
+      }
+
+      if (currentPage < totalPages - 2) pageNumbers.push('...');
+      if (currentPage < totalPages - 1) pageNumbers.push(totalPages);
+    }
+
+    return pageNumbers;
   };
 
   return (
@@ -14,15 +34,18 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       <button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>
         <FaChevronLeft className="text-greenLight" />
       </button>
-      {getPageNumbers().map(page => (
+      
+      {getPageNumbers().map((page, index) => (
         <button
-          key={page}
-          onClick={() => onPageChange(page)}
+          key={index}
+          onClick={() => typeof page === 'number' && onPageChange(page)}
           className={`${currentPage === page ? 'font-bold text-light' : ''}`}
+          disabled={page === '...'}
         >
           {page}
         </button>
       ))}
+      
       <button onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === totalPages}>
         <FaChevronRight className="text-greenLight" />
       </button>

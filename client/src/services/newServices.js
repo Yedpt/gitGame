@@ -4,12 +4,11 @@ const API_URL = 'http://localhost:3000/api/news';
 
   // Obtener el token de autorización
   const token = sessionStorage.getItem('token');
-  console.log('Token:', token);
 
   // Configuración de los headers
   const config = {
     headers: {
-      'Authorization': `Bearer ${token}`
+      'Authorization': token ? `Bearer ${token}` : ''
     }
   };
 

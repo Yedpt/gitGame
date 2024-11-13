@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import reviews from '../models/reviewModel';
+import { addLikeToReview } from "../middleware/reviewService";
 
 // Extiende el tipo Request para incluir la propiedad file de Multer.
 interface MulterRequest extends Request {
@@ -81,15 +82,6 @@ export const createReview = async (req: Request, res: Response) => {
     try {
         const { user_id, rol, title, review, author, rating } = req.body;
 
-        // Verifica que los datos estén correctamente enviados
-        console.log("User ID:", user_id);
-        console.log("Role:", rol);
-        console.log("Title:", title);
-        console.log("Review:", review);
-        console.log("Author:", author);
-        console.log("Rating:", rating);
-
-
         // Verifica si el campo rating está presente solo si el rol es "admin"
         if (rol === 'admin' && (rating === undefined || rating < 1 || rating > 5)) {
             res.status(400).json({ message: 'El rating debe estar entre 1 y 5 para el rol admin' });
@@ -170,3 +162,20 @@ export const updateReview = async (req: Request, res: Response) => {
     };
 
 
+//PATCH LIKE
+// Controlador para agregar un like a una reseña
+export const addLike = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const reviewId = parseInt(req.params.id);
+      const updatedReview = await addLikeToReview(reviewId);
+  
+      if (!updatedReview) {
+        res.status(404).json({ message: 'Reseña no encontrada' });
+        return;
+      }
+  
+      res.status(200).json(updatedReview);
+    } catch (error) {
+      res.status(500).json({ message: 'Error al agregar un like' });
+    }
+  };

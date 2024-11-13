@@ -10,6 +10,7 @@ import {
   getReviewsByUserId,
   getAllAdminReviews,
   getAllUserReviews,
+  addLike,
 } from "../controllers/reviewControllers";
 import { validateCreateReview, validateUpdateReview, validateDeleteReview } from "../utils/validations/reviewValidation";
 import { validationHandler } from "../utils/handle/handleValidator";

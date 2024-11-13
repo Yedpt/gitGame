@@ -14,7 +14,11 @@ import { newRouter } from './routes/newsRoutes';
 import { videoRouter } from './routes/videoRoutes';
 import { reviewRouter } from './routes/reviewRoutes';
 import { PORT } from './config';
+<<<<<<< HEAD
 import { createRelease } from './controllers/releasesController';
+=======
+import { addLike } from './controllers/reviewControllers';
+>>>>>>> 9a0e066d8711b42a32370b4ce904093da1b48e40
 
 export const app = express();
 
@@ -24,7 +28,7 @@ export const app = express();
 app.use(cors({
     origin: 'http://localhost:5173', // Cambia al puerto de tu frontend
     credentials: true, // Permite cookies
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
@@ -41,8 +45,13 @@ app.use('/api/login', loginRouter);
 app.use('/api/news', newRouter);
 app.use('/api/reviews', reviewRouter);
 app.use('/api/videos', videoRouter);
+<<<<<<< HEAD
 app.use('/api/releases', releasesRoutes); // para Usar las rutas de los juegos
 app.use('/api/relesases', createRelease);
+=======
+app.use ('/api/likes', addLike);
+
+>>>>>>> 9a0e066d8711b42a32370b4ce904093da1b48e40
 // Función para autenticar y sincronizar la base de datos
 const initializeDatabase = async (sequelize: Sequelize) => {
     try {
