@@ -3,8 +3,6 @@ import { getNewById, incrementLike } from '../services/newServices';
 import { useAuth } from '../context/authContextsss';
 import { FaHeart } from 'react-icons/fa';
 
-
-
 const CardNewDetail = ({ image_url, title, news, date, image2_url, num_likes, id }) => {
   const { user } = useAuth(); // Obtén el usuario del contexto
   const [report, setReport] = useState([]);
@@ -17,7 +15,7 @@ const CardNewDetail = ({ image_url, title, news, date, image2_url, num_likes, id
           const userNews = await getNewById(id);
           setReport(userNews);
         } catch (error) {
-          console.error('Error al cargar las reseñas:', error);
+          console.error('Error al cargar las noticias', error);
         }
       };
       loadNews();
@@ -29,7 +27,7 @@ const CardNewDetail = ({ image_url, title, news, date, image2_url, num_likes, id
       const updatedNew = await incrementLike(id, user.id);
       setNumLikes(updatedNew.num_likes);
     } catch (error) {
-      console.error('Error al actualizar el número de likes:', error);
+      console.error('Error al actualizar el número de likes', error);
     }
   };
 

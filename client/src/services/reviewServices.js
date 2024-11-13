@@ -104,12 +104,22 @@ export const updateReview = async (id, updatedData) => {
 };
 
 // Servicio para dar like a una reseña
-export const addLikeToReview = async (id, updatedData) => {
+// export const addLikeToReview = async (id, updatedData) => {
+//     try {
+//       const response = await axios.patch(`${BASE_URL}/${id}/like`, updatedData);
+//       return response.data;
+//     } catch (error) {
+//       console.error("Error al dar like a la reseña:", error);
+//       throw error;
+//     }
+//   };
+
+  export const incrementLike = async (id) => {
     try {
-      const response = await axios.patch(`${BASE_URL}/${id}/like`, updatedData);
+      const response = await axios.put(`${BASE_URL}/${id}/like`);
       return response.data;
     } catch (error) {
-      console.error("Error al dar like a la reseña:", error);
+      console.error(`Error al incrementar like a review con ID ${id}:`, error.message);
       throw error;
     }
   };
