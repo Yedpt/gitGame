@@ -1,83 +1,115 @@
-// import request from 'supertest';
-// import { app, server } from '../app';
-// import connectionDb from '../database/conectionDb';
-// import NewsModel from '../models/newsModel';
+import request from 'supertest';
+import { app, server } from '../app'; // Asegúrate de que esta es la ruta correcta a tu app y servidor
+import connectionDb from '../database/conectionDb';
+import UserModel from '../models/userModel';
+import NewsModel from '../models/newsModel';
+import { status } from '../interfaces/userInterface';
 
-// describe('crud news', () => {
-//     //GET
-//     test('METHOD GET - should return a response with status 200 and type json', async () => {
-//         const response = await request(app).get('/api/news');
-//         expect(response.statusCode).toBe(200);
-//         expect(response.headers['content-type']).toContain('application/json');
-//     });
+let token: string;
 
-//     //POST
-//     test('METHOD POST - should create a new user', async () => {
-//         const report = {
-//             user_id: 1,
-//             title: "test",
-//             news: "test",
-//             published_at: "2024-10-25T00:00:00.000Z",
-//             updated_at: "2024-10-25T00:00:00.000Z",
-//             num_likes: 100,
-//             image_url: "URL",
-//             image2_url: "URL"
-//         };
+beforeAll(async () => {
+    await connectionDb.sync({ force: true });
 
-//         const response = await request(app).post('/api/news').send(report);
-//         expect(response.statusCode).toBe(200);
-//         expect(response.body.title).toEqual(report.title);
-//         expect(response.body.news).toBe(report.news);
-//         expect(response.body.num_likes).toBe(report.num_likes);
-//     });
+    // Crear un usuario de prueba y obtener un token
+    await UserModel.create({
+        id: 1,
+        name: 'Jane Doe',
+        email: 'jane@example.com',
+        birth_date: new Date('1992-02-02'),
+        password: 'Password123',
+        bio: 'Test bio',
+        avatar: 'avatar.png',
+        rol: 'admin',
+        created_at: new Date(),
+        status: status.active,
+    });
 
-//     //TDD DELETE
-//     test('METHOD DELETE - should delete a user', async () => {
-//         const newToDelete = await NewsModel.create({
-//             user_id: 1,
-//             title: "test",
-//             news: "test",
-//             published_at: "2024-10-25T00:00:00.000Z",
-//             updated_at: "2024-10-25T00:00:00.000Z",
-//             num_likes: 100,
-//             image_url: "test",
-//             image2_url: "test"
-//         });
+    // Autenticar y obtener el token
+    const loginResponse = await request(app)
+        .post('/api/login') // Asegúrate de que esta sea la ruta correcta para iniciar sesión
+        .send({ email: 'jane@example.com', password: 'Password123' });
+    token = loginResponse.body.token;
+});
 
-//         const id = newToDelete?.get('id')?.toString();
-//         const response = await request(app).delete(`/api/news/${id}`).set('Content-Type', 'application/json');
+// Método POST para crear una nueva entrada de noticias con imágenes
+it('METHOD POST - should create a new news entry with images', async () => {
+    const report = {
+        user_id: 1,
+        rol: "admin",
+        title: "Test News",
+        news: "This is the news content",
+        num_likes: 1,
+        image_url: "image.png",
+        image2_url: "image2.png",
+    };
 
-//         expect(response.statusCode).toBe(200);
-//         expect(response.headers['content-type']).toContain('application/json');
-//     });
+    const response = await request(app)
+        .post('/api/news')
+        .set('Authorization', `Bearer ${token}`) // Agregar el token en los encabezados
+        .send(report);
 
-// //PUT
-//     test("METHOD PUT - should update the new", async () => {
-//         const newForUpdate = await NewsModel.create({
-//             user_id: 1,
-//             title: "test",
-//             news: "test",
-//             published_at: "2024-10-25T00:00:00.000Z",
-//             updated_at: "2024-10-25T00:00:00.000Z",
-//             num_likes: 100,
-//             image_url: "test",
-//             image2_url: "test"
-//         });
+    console.log("Response body en POST:", response.body);
+    expect(response.statusCode).toBe(201);
+    expect(response.body).toHaveProperty('id');  // Asumiendo que el objeto creado devuelve un ID
+    expect(response.body.title).toEqual(report.title);
+});
 
-//         const id = newForUpdate?.get('id')?.toString();
-//         const response = await request(app).put(`/api/news/${id}`).send(newForUpdate).set('Content-Type', 'application/json');
-//         expect(response.statusCode).toBe(200);
-//         expect(response.headers['content-type']).toContain('application/json');
-//     });
+// Método DELETE para eliminar una entrada de noticias
+it('METHOD DELETE - should delete a news entry', async () => {
+    const newToDelete = await NewsModel.create({
+        user_id: 1,
+        rol: "admin",
+        title: "test",
+        news: "test content",
+        num_likes: 100,
+        image_url: "image.png",
+        image2_url: "image2.png"
+    });
 
-//     afterEach(async () => {
-//         await NewsModel.destroy({
-//             where: { title: 'test' }
-//         });
-//     });
+    const id = newToDelete?.get('id')?.toString();
 
-//     afterAll((done) => {
-//         server.close(done);
-//         connectionDb.close();
-//     });
-// });
+    const response = await request(app)
+        .delete(`/api/news/${id}`)
+        .set('Authorization', `Bearer ${token}`) // Agregar el token en los encabezados
+
+    console.log("Response body en DELETE:", response.body);
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toBe(1);  // Verifica que response.body es 1
+});
+
+// Método PUT para actualizar una entrada de noticias
+it('METHOD PUT - should update the news entry', async () => {
+    const newNews = await NewsModel.create({
+        user_id: 1,
+        rol: "admin",
+        title: "Initial Title",
+        news: "Initial news content",
+        num_likes: 50,
+        image_url: "image.png",
+        image2_url: "image2.png"
+    });
+
+    const updatedData = {
+        user_id: 1,
+        rol: "admin",
+        title: "update Title",
+        news: "update news content",
+        num_likes: 150,
+        image_url: "imageupdate.png",
+        image2_url: "image2update.png"
+    };
+
+    const id = newNews?.get('id')?.toString();
+    const response = await request(app)
+        .put(`/api/news/${id}`)
+        .set('Authorization', `Bearer ${token}`) // Agregar el token en los encabezados
+        .send(updatedData);
+
+    console.log("Response body en PUT:", response.body);
+    expect(response.statusCode).toBe(200);
+    expect(response.body.title).toBe(updatedData.title);
+});
+
+afterAll(async () => {
+    server.close(); // Cierra el servidor para evitar que Jest quede esperando
+});
