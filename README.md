@@ -117,10 +117,9 @@ La plataforma define permisos específicos según el rol del usuario:
 
 - [Diseño en Figma](https://www.figma.com/design/Of512zBJEbl0Xb7dhLwPqe/Untitled?node-id=17-3&node-type=canvas&t=DGR9bJCHvTUIh5bk-0) - Visualiza el diseño en Figma.
 - [Esquema de Base de Datos en DrawSQL]([https://drawsql.app/teams/f5-5/diagrams/git-games](https://drawsql.app/teams/wilder-aguilar/diagrams/git-games)) - Consulta el esquema de la base de datos en DrawSQL.
--  ![image]([https://github.com/user-attachments/assets/cae33cf5-5618-4a21-9d2c-71787bf059d](https://github.com/user-attachments/assets/ad0682a4-9757-4908-b24c-0c1aae134f1e))
+  ![drawSQL-image-export-2024-11-13](https://github.com/user-attachments/assets/610b4a6b-7605-49bb-95c2-2b9aa7d7fde2)
 
-
-## Estructura![Uploading drawSQL-image-export-2024-11-13.png…]()
+## Estructura
 
 
             gitgame/
@@ -166,9 +165,9 @@ Para usar GitGame, sigue los pasos a continuación:
 
 ## Herramientas y Utilidades
 
-- **Git**: Sistema de control de versiones para seguimiento de cambios en el código.
-- **GitHub**: Plataforma para alojar el repositorio, colaborar y gestionar issues.
-- **dotenv**: Librería para manejar variables de entorno, manteniendo la configuración sensible segura y separada del código fuente.
+- ![Git](https://img.shields.io/badge/git-1F71AB?style=for-the-badge&logo=git&logoColor=white): Sistema de control de versiones para seguimiento de cambios en el código.
+- ![GitHub](https://img.shields.io/badge/GitHub-black?style=for-the-badge&logo=github&logoColor=white) : Plataforma para alojar el repositorio, colaborar y gestionar issues.
+- ![dotenv](https://img.shields.io/badge/dotenv-2B3238?style=for-the-badge&logo=dotenv&logoColor=white) : Librería para manejar variables de entorno, manteniendo la configuración sensible segura y separada del código fuente.
 
 ---
 
@@ -178,5 +177,15 @@ Estas tecnologías fueron seleccionadas para ofrecer un equilibrio entre rendimi
 
 ![image](https://github.com/user-attachments/assets/0f6a4829-f3fe-422f-881d-c75fb2f15e57) ![image](https://github.com/user-attachments/assets/52b2533f-8b10-4f67-96f6-381a69168b70) ![image](https://github.com/user-attachments/assets/3097400d-5c90-47a9-8890-8dac78a754f7) ![image](https://github.com/user-attachments/assets/a5ae141b-c87d-48d8-b6e9-056b85c7ffb5) ![image](https://github.com/user-attachments/assets/090e68c8-2056-4eb7-a9d1-a4561774c89d)
 
+## Autores ✒️
 
+Vada Velásquez Pérez - [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/DarthVada36) [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/anagarciaarcia/)
+
+Yeder Pimentel - [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Yedpt) [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yeder-pimentel/)
+
+Out Diallo - [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Diallo2024) [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/omarlengua/)
+
+Arturo Mencia Martin - [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Arthurmm77) [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/enmanuelfeliciano/)
+
+Wilder Aguilar - [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Wilder-Aguilar) [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/wilderaguilar/)
 
