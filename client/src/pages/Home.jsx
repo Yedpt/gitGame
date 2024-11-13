@@ -109,6 +109,7 @@ export default function Home() {
                   news={mainCardNews.news}
                   image_url={mainCardNews.image_url}
                   date={new Date(mainCardNews.published_at).toLocaleDateString()}
+                  numLikes={mainCardNews.num_likes}
                 />
               ) : (
                 <p>No hay noticias disponibles.</p>
