@@ -34,14 +34,16 @@ export const getReleasesByMonth = async (req: Request, res: Response) => {
 };
 
 export const createRelease = async (req: Request, res: Response) => {
-    const { user_id, title, release_date, rating, image_url, month } = req.body;
+    const { user_id, title, release_date, rating, month } = req.body;
+    const image_url = req.file ? `/uploads/launch/${req.file.filename}` : null; // Ruta donde se guarda la imagen
+
     try {
         const newRelease = await releases.create({
-            user_id,
+            user_id: user_id,
             title,
             release_date, 
             rating,
-            image_url,
+            image_url: image_url,
             month
         });
         res.status(201).json(newRelease);
@@ -49,6 +51,7 @@ export const createRelease = async (req: Request, res: Response) => {
         res.status(500).json({ message: "Error al crear el lanzamiento", error });
     }
 };
+
 
 export const getReleaseById = async (req: UserIdRequest, res: Response) => { 
     const { userId } = req.params;

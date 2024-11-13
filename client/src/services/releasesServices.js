@@ -1,13 +1,12 @@
 import axios from "axios";
 const BASE_URL = 'http://localhost:3000/api/releases';
 
-export const getAllReleases = async () => {
+export const  getAllReleases = async () => {
     try {
         const response = await axios.get(BASE_URL);
-        const data = await response.json();
-        return data;
+        return response.data;
     } catch (error) {
-        console.error('Error fetching releases:', error);
+        console.error('Error al obtener las reseñas:', error);
         throw error;
     }
 };
@@ -36,17 +35,17 @@ export const getReleasesByMonth = async (month) => {
 
 export const createRelease = async (formData) => {
     try {
-        const response = await axios.post(BASE_URL, {
-            method: 'POST',
-            body: formData
-        });
-        const data = await response.json();
-        return data;
+      const response = await axios.post(BASE_URL, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response.data;
     } catch (error) {
-        console.error('Error creating release:', error);
-        throw error;
+      console.error('Error creating release:', error);
+      throw error;
     }
-};
+  };
 
 export const updateRelease = async (id, formData) => {
     try {

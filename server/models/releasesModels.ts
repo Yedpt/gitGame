@@ -1,5 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import connectionDb from '../database/conectionDb';
+import UserModel from './userModel';
 
 const releases = connectionDb.define(
     'upcoming_releases',
@@ -11,11 +12,15 @@ const releases = connectionDb.define(
         },
         user_id: {
             type: DataTypes.INTEGER,
-        },
+            references: {
+                model: UserModel,
+                key: 'id',
+            }
+            },
         title: {
             type: DataTypes.STRING,
         },
-        relese_date: {
+        release_date: {
             type: DataTypes.DATE,
             allowNull: false,
         },
@@ -25,7 +30,7 @@ const releases = connectionDb.define(
         },
         image_url: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         month: {
             type: DataTypes.STRING,
