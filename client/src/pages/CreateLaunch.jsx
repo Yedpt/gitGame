@@ -47,91 +47,70 @@ const CreateLaunch = () => {
     };
 
     return (
-        <div className="create-launch-container">
-            <h2>Create New Launch</h2>
-            <form onSubmit={handleSubmit} className="launch-form">
-                <div className="form-group">
-                    <label htmlFor="title">Title:</label>
-                    <input
-                        type="text"
-                        id="title"
-                        name="title"
-                        value={formData.title}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-
-                <div className="form-group">
-                    <label htmlFor="relese_date">Release Date:</label>
-                    <input
-                        type="date"
-                        id="relese_date"
-                        name="relese_date"
-                        value={formData.relese_date}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-
-                <div className="form-group">
-                    <label htmlFor="rating">Rating:</label>
-                    <select
-                        id="rating"
-                        name="rating"
-                        value={formData.rating}
-                        onChange={handleChange}
-                        required
-                    >
-                        <option value="">Select Rating</option>
-                        <option value="E">E (Everyone)</option>
-                        <option value="T">T (Teen)</option>
-                        <option value="M">M (Mature)</option>
-                    </select>
-                </div>
-
-                <div className="form-group">
-                    <label htmlFor="month">Month:</label>
-                    <select
-                        id="month"
-                        name="month"
-                        value={formData.month}
-                        onChange={handleChange}
-                        required
-                    >
-                        <option value="">Select Month</option>
-                        <option value="January">January</option>
-                        <option value="February">February</option>
-                        <option value="March">March</option>
-                        <option value="April">April</option>
-                        <option value="May">May</option>
-                        <option value="June">June</option>
-                        <option value="July">July</option>
-                        <option value="August">August</option>
-                        <option value="September">September</option>
-                        <option value="October">October</option>
-                        <option value="November">November</option>
-                        <option value="December">December</option>
-                    </select>
-                </div>
-
-                <div className="form-group">
-                    <label htmlFor="image">Image:</label>
-                    <input
-                        type="file"
-                        id="image"
-                        name="image"
-                        onChange={handleImageChange}
-                        accept="image/*"
-                        required
-                    />
-                </div>
-
-                <button type="submit" className="submit-button">Create Launch</button>
-            </form>
+        <div className="max-w-md mx-auto bg-green-900 p-8 rounded-lg shadow-lg">
+    <h2 className="text-center text-white text-2xl font-bold mb-6">CREA UNA NOTICIA</h2>
+    <form onSubmit={handleSubmit} className="space-y-4">
+        
+        <div className="flex flex-col">
+            <label htmlFor="title" className="text-green-400 font-semibold mb-2">TÍTULO</label>
+            <input
+                type="text"
+                id="title"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                required
+                className="p-2 rounded bg-green-800 border border-green-600 text-white"
+            />
         </div>
-    );
-};
+
+        <div className="flex flex-col">
+            <label htmlFor="relese_date" className="text-green-400 font-semibold mb-2">DETALLE</label>
+            <textarea
+                id="relese_date"
+                name="relese_date"
+                value={formData.relese_date}
+                onChange={handleChange}
+                required
+                className="p-2 rounded bg-green-800 border border-green-600 text-white"
+            />
+        </div>
+
+        <div className="flex flex-col">
+            <label htmlFor="image" className="text-green-400 font-semibold mb-2">IMAGEN PRINCIPAL</label>
+            <input
+                type="file"
+                id="image"
+                name="image"
+                onChange={handleImageChange}
+                accept="image/*"
+                required
+                className="p-2 rounded bg-green-800 border border-green-600 text-white"
+            />
+        </div>
+
+        <div className="flex flex-col">
+            <label htmlFor="image_secondary" className="text-green-400 font-semibold mb-2">IMAGEN SECUNDARIA</label>
+            <input
+                type="file"
+                id="image_secondary"
+                name="image_secondary"
+                onChange={handleImageChange}
+                accept="image/*"
+                className="p-2 rounded bg-green-800 border border-green-600 text-white"
+            />
+        </div>
+
+        <button
+            type="submit"
+            className="w-full py-2 mt-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded"
+        >
+            Enviar
+        </button>
+    </form>
+</div>
+)};
+
 
 export default CreateLaunch;
 
