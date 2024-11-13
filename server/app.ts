@@ -12,7 +12,7 @@ import { newRouter } from './routes/newsRoutes';
 import { videoRouter } from './routes/videoRoutes';
 import { reviewRouter } from './routes/reviewRoutes';
 import { PORT } from './config';
-import { addLike } from './controllers/reviewControllers';
+// import { addLike } from './controllers/reviewControllers';
 
 export const app: Express = express();
 
@@ -39,7 +39,7 @@ app.use('/api/login', loginRouter);
 app.use('/api/news', newRouter);
 app.use('/api/reviews', reviewRouter);
 app.use('/api/videos', videoRouter);
-app.use ('/api/likes', addLike);
+// app.use ('/api/likes', addLike);
 
 // Función para autenticar y sincronizar la base de datos
 const initializeDatabase = async (sequelize: Sequelize) => {

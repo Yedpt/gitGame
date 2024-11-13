@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import reviews from '../models/reviewModel';
-import { addLikeToReview } from "../middleware/reviewService";
+// import { addLikeToReview } from "../middleware/reviewService";
 
 // Extiende el tipo Request para incluir la propiedad file de Multer.
 interface MulterRequest extends Request {
@@ -162,20 +162,36 @@ export const updateReview = async (req: Request, res: Response) => {
     };
 
 
-//PATCH LIKE
-// Controlador para agregar un like a una reseña
-export const addLike = async (req: Request, res: Response): Promise<void> => {
+// //PATCH LIKE
+// // Controlador para agregar un like a una reseña
+// export const addLike = async (req: Request, res: Response): Promise<void> => {
+//     try {
+//       const reviewId = parseInt(req.params.id);
+//       const updatedReview = await addLikeToReview(reviewId);
+  
+//       if (!updatedReview) {
+//         res.status(404).json({ message: 'Reseña no encontrada' });
+//         return;
+//       }
+  
+//       res.status(200).json(updatedReview);
+//     } catch (error) {
+//       res.status(500).json({ message: 'Error al agregar un like' });
+//     }
+//   };
+
+  //PUT LIKE
+export const incrementLike = async (req: Request, res: Response) => {
     try {
-      const reviewId = parseInt(req.params.id);
-      const updatedReview = await addLikeToReview(reviewId);
-  
-      if (!updatedReview) {
-        res.status(404).json({ message: 'Reseña no encontrada' });
-        return;
-      }
-  
-      res.status(200).json(updatedReview);
+      const newId = req.params.id;
+      const updatedReview = await reviews.increment(
+        { num_likes: 1 },
+        {
+          where: { id: newId }
+        });
+      const review = await reviews.findByPk(newId);
+      res.status(200).json(review);
     } catch (error) {
-      res.status(500).json({ message: 'Error al agregar un like' });
+      res.json({ message: "Ha ocurrido un error", error });
     }
   };
