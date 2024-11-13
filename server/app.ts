@@ -14,11 +14,9 @@ import { newRouter } from './routes/newsRoutes';
 import { videoRouter } from './routes/videoRoutes';
 import { reviewRouter } from './routes/reviewRoutes';
 import { PORT } from './config';
-// import { createRelease } from './controllers/releasesController';
+
 
 export const app = express();
-
-// Hacer pública la carpeta de uploads para servir archivos
 
 // Configuración de CORS
 app.use(cors({
@@ -41,8 +39,8 @@ app.use('/api/login', loginRouter);
 app.use('/api/news', newRouter);
 app.use('/api/reviews', reviewRouter);
 app.use('/api/videos', videoRouter);
-// app.use('/api/releases', releasesRoutes); // para Usar las rutas de los juegos
-app.use('/api/relesases', createRelease);
+app.use('/api/releases', releasesRoutes); // para Usar las rutas de los juegos
+
 // Función para autenticar y sincronizar la base de datos
 const initializeDatabase = async (sequelize: Sequelize) => {
     try {
@@ -55,7 +53,7 @@ const initializeDatabase = async (sequelize: Sequelize) => {
         await news.sync({ force: false });
         console.log("Tabla de noticias sincronizada.");
 
-        await reviews.sync({ force: true });
+        await reviews.sync({ force: false });
         console.log("Tabla de reviews sincronizada.");
 
         await Video.sync({ force: false });
