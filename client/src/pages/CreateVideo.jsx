@@ -7,6 +7,7 @@ import { createVideo } from '../services/videoServices';
 const CreateVideo = () => {
   const navigate = useNavigate();
   const { user, isLoggedIn } = useAuth();
+  const [successMessage, setSuccessMessage] = useState('');
 
   const [formData, setFormData] = useState({
     id: '',
@@ -60,8 +61,8 @@ const CreateVideo = () => {
 
       try {
         await createVideo(formDataToSend);
-        alert('Video creado exitosamente');
-        navigate('/Videos');
+        setSuccessMessage('Video creado exitosamente');
+        setTimeout(() => navigate('/Videos'), 3000);
       } catch (error) {
         setSubmissionError('Error al registrar video: ' + error.message);
         console.error('Error al registrar video:', error);
@@ -119,6 +120,7 @@ const CreateVideo = () => {
                     Enviar
                 </button>
               </div>
+              {successMessage && <p className="text-green-500 mt-4 text-sm">{successMessage}</p>}
             </form>
           </div>
         </div>

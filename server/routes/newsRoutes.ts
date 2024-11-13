@@ -37,4 +37,4 @@ newRouter.put('/:id',
   validateUpdateNew,
   validationHandler,
   updateNew
-)
+);
