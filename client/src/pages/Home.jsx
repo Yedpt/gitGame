@@ -32,12 +32,6 @@ export default function Home() {
       // Establecer el estado con solo la primera noticia (más reciente)
       setNews(sortedNews);
 
-        if (sortedNews.length > 0) {
-            setNews([sortedNews[0]]);
-        } else {
-            console.error('Aucune nouvelle disponible');
-            setNews([]);
-        }
     } else {
         console.error('La respuesta no es un array:', dataNews);
         setNews([]);
