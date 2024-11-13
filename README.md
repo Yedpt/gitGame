@@ -125,8 +125,7 @@ La plataforma define permisos específicos según el rol del usuario:
 ## Recursos de Diseño y Base de Datos
 
 - [Diseño en Figma](https://www.figma.com/design/Of512zBJEbl0Xb7dhLwPqe/Untitled?node-id=17-3&node-type=canvas&t=DGR9bJCHvTUIh5bk-0) - Visualiza el diseño en Figma.
-- [Esquema de Base de Datos en DrawSQL]([https://drawsql.app/teams/f5-5/diagrams/git-games](https://drawsql.app/teams/wilder-aguilar/diagrams/git-games))
-- [Consulta el esquema de la base de datos en DrawSQL](https://drawsql.app/teams/wilder-aguilar/diagrams/git-games).
+- [Esquema de la base de datos en DrawSQL](https://drawsql.app/teams/wilder-aguilar/diagrams/git-games).
 
 ![drawSQL-image-export-2024-11-13](https://github.com/user-attachments/assets/baca752e-34db-4ca7-8e13-289e8a051aea)
 
