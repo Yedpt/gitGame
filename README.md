@@ -46,6 +46,9 @@ GitGame está construido con una variedad de tecnologías modernas para ofrecer 
 
 ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white): Cliente HTTP para realizar peticiones al backend de forma sencilla.
 
+![TypeScript](https://img.shields.io/badge/TypeScript-blue?style=for-the-badge&logo=typescript&logoColor=white) : Aplicado en el back-end mejorando la escalabilidad, seguridad y mantenimiento del código con tipado estático.
+
+
 ### Backend (Server)
 ![Node.js](https://img.shields.io/badge/Node.js-green?style=for-the-badge&logo=node.js&logoColor=white): Entorno de ejecución de JavaScript en el servidor.
 
@@ -68,19 +71,19 @@ Para ejecutar GitGame en tu entorno local, sigue estos pasos:
    ```bash
    git clone https://github.com/Wilder-Aguilar/gitGame.git
 
-2. Instalar dependencias para el cliente:
+2. Instalar dependencias en el front-end:
 
 
           cd gitgame/client
           npm install
    
-4. Instalar dependencias para el servidor:
+3. Instalar dependencias en el back-end:
 
 
           cd ../server
           npm install
 
-5. Configurar variables de entorno: Crea un archivo .env en el directorio server con las configuraciones necesarias, como la conexión a la base de datos.
+4. Configurar variables de entorno: Crea un archivo .env en el directorio server con las configuraciones necesarias, como la conexión a la base de datos.
 
    
             DB_PASSWORD =12345
@@ -93,7 +96,7 @@ Para ejecutar GitGame en tu entorno local, sigue estos pasos:
             JWT_SECRET=tu_clave_secreta_super_segura
    
    
-7. Ejecutar el proyecto:
+5. Ejecutar el proyecto:
 
 Inicia el servidor desde el directorio server:
 
@@ -173,6 +176,13 @@ Para usar GitGame, sigue los pasos a continuación:
 ---
 
 Estas tecnologías fueron seleccionadas para ofrecer un equilibrio entre rendimiento, escalabilidad y facilidad de desarrollo, permitiendo que GitGame sea una plataforma rápida, segura y fácil de mantener.
+
+## Documentación de la API
+
+Esta documentación proporciona una guía completa para interactuar con nuestra API, diseñada para facilitar la integración y el uso de los servicios backend. A través de Postman, podrás realizar pruebas, explorar los distintos endpoints y comprender las respuestas de la API de manera efectiva.
+
+![Postman]((https://img.shields.io/badge/Postman-orange?style=for-the-badge&logo=postman&logoColor=white)(https://documenter.getpostman.com/view/37812250/2sAY545JAw))
+
 
 ## Visionado de la web
 
