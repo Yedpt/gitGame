@@ -97,11 +97,13 @@ const ReviewsPage = () => {
           {paginatedAdminReviews.map((review, index) => (
             <AdminReviewCard
               key={review.id}
+              id={review.id}
               title={review.title}
               review={review.review}
               imageUrl={`http://localhost:3000${review.image_url}`}
               author={review.author}
               rating={review.rating}
+              num_likes={review.num_likes}
               bgColor={index % 2 === 0 ? 'bg-greenMidsec' : 'bg-greenMid'}
             />
           ))}

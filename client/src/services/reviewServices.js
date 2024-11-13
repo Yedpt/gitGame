@@ -112,3 +112,13 @@ export const addLikeToReview = async (id, updatedData) => {
       throw error;
     }
   };
+
+  export const incrementLike = async (id) => {
+    try {
+      const response = await axios.put(`${BASE_URL}/${id}/like`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error al incrementar like a review con ID ${id}:`, error.message);
+      throw error;
+    }
+  };
