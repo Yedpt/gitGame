@@ -206,3 +206,4 @@ Arturo Mencia - [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-
 
 Wilder Aguilar - [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Wilder-Aguilar) [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/wilderaguilar/)
 
+![Get_to_Know_Our_Team](https://github.com/user-attachments/assets/c187c03a-f30e-4154-850e-0bdff9ed91ce)
