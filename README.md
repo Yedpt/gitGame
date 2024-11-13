@@ -15,7 +15,9 @@ Bienvenidos a **GitGame**, una plataforma completa para los apasionados de los v
 - [Estructura del Proyecto](#estructura)
 - [Uso](#uso)
 - [Herramientas y Utilidades](#herramientas-y-utilidades)
+- [Documentación de la API](#Documentación-de-la-API)
 - [Visionado de la Web](#visionado-de-la-web)
+- [Autores](#Autores)
 
 
 
