@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const BASE_URL = 'http://localhost:3000/api/reviews'; // Cambia esta URL si tu endpoint es diferente
 
 //GET all reviews -- GET
@@ -12,7 +11,7 @@ export const  getAllReviews = async () => {
         throw error;
     }
 };
-
+                                                                                                                                                                                                                                                      
 
 //GET one review by ID -- GET
 export const getOneReview = async (id) => {
@@ -110,6 +109,16 @@ export const addLikeToReview = async (id, updatedData) => {
       return response.data;
     } catch (error) {
       console.error("Error al dar like a la reseña:", error);
+      throw error;
+    }
+  };
+
+  export const incrementLike = async (id) => {
+    try {
+      const response = await axios.put(`${BASE_URL}/${id}/like`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error al incrementar like a review con ID ${id}:`, error.message);
       throw error;
     }
   };

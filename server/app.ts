@@ -12,11 +12,11 @@ import { newRouter } from './routes/newsRoutes';
 import { videoRouter } from './routes/videoRoutes';
 import { reviewRouter } from './routes/reviewRoutes';
 import { PORT } from './config';
-import { addLike } from './controllers/reviewControllers';
+import {releaseRouter} from './routes/releasesRoutes';
+import multer from 'multer';
+import releases from './models/releasesModels';
 
 export const app: Express = express();
-
-// Hacer pública la carpeta de uploads para servir archivos
 
 // Configuración de CORS
 app.use(cors({
@@ -26,12 +26,16 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
+// Configura multer para guardar imágenes en una carpeta específica (e.g., 'uploads/')
+const upload = multer({ dest: 'uploads/launch' });
+
 // Servir archivos estáticos desde la carpeta 'uploads' dentro de 'server'
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 // Middleware para procesar JSON
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Rutas API
 app.use('/api/users', userRouter);
@@ -39,7 +43,7 @@ app.use('/api/login', loginRouter);
 app.use('/api/news', newRouter);
 app.use('/api/reviews', reviewRouter);
 app.use('/api/videos', videoRouter);
-app.use ('/api/likes', addLike);
+app.use('/api/releases', releaseRouter); // para Usar las rutas de los juegos
 
 // Función para autenticar y sincronizar la base de datos
 const initializeDatabase = async (sequelize: Sequelize) => {
@@ -58,6 +62,11 @@ const initializeDatabase = async (sequelize: Sequelize) => {
 
         await Video.sync({ force: false });
         console.log("Tabla de videos sincronizada.");
+
+        await releases.sync({force:false});
+        console.log("tabla de lanzamientos syncronizada");
+
+        
         
     } catch (error) {
         console.error("Error al conectar la base de datos:", error);

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaHeart } from 'react-icons/fa';
 
-const MainCard = ({ title, image_url, date, id }) => {
+const MainCard = ({ title, image_url, date, id, numLikes }) => {
 
   return (
     <div >
@@ -17,11 +18,21 @@ const MainCard = ({ title, image_url, date, id }) => {
         <div className='row-span-2 rotate-[270deg] font-title text-greenMidsec text-xs font-semibold justify-self-center mt-10 py-12'>
           {date}
         </div>
-        <div className='col-span-9' >
+
+
+        <div className='col-span-9 flex items-center justify-start space-x-6' >
           <Link to={`/newsdetails/${id}`}>
             <button className='font-title text-light rounded-md bg-greenMid p-1 text-sm font-bold my-4 '>LEER MÁS</button>
           </Link>
+
+          <button
+            className="text-light flex items-center space-x-1"
+            title="like"
+          >
+            <FaHeart /> <span>{numLikes}</span>
+          </button>
         </div>
+
         <div className="col-span-8">
           <h2 className="md:text-lg mb-4 font-bold font-title text-light">{title}</h2>
         </div>

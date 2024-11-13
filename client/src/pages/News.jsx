@@ -56,6 +56,7 @@ const GameNews = () => {
               news={item.news}
               image_url={item.image_url}
               date={new Date(item.published_at).toLocaleDateString()}
+              numLikes={item.num_likes}
             />
           ))
         ) : (

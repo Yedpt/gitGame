@@ -47,6 +47,7 @@ const NewsDetails = () => {
               image_url={news.image_url}
               image2_url={news.image2_url}
               date={news.published_at}
+              num_likes={news.num_likes}
             />
         
         ) : (

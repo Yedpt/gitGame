@@ -10,7 +10,7 @@ import {
   getReviewsByUserId,
   getAllAdminReviews,
   getAllUserReviews,
-  addLike,
+  incrementLike
 } from "../controllers/reviewControllers";
 import { validateCreateReview, validateUpdateReview, validateDeleteReview } from "../utils/validations/reviewValidation";
 import { validationHandler } from "../utils/handle/handleValidator";
@@ -32,5 +32,6 @@ reviewRouter.get('/', getAllReviews);
 // Rutas CRUD
 reviewRouter.delete('/:id',validateDeleteReview , validationHandler, deleteReview);
 reviewRouter.put('/:id', validateUpdateReview, validationHandler, updateReview);
+reviewRouter.put('/:id/like', incrementLike);
 
 
