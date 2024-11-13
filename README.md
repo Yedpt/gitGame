@@ -39,18 +39,26 @@ GitGame está construido con una variedad de tecnologías modernas para ofrecer 
 
 ### Frontend (Client)
 ![React](https://img.shields.io/badge/React-blue?style=for-the-badge&logo=react&logoColor=white): Biblioteca de JavaScript para construir interfaces de usuario interactivas y dinámicas.
-- **Vite**: Herramienta de construcción rápida y ligera para desarrollar proyectos con React.
-- **Tailwind CSS**: Framework de CSS basado en utilidades para diseñar de forma rápida y eficiente.
-- **Axios**: Cliente HTTP para realizar peticiones al backend de forma sencilla.
-- **ESLint**: Herramienta de análisis estático para identificar y solucionar problemas en el código JavaScript.
-- **PostCSS**: Herramienta para transformar CSS mediante plugins, usada aquí para personalizar Tailwind CSS.
+
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white): Herramienta de construcción rápida y ligera para desarrollar proyectos con React.
+
+![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white): Framework de CSS basado en utilidades para diseñar de forma rápida y eficiente.
+
+![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white): Cliente HTTP para realizar peticiones al backend de forma sencilla.
 
 ### Backend (Server)
 ![Node.js](https://img.shields.io/badge/Node.js-green?style=for-the-badge&logo=node.js&logoColor=white): Entorno de ejecución de JavaScript en el servidor.
+
 ![Express.js](https://img.shields.io/badge/Express.js-4DB33A?style=for-the-badge&logo=express&logoColor=white): Framework de servidor para Node.js que simplifica la gestión de rutas y peticiones HTTP.
-- **JWT (JSON Web Tokens)**: Tecnología para manejar la autenticación y autorización de usuarios.
-- **Bcrypt**: Librería para el hash de contraseñas, asegurando la seguridad de los datos sensibles.
-- **Multer**: Middleware para manejar la subida de archivos en las rutas del servidor.
+
+![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white): Tecnología para manejar la autenticación y autorización de usuarios.
+
+![Bcrypt](https://img.shields.io/badge/Bcrypt-0046BE?style=for-the-badge&logo=bcrypt&logoColor=white): Librería para el hash de contraseñas, asegurando la seguridad de los datos sensibles.
+
+![Multer](https://img.shields.io/badge/Multer-FF7A3F?style=for-the-badge&logo=multer&logoColor=white): Middleware para manejar la subida de archivos en las rutas del servidor.
+
+![MySQL Workbench](https://img.shields.io/badge/MySQL_Workbench-00758F?style=for-the-badge&logo=mysql&logoColor=white):
+
 
 ## Instalación
 
@@ -108,12 +116,12 @@ La plataforma define permisos específicos según el rol del usuario:
 ## Recursos de Diseño y Base de Datos
 
 - [Diseño en Figma](https://www.figma.com/design/Of512zBJEbl0Xb7dhLwPqe/Untitled?node-id=17-3&node-type=canvas&t=DGR9bJCHvTUIh5bk-0) - Visualiza el diseño en Figma.
-- [Esquema de Base de Datos en DrawSQL](https://drawsql.app/teams/f5-5/diagrams/git-games) - Consulta el esquema de la base de datos en DrawSQL.
-  ![image](https://github.com/user-attachments/assets/cae33cf5-5618-4a21-9d2c-71787bf059de)
+- [Esquema de Base de Datos en DrawSQL]([https://drawsql.app/teams/f5-5/diagrams/git-games](https://drawsql.app/teams/wilder-aguilar/diagrams/git-games)) - Consulta el esquema de la base de datos en DrawSQL.
+-  ![image]([https://github.com/user-attachments/assets/cae33cf5-5618-4a21-9d2c-71787bf059d](https://github.com/user-attachments/assets/ad0682a4-9757-4908-b24c-0c1aae134f1e))
 
 
+## Estructura![Uploading drawSQL-image-export-2024-11-13.png…]()
 
-## Estructura
 
             gitgame/
           ├── client/                  # Código del frontend (interfaz de usuario)
