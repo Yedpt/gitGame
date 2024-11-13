@@ -6,8 +6,8 @@ interface File {
   originalname: string;
 }
 interface Files {
-  image_url?: File[]; 
-  image2_url?: File[]; 
+  image_url?: File[];
+  image2_url?: File[];
 }
 
 //GET
@@ -15,8 +15,7 @@ export const getAllNews = async (req: Request, res: Response) => {
   try {
     const report = await NewsModel.findAll();
     res.json(report);
-  } catch (error) 
-  {
+  } catch (error) {
     res.json({ message: "Ha ocurrido un error", error });
   }
 };
@@ -24,19 +23,18 @@ export const getAllNews = async (req: Request, res: Response) => {
 //GET by ID
 export const getNewById = async (req: Request, res: Response) => {
   try {
-      const { id } = req.params;
-      const report = await NewsModel.findByPk(id);
-      res.json(report);
-  } catch (error)
-  {
-      res.json({ message: "No se ha encontrado la noticia", error });
+    const { id } = req.params;
+    const report = await NewsModel.findByPk(id);
+    res.json(report);
+  } catch (error) {
+    res.json({ message: "No se ha encontrado la noticia", error });
   }
 };
 
 //POST
 export const createNew = async (req: Request, res: Response) => {
   console.log('Cuerpo de la solicitud:', req.body);   // Verifica los datos
-  console.log('Archivos recibidos:', req.files); 
+  console.log('Archivos recibidos:', req.files);
 
   try {
     console.log(res)
@@ -112,23 +110,18 @@ export const updateNew = async (req: Request, res: Response) => {
   }
 };
 
-// export const updateNew = async (req: Request, res: Response) => {
-//   try {
-//     const newId = req.params.id;
-//     const { user_id, title, news, published_at, updated_at, num_likes, image_url, image2_url } = req.body;
-//     const report = await NewsModel.findByPk(newId);
-//     await report?.update({
-//         user_id,
-//         title,
-//         news,
-//         published_at,
-//         updated_at,
-//         num_likes,
-//         image_url,
-//         image2_url,
-//     });
-//     res.json(report);
-//   } catch (error) {
-//     console.log('El meme no se pudo actualizar', error);
-//   }
-// }
+//PUT LIKE
+export const incrementLike = async (req: Request, res: Response) => {
+  try {
+    const newId = req.params.id;
+    const updatedNew = await NewsModel.increment(
+      { num_likes: 1 },
+      {
+        where: { id: newId }
+      });
+    const report = await NewsModel.findByPk(newId);
+    res.status(200).json(report);
+  } catch (error) {
+    res.json({ message: "Ha ocurrido un error", error });
+  }
+};

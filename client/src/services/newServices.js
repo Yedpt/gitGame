@@ -2,16 +2,6 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:3000/api/news';
 
-  // Obtener el token de autorización
-  const token = sessionStorage.getItem('token');
-
-  // Configuración de los headers
-  const config = {
-    headers: {
-      'Authorization': token ? `Bearer ${token}` : ''
-    }
-  };
-
 //Get all news -- GET
 export const getAllNews = async () => {
   try {
@@ -52,6 +42,14 @@ export const getNewsByUserId = async (userId) => {
 // Eliminar noticia -- DELETE
 export const deleteNew = async (id) => {
   try {
+    // Obtener el token de autorización
+    const token = sessionStorage.getItem('token');
+    // Configuración de los headers
+    const config = {
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : ''
+      }
+    };
     const response = await axios.delete(`${API_URL}/${id}`, config);
     return response.data;
   } catch (error) {
@@ -65,6 +63,14 @@ export const createNew = async (newData) => {
   const { title, news, image_url, image2_url } = newData;
 
   try {
+    // Obtener el token de autorización
+    const token = sessionStorage.getItem('token');
+    // Configuración de los headers
+    const config = {
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : ''
+      }
+    };
     const response = await axios.post(API_URL, newData, config);
     return response.data;
   } catch (error) {
@@ -76,10 +82,28 @@ export const createNew = async (newData) => {
 // Actualizar noticia -- PUT
 export const updateNew = async (id, updatedData) => {
   try {
+    // Obtener el token de autorización
+    const token = sessionStorage.getItem('token');
+    // Configuración de los headers
+    const config = {
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : ''
+      }
+    };
     const response = await axios.put(`${API_URL}/${id}`, updatedData, config);
     return response.data;
   } catch (error) {
     console.error(`Error al actualizar la reseña con ID ${id}:`, error.message);
+    throw error;
+  }
+};
+
+export const incrementLike = async (id) => {
+  try {
+    const response = await axios.put(`${API_URL}/${id}/like`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error al incrementar like a noticia con ID ${id}:`, error.message);
     throw error;
   }
 };

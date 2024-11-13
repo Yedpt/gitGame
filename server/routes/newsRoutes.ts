@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllNews, createNew, deleteNew, updateNew, getNewById } from "../controllers/newsController";
+import { getAllNews, createNew, deleteNew, updateNew, getNewById, incrementLike } from "../controllers/newsController";
 import { upload } from "../middleware/newUpload";
 import { authenticateToken, isAdmin } from "../middleware/userRole";
 import { validateCreateNew, validateDeleteNew, validateUpdateNew } from "../utils/validations/newValidation";
@@ -37,4 +37,7 @@ newRouter.put('/:id',
   validateUpdateNew,
   validationHandler,
   updateNew
+);
+newRouter.put('/:id/like',
+  incrementLike
 );
