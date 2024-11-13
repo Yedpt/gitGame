@@ -8,11 +8,17 @@ Bienvenidos a **GitGame**, una plataforma completa para los apasionados de los v
 
 ## Índice
 - [Características](#características)
-- [Instalación](#instalación)
-- [Uso](#uso)
-- [Roles y Permisos](#roles-y-permisos)
-- [Estructura del Proyecto](#estructura-del-proyecto)
 - [Tecnologías Utilizadas](#tecnologías-utilizadas)
+- [Instalación](#instalación)
+- [Roles y Permisos](#roles-y-permisos)
+- [Recursos de Diseño y Base de Datos](#recursos-de-diseño-y-base-de-datos)
+- [Estructura del Proyecto](#estructura)
+- [Uso](#uso)
+- [Herramientas y Utilidades](#herramientas-y-utilidades)
+- [Visionado de la Web](#visionado-de-la-web)
+
+
+
 
 ---
 
@@ -99,6 +105,15 @@ La plataforma define permisos específicos según el rol del usuario:
 |---------------|----------------------------------------------------------------------------------------------------|
 | **Usuario**   | Puede ver contenido y crear reseñas de videojuegos.                                       |
 | **Admin**     | Puede crear, editar y eliminar noticias, videos, lanzamientos y reseñas.                           |
+
+
+## Recursos de Diseño y Base de Datos
+
+- [Diseño en Figma](https://www.figma.com/design/Of512zBJEbl0Xb7dhLwPqe/Untitled?node-id=17-3&node-type=canvas&t=DGR9bJCHvTUIh5bk-0) - Visualiza el diseño en Figma.
+- [Esquema de Base de Datos en DrawSQL](https://drawsql.app/teams/f5-5/diagrams/git-games) - Consulta el esquema de la base de datos en DrawSQL.
+  ![image](https://github.com/user-attachments/assets/cae33cf5-5618-4a21-9d2c-71787bf059de)
+
+
 
 ## Estructura
 
