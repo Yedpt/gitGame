@@ -3,6 +3,7 @@ import { useAuth } from "../context/authContextsss";
 
 const API_URL = "http://localhost:3000/api/users";
 
+// prueba para pushear
 // listar todos los usuarios
 export const getUsers = async (token) => {
   try {
