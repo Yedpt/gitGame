@@ -149,8 +149,11 @@ La plataforma define permisos específicos según el rol del usuario:
 Para usar GitGame, sigue los pasos a continuación:
 
 **Registro e Inicio de Sesión**: Los usuarios deben registrarse o iniciar sesión para interactuar con la plataforma.
+
 **Explorar Secciones**: Los usuarios pueden explorar noticias, videos y lanzamientos de forma libre.
+
 **Crear Reseñas**: Los usuarios registrados pueden crear y ver reseñas.
+
 **Acciones del Administrador**: Los administradores pueden crear, editar y eliminar noticias, videos, lanzamientos y reseñas.
 
 
