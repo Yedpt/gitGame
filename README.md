@@ -172,7 +172,7 @@ Para usar GitGame, sigue los pasos a continuación:
 
 **Acciones del Administrador**: Los administradores pueden crear, editar y eliminar noticias, videos, lanzamientos y reseñas.
 
-
+![contexto](https://github.com/user-attachments/assets/8939478b-f5e7-4c4c-9d2b-5da965f60434)
 
 ## Herramientas y Utilidades
 
@@ -195,7 +195,7 @@ Esta documentación proporciona una guía completa para interactuar con nuestra 
 
 ![image](https://github.com/user-attachments/assets/0f6a4829-f3fe-422f-881d-c75fb2f15e57) ![image](https://github.com/user-attachments/assets/52b2533f-8b10-4f67-96f6-381a69168b70) ![image](https://github.com/user-attachments/assets/3097400d-5c90-47a9-8890-8dac78a754f7) ![image](https://github.com/user-attachments/assets/a5ae141b-c87d-48d8-b6e9-056b85c7ffb5) ![image](https://github.com/user-attachments/assets/090e68c8-2056-4eb7-a9d1-a4561774c89d)
 
-## Autores ✒️
+## Autores
 
 Vada Velázquez - [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/DarthVada36) [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/avadavelazquez/)
 
