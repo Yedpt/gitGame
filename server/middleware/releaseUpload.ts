@@ -4,7 +4,7 @@ import path from 'path';
 // Configuración de almacenamiento de Multer
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => {
-    cb(null, "./uploads/releases/");
+    cb(null, "./uploads/launch/");
   },
   filename: (_req, file, cb) => {
     // Usa el nombre original del archivo para el nombre

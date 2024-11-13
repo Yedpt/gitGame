@@ -34,14 +34,16 @@ export const getReleasesByMonth = async (req: Request, res: Response) => {
 };
 
 export const createRelease = async (req: Request, res: Response) => {
-    const { user_id, title, release_date, rating, image_url, month } = req.body;
+    const { user_id, title, release_date, rating, month } = req.body;
+    const image_url = req.file ? `/uploads/launch/${req.file.filename}` : null; // Ruta donde se guarda la imagen
+
     try {
         const newRelease = await releases.create({
-            user_id,
+            user_id: user_id,
             title,
             release_date, 
             rating,
-            image_url,
+            image_url: image_url,
             month
         });
         res.status(201).json(newRelease);
@@ -50,46 +52,49 @@ export const createRelease = async (req: Request, res: Response) => {
     }
 };
 
-export const getReleaseById = async (req: UserIdRequest, res: Response) => { 
-    const { userId } = req.params;
+
+export const getReleaseById = async (req: Request, res: Response) => {
     try {
-        const release = await releases.findByPk(userId);
-        if (!release) {
-            return res.status(404).json({ message: "Lanzamiento no encontrado" });
-        }
-        res.json(release);
-    } catch (error) {
-        res.status(500).json({ message: "Error al obtener el lanzamiento", error });
+        const { id } = req.params;
+        const report = await releases.findByPk(id);
+        res.json(report);
+    } catch (error)
+    {
+        res.json({ message: "No se ha encontrado el review", error });
     }
 };
 
-export const updateRelease = async (req: UserIdRequest, res: Response) => { 
-    const { userId } = req.params;
+export const updateRelease = async (req: Request, res: Response) => {
     try {
-        const [updated] = await releases.update(req.body, {
-            where: { userId }
-        });
-        if (updated === 0) {
-            return res.status(404).json({ message: "Lanzamiento no encontrado" });
-        }
-        const updatedRelease = await releases.findByPk(userId);
-        res.json(updatedRelease);
+        const releaseId = req.params.id;
+        const { user_id, title, release_date,  rating,  month } = req.body;
+        const updatedRelease = await releases.update(
+            {
+                user_id: user_id,
+                title,
+                release_date,
+                rating,
+                month
+            },
+            {
+                where: { id: releaseId }
+            });
+        const report = await releases.findByPk(releaseId);
+        res.status(200).json(report);
     } catch (error) {
-        res.status(500).json({ message: "Error al actualizar el lanzamiento", error });
+        res.json({ message: "No se ha podido actualizar el review", error });
     }
 };
 
-export const deleteRelease = async (req: UserIdRequest, res: Response) => { 
-    const { userId } = req.params;
+export const deleteRelease = async (req: Request, res: Response) => {
     try {
-        const deleted = await releases.destroy({
-            where: { userId }
-        });
-        if (deleted === 0) {
-            return res.status(404).json({ message: "Lanzamiento no encontrado" });
+        const releaseId = req.params.id;
+        const deletedRelease = await releases.destroy(
+            {
+                where: { id: releaseId }
+            })
+            res.status(200).json(deletedRelease)
+        } catch (error) {
+            console.log('El review no se pudo eliminar', error);
         }
-        res.json({ message: "Lanzamiento eliminado correctamente" });
-    } catch (error) {
-        res.status(500).json({ message: "Error al eliminar el lanzamiento", error });
-    }
-};
+    };
