@@ -86,14 +86,14 @@ Para ejecutar GitGame en tu entorno local, sigue estos pasos:
 4. Configurar variables de entorno: Crea un archivo .env en el directorio server con las configuraciones necesarias, como la conexión a la base de datos.
 
    
-            DB_PASSWORD =12345
+            DB_PASSWORD = "INTRODUCE LA CONTRASEÑA DE TU MYSQL WORKBENCH"
             DB_HOST=localhost
-            DB_USER=root
+            DB_USER=root (Verifica tu MySQL Workbench)
             DB_DEV_NAME=git_game
             DB_TEST_NAME=git_game_test
-            PORT=3000
-            DB_PORT=3306
-            JWT_SECRET=tu_clave_secreta_super_segura
+            PORT=3000 
+            DB_PORT=3306  (Verifica tu MySQL Workbench)
+            JWT_SECRET= "INTRODUCE LA CONTRASEÑA JWT"
    
    
 5. Ejecutar el proyecto:
@@ -120,8 +120,8 @@ La plataforma define permisos específicos según el rol del usuario:
 
 - [Diseño en Figma](https://www.figma.com/design/Of512zBJEbl0Xb7dhLwPqe/Untitled?node-id=17-3&node-type=canvas&t=DGR9bJCHvTUIh5bk-0) - Visualiza el diseño en Figma.
 - [Esquema de Base de Datos en DrawSQL]([https://drawsql.app/teams/f5-5/diagrams/git-games](https://drawsql.app/teams/wilder-aguilar/diagrams/git-games))
-- Consulta el esquema de la base de datos en DrawSQL.
-  ![drawSQL-image-export-2024-11-13](https://github.com/user-attachments/assets/610b4a6b-7605-49bb-95c2-2b9aa7d7fde2)
+- [Consulta el esquema de la base de datos en DrawSQL](https://drawsql.app/teams/wilder-aguilar/diagrams/git-games).
+  ![drawSQL-image-export-2024-11-13] (https://github.com/user-attachments/assets/610b4a6b-7605-49bb-95c2-2b9aa7d7fde2)
 
 ## Estructura
 
@@ -181,7 +181,7 @@ Estas tecnologías fueron seleccionadas para ofrecer un equilibrio entre rendimi
 
 Esta documentación proporciona una guía completa para interactuar con nuestra API, diseñada para facilitar la integración y el uso de los servicios backend. A través de Postman, podrás realizar pruebas, explorar los distintos endpoints y comprender las respuestas de la API de manera efectiva.
 
-![Postman]((https://img.shields.io/badge/Postman-orange?style=for-the-badge&logo=postman&logoColor=white)(https://documenter.getpostman.com/view/37812250/2sAY545JAw))
+[![Postman]((https://img.shields.io/badge/Postman-orange?style=for-the-badge&logo=postman&logoColor=white)](https://documenter.getpostman.com/view/37812250/2sAY545JAw))
 
 
 ## Visionado de la web
