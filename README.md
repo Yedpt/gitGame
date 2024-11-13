@@ -38,7 +38,7 @@ Además, GitGame ofrece un sistema de autenticación y control de usuarios para 
 GitGame está construido con una variedad de tecnologías modernas para ofrecer una experiencia de usuario rápida y una arquitectura robusta en el servidor. A continuación, se listan las principales herramientas y frameworks utilizados en el proyecto.
 
 ### Frontend (Client)
-- **React**: Biblioteca de JavaScript para construir interfaces de usuario interactivas y dinámicas.
+![React](https://img.shields.io/badge/React-blue?style=for-the-badge&logo=react&logoColor=white): Biblioteca de JavaScript para construir interfaces de usuario interactivas y dinámicas.
 - **Vite**: Herramienta de construcción rápida y ligera para desarrollar proyectos con React.
 - **Tailwind CSS**: Framework de CSS basado en utilidades para diseñar de forma rápida y eficiente.
 - **Axios**: Cliente HTTP para realizar peticiones al backend de forma sencilla.
@@ -46,10 +46,8 @@ GitGame está construido con una variedad de tecnologías modernas para ofrecer 
 - **PostCSS**: Herramienta para transformar CSS mediante plugins, usada aquí para personalizar Tailwind CSS.
 
 ### Backend (Server)
-- **Node.js**: Entorno de ejecución de JavaScript en el servidor.
-- **Express**: Framework de servidor para Node.js que simplifica la gestión de rutas y peticiones HTTP.
-- **MongoDB**: Base de datos NoSQL orientada a documentos, ideal para manejar datos flexibles de la aplicación.
-- **Mongoose**: ODM para MongoDB que facilita la interacción entre Node.js y la base de datos.
+![Node.js](https://img.shields.io/badge/Node.js-green?style=for-the-badge&logo=node.js&logoColor=white): Entorno de ejecución de JavaScript en el servidor.
+![Express.js](https://img.shields.io/badge/Express.js-4DB33A?style=for-the-badge&logo=express&logoColor=white): Framework de servidor para Node.js que simplifica la gestión de rutas y peticiones HTTP.
 - **JWT (JSON Web Tokens)**: Tecnología para manejar la autenticación y autorización de usuarios.
 - **Bcrypt**: Librería para el hash de contraseñas, asegurando la seguridad de los datos sensibles.
 - **Multer**: Middleware para manejar la subida de archivos en las rutas del servidor.
