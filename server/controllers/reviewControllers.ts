@@ -110,7 +110,7 @@ export const createReview = async (req: Request, res: Response) => {
         });
 
         // Envía la respuesta y termina la ejecución sin retorno
-        res.json(newReview);
+        res.status(201).json(newReview);
     } catch (error) {
         console.error("Error al crear la reseña:", error); // Agrega log detallado de error
         res.status(500).json({ message: "No se ha podido crear un review", error });

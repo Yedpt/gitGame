@@ -14,5 +14,3 @@ userRouter.post('/', validateCreateUser, validationHandler, createUser); // Crea
 userRouter.delete('/:id', authenticateToken, isAdmin, validateDeleteUser, validationHandler , deleteUser); 
 userRouter.put('/:id', authenticateToken, isAdmin, validateUpdateUser, validationHandler, updateUser);
 loginRouter.post('/', loginUser)
-
-export default loginUser
