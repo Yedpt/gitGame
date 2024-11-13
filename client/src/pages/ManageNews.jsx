@@ -134,7 +134,6 @@ const ConfirmDeleteModal = ({ onConfirm, onCancel }) => (
     setEditNew(report);
     setValue('title', report.title);
     setValue('news', report.news);
-    setValue('num_likes', report.num_likes);
     setValue('image_url', report.image_url);
     setValue('image2_url', report.image2_url);
     setValue('productId', report.productId);
@@ -305,15 +304,6 @@ const ConfirmDeleteModal = ({ onConfirm, onCancel }) => (
               {...register('news', { required: true })}
             />
             {errors.author && <span className="text-red-500">Este campo es requerido</span>}
-          </div>
-          <div className="mb-4">
-            <label className="block font-medium mb-2">Likes</label>
-            <input
-              type="number"
-              className="border border-gray-300  font-paragraph rounded-md px-2 py-1 w-full"
-              {...register('num_likes', { required: true })}
-            />
-            {errors.num_likes && <span className="text-red-500">Este campo es requerido</span>}
           </div>
           <button
             type="submit"
