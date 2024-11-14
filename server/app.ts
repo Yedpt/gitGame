@@ -71,6 +71,8 @@ const initializeDatabase = async (sequelize: Sequelize) => {
 
         await releases.sync({force:false});
         console.log("tabla de lanzamientos syncronizada");
+
+        
         
     } catch (error) {
         console.error("Error al conectar la base de datos:", error);
