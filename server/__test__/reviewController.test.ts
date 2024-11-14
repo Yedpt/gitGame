@@ -84,9 +84,13 @@ describe('Test de rutas de /api/reviews', () => {
         expect(response.statusCode).toBe(200);  // 200 para eliminación exitosa
         expect(response.body).toBe(1);  // Verifica que response.body es 1
     });
+
+
+    // Cerrar el servidor después de todos los tests
+afterAll(async () => {
+    await server.close();
+    await connectionDb.close();
+  });
 });
 
-// Cerrar el servidor después de todos los tests
-afterAll(() => {
-    server.close();
-});
+

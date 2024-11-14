@@ -137,7 +137,7 @@ describe('CRUD usuarios', () => {
   });
 
   afterAll(async () => {
-    server.close();
+    await server.close();
     await connectionDb.close();
   });
 });
