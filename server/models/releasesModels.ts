@@ -1,7 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
 import connectionDb from '../database/conectionDb';
 import UserModel from './userModel';
-
+// cambiando el camo relese a release
 const releases = connectionDb.define(
     'upcoming_releases',
     {
