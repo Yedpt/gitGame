@@ -6,7 +6,7 @@ Bienvenidos a **GitGame**, una plataforma completa para los apasionados de los v
 
 
 
-## Índice
+### Índice
 - [Características](#características)
 - [Tecnologías Utilizadas](#tecnologías-utilizadas)
 - [Instalación](#instalación)
