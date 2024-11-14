@@ -17,4 +17,4 @@ releaseRouter.post('/', upload.single('image_url'), createRelease);
 releaseRouter.get('/:month', getReleasesByMonth);
 
 
-export default releaseRouter;
+

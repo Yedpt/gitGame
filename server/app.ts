@@ -12,8 +12,7 @@ import { newRouter } from './routes/newsRoutes';
 import { videoRouter } from './routes/videoRoutes';
 import { reviewRouter } from './routes/reviewRoutes';
 import { PORT } from './config';
-import { addLike } from './controllers/reviewControllers';
-import releaseRouter from './routes/releasesRoutes';
+import {releaseRouter} from './routes/releasesRoutes';
 import multer from 'multer';
 import releases from './models/releasesModels';
 
@@ -46,10 +45,7 @@ app.use('/api/login', loginRouter);
 app.use('/api/news', newRouter);
 app.use('/api/reviews', reviewRouter);
 app.use('/api/videos', videoRouter);
-app.use ('/api/likes', addLike);
-app.use('/api/releases', releaseRouter);
-// Aplica el middleware para manejar archivos en la ruta de creación
-
+app.use('/api/releases', releaseRouter); // para Usar las rutas de los juegos
 
 // Función para autenticar y sincronizar la base de datos
 const initializeDatabase = async (sequelize: Sequelize) => {
