@@ -1,7 +1,7 @@
-import { React, useEffect, useState } from 'react';
-import image from '../assets/images/image.png';
-import MainCard from '../components/MainCard';
-import { getAllNews } from '../services/newServices';
+import { React, useEffect, useState } from "react";
+import image from "../assets/images/image.png";
+import MainCard from "../components/MainCard";
+import { getAllNews } from "../services/newServices";
 
 const GameNews = () => {
   const [news, setNews] = useState([]);
@@ -9,8 +9,7 @@ const GameNews = () => {
   const fetchData = async () => {
     const dataNews = await getAllNews();
     if (Array.isArray(dataNews)) {
-      const formattedNews = dataNews.map(item => {
-
+      const formattedNews = dataNews.map((item) => {
         const formattedDateTime = new Date(item.published_at).toISOString();
         const imageUrl = `http://localhost:3000${item.image_url}`;
 
@@ -22,11 +21,13 @@ const GameNews = () => {
       });
 
       // Ordena las noticias de forma descendente (última noticia primero)
-      formattedNews.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
+      formattedNews.sort(
+        (a, b) => new Date(b.published_at) - new Date(a.published_at)
+      );
 
       setNews(formattedNews);
     } else {
-      console.error('La respuesta no es un array:', dataNews);
+      console.error("La respuesta no es un array:", dataNews);
       setNews([]);
     }
   };
@@ -37,16 +38,20 @@ const GameNews = () => {
 
   return (
     <div div className="w-full min-h-screen flex flex-col items-center bg-dark">
-      <h1 className='font-title md:mt-32 mt-20 drop-shadow-lg md:text-6xl text-2xl font-bold text-light z-10'>NOTICIAS</h1>
-      <div className="w-full">
+      <div className="relative h-60 md:h-[100vh] h-11/12 mb-8">
         <img
           src={image}
-          alt="fondo verde"
-          className="absolute top-0 w-full"
+          alt="Fondo Verde"
+          className="w-full h-full object-cover"
         />
+        <div className="absolute inset-x-0 top-0 p-4 flex items-center justify-center h-full">
+          <h1 className="text-3xl md:text-6xl font-bold text-white font-orbitron drop-shadow-lg">
+            NOTICIAS
+          </h1>
+        </div>
       </div>
 
-      <div className="grid gap-10 md:grid-cols-2 w-5/6 mt-20 mb-2">
+      <div className="grid gap-10 md:grid-cols-2 w-5/6 mt-0 mb-2">
         {Array.isArray(news) && news.length > 0 ? (
           news.map((item) => (
             <MainCard
@@ -63,9 +68,8 @@ const GameNews = () => {
           <p>No hay noticias disponibles.</p>
         )}
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default GameNews
+export default GameNews;

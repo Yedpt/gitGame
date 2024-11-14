@@ -29,7 +29,7 @@ const MainCard = ({ title, image_url, date, id, numLikes }) => {
             className="text-light flex items-center space-x-1"
             title="like"
           >
-            <FaHeart /> <span>{numLikes}</span>
+            <FaHeart className='text-red-500'/> <span>{numLikes}</span>
           </button>
         </div>
 

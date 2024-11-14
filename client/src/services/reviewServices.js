@@ -11,7 +11,6 @@ export const  getAllReviews = async () => {
         throw error;
     }
 };
-                                                                                                                                                                                                                                                      
 
 //GET one review by ID -- GET
 export const getOneReview = async (id) => {

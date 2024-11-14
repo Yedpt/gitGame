@@ -1,22 +1,31 @@
 import React from "react";
-import logo from "../assets/img/ggLogo1.svg"
+import { Link } from "react-router-dom";
+import logo from "../assets/img/ggLogo1.svg";
 
 const Footer = () => {
   return (
     <footer className="h-auto bg-greenDark flex flex-col md:flex-row justify-between items-center px-6 py-4 w-full relative">
       {/* Logo a la izquierda */}
       <div className="flex items-center md:justify-start justify-center w-full md:w-auto mb-4 md:mb-0">
-        <a href="/">
+        <Link to="/">
           <img className="max-w-11 py-2" src={logo} alt="logo" />
-        </a>
+        </Link>
       </div>
 
       {/* Links centrados */}
       <div className="flex justify-center space-x-6 text-light text-sm font-title font-normal mb-4 md:mb-0">
-        <a href="/" className="hover:text-greenLight">Noticias</a>
-        <a href="/" className="hover:text-greenLight">Videos</a>
-        <a href="/" className="hover:text-greenLight">Reviews</a>
-        <a href="/" className="hover:text-greenLight">Contacto</a>
+        <Link to="/news" className="hover:text-greenLight">
+          Noticias
+        </Link>
+        <Link to="/videos" className="hover:text-greenLight">
+          Videos
+        </Link>
+        <Link to="/reviews" className="hover:text-greenLight">
+          Reviews
+        </Link>
+        <Link to="/" className="hover:text-greenLight">
+          Contacto
+        </Link>
       </div>
 
       {/* Copyright */}

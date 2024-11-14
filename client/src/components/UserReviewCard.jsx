@@ -70,7 +70,7 @@ const UserReviewCard = ({title, imageUrl, review, num_likes, author, bgColor }) 
       {isSmallScreen && (
         <div className="flex justify-start items-center mt-3 w-full">
           <button onClick={() => handleLike(review.id)} className="mr-2 text-red-500 hover:text-red-700">
-            <FaHeart />
+            <FaHeart className='text-red-500' />
           </button>
           <span className="text-light mr-9">{likes}</span>
           <p className="text-light font-bold my-4"><span className="text-dark">Autor:</span> {author}</p>
