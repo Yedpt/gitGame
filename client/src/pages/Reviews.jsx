@@ -16,7 +16,6 @@ const ReviewsPage = () => {
   const navigate = useNavigate();
   const reviewsPerPage = 2;
 
-  // Referencias para los contenedores de reseñas de admins y usuarios
   const adminReviewsRef = useRef(null);
   const userReviewsRef = useRef(null);
 
@@ -70,7 +69,6 @@ const ReviewsPage = () => {
     );
   };
 
-  // Función para cambiar la página y desplazarse hacia la sección correspondiente
   const handlePageChange = (page, isAdmin = true) => {
     if (isAdmin) {
       setAdminPage(page);
@@ -90,7 +88,6 @@ const ReviewsPage = () => {
         </div>
       </div>
 
-      {/* Contenido de las reseñas de Admin */}
       <div className="container mx-auto p-4" ref={adminReviewsRef}>
         <h2 className="text-2xl md:text-4xl text-greenLight font-bold pt-10 mb-4">ÚLTIMAS RESEÑAS</h2>
         <div className="grid w-full grid-cols-1 md:grid-cols-1 gap-4">
@@ -115,7 +112,6 @@ const ReviewsPage = () => {
         />
       </div>
       
-      {/* Contenido de las reseñas de Usuarios */}
       <div className="container bg-greenDark mx-auto p-4" ref={userReviewsRef}>
         <h2 className="text-2xl md:text-4xl text-greenLight font-bold pt-10 mb-4">VALORACIONES DE USUARIOS</h2>
         <div className="grid w-full grid-cols-1 md:grid-cols-1 gap-4">

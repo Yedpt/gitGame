@@ -20,11 +20,9 @@ const ManageReviews = () => {
   const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
   const [editReview, setEditReview] = useState(null);
 
-  // Estado para el modal de confirmación
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [reviewToDelete, setReviewToDelete] = useState(null);
 
-  // Confirm Delete Modal component
   const ConfirmDeleteModal = ({ onConfirm, onCancel }) => (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white p-6 rounded shadow-lg text-center">
@@ -116,7 +114,6 @@ const ManageReviews = () => {
       return 0;
     });
 
-    // Rellenar formulario con datos de la reseña seleccionada
     const handleEdit = async (review) => {
       setEditReview(review);
       setValue('title', review.title);
@@ -128,14 +125,13 @@ const ManageReviews = () => {
       setValue('productId', review.productId);
     };
 
-    // Actualizar reseña
     const onSubmit = async (data) => {
       try {
         if (editReview) {
           await updateReview(editReview.id, data);
           setEditReview(null);
-          fetchReviews(); // Refrescar la lista de reseñas
-          reset(); // Limpiar formulario
+          fetchReviews(); 
+          reset(); 
         }
       } catch (error) {
         console.error('Error al actualizar la reseña:', error);
@@ -280,7 +276,7 @@ const ManageReviews = () => {
           </tbody>
         </table>
       </div>
-      {/* * Modal para editar reseña */}
+      
       {editReview && (
         <form onSubmit={handleSubmit(onSubmit)} className="bg-light p-4 rounded-md shadow-md mt-6">
           <h2 className="text-xl font-bold mb-4">Editando Reseña ID: {editReview.id}</h2>
@@ -336,7 +332,7 @@ const ManageReviews = () => {
           </button>
         </form>
       )}
-      {/* Modal de confirmación de eliminación */}
+      
       {showDeleteModal && (
           <ConfirmDeleteModal
             onConfirm={handleDeleteConfirm}

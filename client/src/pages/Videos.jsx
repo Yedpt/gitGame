@@ -8,7 +8,7 @@ const VideoGallery = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/videos"); // Asegúrate de que la URL sea la correcta
+        const response = await fetch("http://localhost:3000/api/videos"); 
         const data = await response.json();
         setVideos(data);
       } catch (error) {

@@ -36,21 +36,21 @@ export const createVideo = async (formData) => {
         },
       }
     );
-    return response.data; // Maneja la respuesta del backend
+    return response.data; 
   } catch (error) {
     console.error("Error al crear el video:", error);
-    throw error; // Propaga el error al componente para que se pueda manejar adecuadamente
+    throw error; 
   }
 };
 
 // Eliminar un video por ID
 export const deleteVideo = async (id) => {
-  const token = localStorage.getItem("token"); // Si necesitas un token
+  const token = localStorage.getItem("token"); 
 
   try {
     const response = await axios.delete(`${BASE_URL}/${id}`, {
       headers: {
-        Authorization: `Bearer ${token}`, // Si el backend usa autenticación
+        Authorization: `Bearer ${token}`, 
       },
     });
     return response.data;
@@ -62,12 +62,12 @@ export const deleteVideo = async (id) => {
 
 // Actualizar un video por ID
 export const updateVideo = async (id, updatedData) => {
-  const token = localStorage.getItem("token"); // Si necesitas un token
+  const token = localStorage.getItem("token"); 
 
   try {
     const response = await axios.put(`${BASE_URL}/${id}`, updatedData, {
       headers: {
-        Authorization: `Bearer ${token}`, // Si el backend usa autenticación
+        Authorization: `Bearer ${token}`, 
       },
     });
     return response.data;

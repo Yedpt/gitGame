@@ -12,19 +12,18 @@ const UserReviewCard = ({title, imageUrl, review, num_likes, author, bgColor }) 
   const handleLike = async (reviewId) => {
     try {
       const updatedReview = await addLikeToReview(reviewId);
-      setLikes(updatedReview.num_likes); // Actualiza los likes con la respuesta del backend
+      setLikes(updatedReview.num_likes); 
     } catch (error) {
       console.error("Error al dar like:", error);
     }
   };
 
-  // Detectar tamaño de pantalla
   useEffect(() => {
     const handleResize = () => {
-        setIsSmallScreen(window.innerWidth < 768); // Cambia a true para pantallas pequeñas
+        setIsSmallScreen(window.innerWidth < 768); 
     };
   
-    // Escuchar cambios de tamaño de pantalla
+    
     window.addEventListener('resize', handleResize);
     handleResize();
 
@@ -32,16 +31,16 @@ const UserReviewCard = ({title, imageUrl, review, num_likes, author, bgColor }) 
   }, []);
 
   const toggleReview = () => {
-    setExpanded(!expanded);  // Alternar estado "expanded"
+    setExpanded(!expanded);  
   };
 
   return (
     <div className={`${bgColor} relative w-full flex flex-col lg:flex-row items-start lg:items-center justify-between p-6 gap-2 rounded-lg shadow-lg mb-0`} onClick={toggleReview}>
-      {/* Contenedor izquierdo con título y descripción */}
+      
       <div className={`flex-1 ${isSmallScreen ? 'w-full' : 'text-left'}`} onClick={isSmallScreen ? toggleReview : null}>
         <h3 className="md:text-3xl font-bold text-light font-title text-2xl md:text-left text-center drop-shadow-md mb-4 px-0">{title}</h3>
         {isSmallScreen ? (
-          // Collapse solo en pantallas pequeñas
+          
           <Collapse isOpened={expanded}>
             <div>
               <p className="text-base font-paragraph md:text-lg  text-light mb-4">{review}</p>
@@ -61,12 +60,11 @@ const UserReviewCard = ({title, imageUrl, review, num_likes, author, bgColor }) 
         )}
       </div>
 
-      {/* Contenedor derecho con imagen */}
+      
       <div className={`${isSmallScreen ? 'w-full rounded-lg mt-4' : 'lg:w-1/2'}`}>
         <img src={imageUrl} alt={title} className="rounded-lg w-full drop-shadow-md h-auto object-cover" />
       </div>
 
-      {/* Likes siempre visibles debajo de la imagen en pantallas pequeñas */}
       {isSmallScreen && (
         <div className="flex justify-start items-center mt-3 w-full">
           <button onClick={() => handleLike(review.id)} className="mr-2 text-red-500 hover:text-red-700">

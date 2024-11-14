@@ -3,7 +3,6 @@ import connectionDb from '../database/conectionDb';
 import UserModel from '../models/userModel';
 import { ReviewAttributes } from '../interfaces/reviewInterfaces';
 
-// Definimos los campos opcionales solo para el proceso de creación
 interface ReviewCreationAttributes extends Optional<ReviewAttributes, 'id' | 'published_at' | 'updated_at' | 'num_likes' | 'rating'> {}
 
 

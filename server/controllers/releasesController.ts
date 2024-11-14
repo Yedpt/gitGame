@@ -35,7 +35,7 @@ export const getReleasesByMonth = async (req: Request, res: Response) => {
 
 export const createRelease = async (req: Request, res: Response) => {
     const { user_id, title, release_date, rating, month } = req.body;
-    const image_url = req.file ? `/uploads/launch/${req.file.filename}` : null; // Ruta donde se guarda la imagen
+    const image_url = req.file ? `/uploads/launch/${req.file.filename}` : null; 
 
     try {
         const newRelease = await releases.create({

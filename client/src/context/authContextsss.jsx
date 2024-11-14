@@ -5,7 +5,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(() => {
-        // Intenta cargar el usuario desde sessionStorage
+        
         const savedUser = sessionStorage.getItem("user");
         return savedUser ? JSON.parse(savedUser) : null;
     });
@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
     const login = (userData) => {
         setIsLoggedIn(true);
         setUser(userData);
-        sessionStorage.setItem("user", JSON.stringify(userData)); // Guarda en sessionStorage
+        sessionStorage.setItem("user", JSON.stringify(userData)); 
     };
 
     const logout = () => {
@@ -23,9 +23,9 @@ export const AuthProvider = ({ children }) => {
         sessionStorage.removeItem('user');
     };
 
-    // Nueva función para verificar si el usuario es admin
+    
     const isAdmin = () => {
-        return user && user.rol === 'admin'; // Devuelve true si el usuario tiene rol admin
+        return user && user.rol === 'admin'; 
     };
 
 
@@ -36,5 +36,5 @@ export const AuthProvider = ({ children }) => {
     );
 };
 
-// Hook para usar el contexto
+
 export const useAuth = () => useContext(AuthContext);

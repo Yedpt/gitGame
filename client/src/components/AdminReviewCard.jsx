@@ -14,7 +14,7 @@ const AdminReviewCard = ({
   author,
   bgColor,
 }) => {
-  const { user } = useAuth(); // Obtén el usuario del contexto
+  const { user } = useAuth(); 
   const [report, setReport] = useState([]);
   const [numLikes, setNumLikes] = useState(num_likes);
   const [expanded, setExpanded] = useState(false);
@@ -43,13 +43,13 @@ const AdminReviewCard = ({
     }
   };
 
-  //DETECT SCREEN SIZE
+  
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 768); // Cambia a true para pantallas pequeñas
+      setIsSmallScreen(window.innerWidth < 768); 
     };
 
-    // LISTEN TO RESIZE
+    
     window.addEventListener("resize", handleResize);
     handleResize();
 
@@ -57,7 +57,7 @@ const AdminReviewCard = ({
   }, []);
 
   const toggleReview = () => {
-    setExpanded(!expanded); // Alternar estado "expanded"
+    setExpanded(!expanded); 
   };
 
   return (
@@ -65,7 +65,7 @@ const AdminReviewCard = ({
       className={`${bgColor} relative w-full flex flex-col lg:flex-row items-start lg:items-center justify-between p-6 gap-2 rounded-lg shadow-lg mb-0`}
       onClick={toggleReview}
     >
-      {/* Contenedor izquierdo con título y descripción */}
+      
       <div
         className={`flex-1 ${isSmallScreen ? "w-full" : "text-left"}`}
         onClick={isSmallScreen ? toggleReview : null}
@@ -88,7 +88,7 @@ const AdminReviewCard = ({
           </button>
         </div>
         {isSmallScreen ? (
-          // Collapse solo en pantallas pequeñas
+          
           <Collapse isOpened={expanded}>
             <div>
               <p className="text-base font-paragraph md:text-lg text-light mb-4">
@@ -107,7 +107,7 @@ const AdminReviewCard = ({
             </div>
           </Collapse>
         ) : (
-          // En pantallas grandes, mostrar todo
+          
           <div>
             <p className="mt-2 text-light font-paragraph">{review}</p>
 
@@ -124,7 +124,7 @@ const AdminReviewCard = ({
         )}
       </div>
 
-      {/* Contenedor derecho con imagen */}
+      
       <div
         className={`${isSmallScreen ? "w-full rounded-lg mt-4" : "lg:w-1/2"}`}
       >

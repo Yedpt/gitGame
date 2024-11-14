@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken';
 import { status } from '../interfaces/userInterface';
 import { JWT_SECRET } from '../config';
 
-//CRUD
 //READ - GET
 export const getUsers = async (req: Request, res: Response) => {
     try {
@@ -70,17 +69,14 @@ export const createUser: RequestHandler = async (req, res) => {
     try {
       const { name, email, birth_date, password, bio, avatar } = req.body;
   
-      // Validar si el usuario ya existe
       const existingUser = await UserModel.findOne({ where: { email } });
       if (existingUser) {
         res.status(409).json({ message: 'El correo ya está en uso' });
-        return; // Asegúrate de salir después de enviar la respuesta
+        return; 
       }
   
-      // Hashear contraseña
       const hashedPassword = await bcrypt.hash(password, 10);
   
-      // Crear usuario
       const user = await UserModel.create({
         name,
         email,
@@ -93,7 +89,6 @@ export const createUser: RequestHandler = async (req, res) => {
         rol: 'usuario',
       });
   
-      // Generar token JWT
       const token = jwt.sign({ userId: user.id, rol: user.rol }, JWT_SECRET, { expiresIn: '1h' });
   
       res.status(201).json({

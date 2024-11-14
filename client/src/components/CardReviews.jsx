@@ -7,7 +7,7 @@ const CardsReviews = ({ userId }) => {
   const [reviews, setReviews] = useState([]);
   const [editingReview, setEditingReview] = useState(null); 
 
-  // Inicializamos react-hook-form
+  
   const { register, handleSubmit, setValue, reset, formState: { errors } } = useForm();
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const CardsReviews = ({ userId }) => {
       ));
       
       setEditingReview(null);
-      reset(); // Reseteamos el formulario
+      reset(); 
     } catch (error) {
       console.error("Error al guardar la reseña actualizada:", error);
     }

@@ -16,7 +16,7 @@ export const getAllVideos = async (req: Request, res: Response) => {
 // POST: Crear un nuevo video
 export const createVideo = async (req: Request, res: Response) => {
     const { user_id, title, video_url, published_at } = req.body;
-    const thumbnail = req.file ? req.file.filename : null; // Solo guarda el nombre del archivo
+    const thumbnail = req.file ? req.file.filename : null; 
 
     try {
         const newVideo = await Video.create({ user_id, title, video_url, published_at, thumbnail });

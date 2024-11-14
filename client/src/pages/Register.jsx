@@ -25,7 +25,6 @@ const Register = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [showAvatarDropdown, setShowAvatarDropdown] = useState(false);
 
-  // Estados para la visibilidad de la contraseña y confirmación
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 

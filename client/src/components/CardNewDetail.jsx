@@ -4,7 +4,7 @@ import { useAuth } from '../context/authContextsss';
 import { FaHeart } from 'react-icons/fa';
 
 const CardNewDetail = ({ image_url, title, news, date, image2_url, num_likes, id }) => {
-  const { user } = useAuth(); // Obtén el usuario del contexto
+  const { user } = useAuth(); 
   const [report, setReport] = useState([]);
   const [numLikes, setNumLikes] = useState(num_likes);
 

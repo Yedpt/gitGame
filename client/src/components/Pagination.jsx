@@ -6,12 +6,12 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
     const pageNumbers = [];
 
     if (totalPages <= 5) {
-      // Si el total de páginas es menor o igual a 5, mostrar todas
+      
       for (let i = 1; i <= totalPages; i++) {
         pageNumbers.push(i);
       }
     } else {
-      // Si hay muchas páginas, muestra solo algunas con "..." en medio
+      
       if (currentPage > 2) pageNumbers.push(1);
       if (currentPage > 3) pageNumbers.push('...');
 

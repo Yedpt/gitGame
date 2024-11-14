@@ -20,7 +20,6 @@ const GameNews = () => {
         };
       });
 
-      // Ordena las noticias de forma descendente (última noticia primero)
       formattedNews.sort(
         (a, b) => new Date(b.published_at) - new Date(a.published_at)
       );

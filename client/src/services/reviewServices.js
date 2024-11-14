@@ -63,13 +63,13 @@ export const getAllReviewsUser = async () => {
 //CREATE new review -- POST
 
 export const createReview = async (reviewData) => {
-    const token = localStorage.getItem('token'); // Obtén el token del localStorage
+    const token = localStorage.getItem('token');
 
     try {
         const response = await axios.post(`${BASE_URL}`, reviewData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
-                Authorization: `Bearer ${token}`, // Añade el token aquí
+                Authorization: `Bearer ${token}`, 
             },
         });
         return response.data;

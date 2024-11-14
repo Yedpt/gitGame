@@ -12,7 +12,7 @@ const CreateLaunch = () => {
         relese_date: '',
         rating: '',
         month: '',
-        user_id: user?.id, // Using the user id from context
+        user_id: user?.id, 
     });
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState(null);
@@ -26,7 +26,7 @@ const CreateLaunch = () => {
         const objectUrl = URL.createObjectURL(image);
         setPreview(objectUrl);
 
-        // Cleanup function
+        
         return () => URL.revokeObjectURL(objectUrl);
     }, [image]);
 

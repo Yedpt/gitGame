@@ -15,7 +15,7 @@ const CreateReview = () => {
     review: '',
     author: '',
     rating: null,
-    image_url: null, // Debe ser null inicialmente para un archivo
+    image_url: null, 
   });
 
   const [errors, setErrors] = useState({});
@@ -24,7 +24,6 @@ const CreateReview = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      // Redirige al inicio de sesión si no está autenticado
       navigate('/login');
     }
   }, [isLoggedIn, navigate]);
@@ -33,7 +32,7 @@ const CreateReview = () => {
     const { name, value, files } = e.target;
     setFormData({
       ...formData,
-      [name]: files ? files[0] : value, // Asigna la imagen si es un archivo
+      [name]: files ? files[0] : value, 
     });
   };
 
@@ -63,9 +62,9 @@ const CreateReview = () => {
       formDataToSend.append('rol', user.rol);
       formDataToSend.append('title', formData.title);
       formDataToSend.append('review', formData.review);
-      formDataToSend.append('image_url', formData.image_url); // Usa el image_url del estado
+      formDataToSend.append('image_url', formData.image_url); 
       formDataToSend.append('author', formData.author);
-      formDataToSend.append('num_likes', 0); // Inicialmente en 0
+      formDataToSend.append('num_likes', 0); 
       // Solo los admins envían rating
       if (user?.rol === 'admin' && formData.rating) {
         formDataToSend.append('rating', formData.rating);

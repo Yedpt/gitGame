@@ -8,7 +8,6 @@ import { IoIosAddCircle } from "react-icons/io";
 import { LuChevronsUpDown } from "react-icons/lu";
 import { useForm } from "react-hook-form";
 
-// Notification component for better user feedback
 const Notification = ({ message, type, onClose }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -28,7 +27,6 @@ const Notification = ({ message, type, onClose }) => {
   );
 };
 
-// Confirm Delete Modal component
 const ConfirmDeleteModal = ({ onConfirm, onCancel }) => (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
     <div className="bg-white p-6 rounded shadow-lg text-center">
@@ -62,7 +60,7 @@ const ManageUsers = () => {
   const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
   const [editUser, setEditUser] = useState(null);
   const [notification, setNotification] = useState(null);
-  const [userToDelete, setUserToDelete] = useState(null); // State for user to be deleted
+  const [userToDelete, setUserToDelete] = useState(null); 
 
   useEffect(() => {
     if (!user || user.rol !== 'admin') {
@@ -90,7 +88,7 @@ const ManageUsers = () => {
   }, []);
 
   const handleDeleteRequest = (id) => {
-    setUserToDelete(id); // Set the user to delete and show the modal
+    setUserToDelete(id); 
   };
 
   const handleDeleteConfirm = async () => {
@@ -102,7 +100,7 @@ const ManageUsers = () => {
       } catch (error) {
         setNotification({ message: 'Error al eliminar el usuario', type: 'error' });
       } finally {
-        setUserToDelete(null); // Hide the modal after deleting
+        setUserToDelete(null); 
       }
     }
   };

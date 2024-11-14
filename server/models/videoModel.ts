@@ -3,7 +3,6 @@ import { DataTypes, Model, Optional } from 'sequelize';
 import connectionDb from '../database/conectionDb';
 import UserModel from '../models/userModel';
 
-// Define la interfaz para los atributos del modelo
 interface VideoAttributes {
     id: number;
     user_id: number;
@@ -14,7 +13,6 @@ interface VideoAttributes {
     thumbnail?: string | null;
 }
 
-// Define la interfaz para los atributos opcionales (para crear un video)
 interface VideoCreationAttributes extends Optional<VideoAttributes, 'id' | 'published_at' | 'updated_at' | 'thumbnail'> {}
 
 class Video extends Model<VideoAttributes, VideoCreationAttributes> implements VideoAttributes {
@@ -27,7 +25,6 @@ class Video extends Model<VideoAttributes, VideoCreationAttributes> implements V
     public thumbnail!: string | null;
 }
 
-// Inicializa el modelo con hooks y atributos
 Video.init(
     {
         id: {

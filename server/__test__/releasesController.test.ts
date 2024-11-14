@@ -28,7 +28,7 @@ describe('crud releases', () => {
             .post('/api/releases')
             .field('user_id', '1')
             .field('title', 'Test Game')
-            .field('release_date', '2024-12-25')  // Corrigé: release_date au lieu de relese_date
+            .field('release_date', '2024-12-25')
             .field('rating', 'E')
             .field('month', 'December')
             .attach('image_url', testImagePath);

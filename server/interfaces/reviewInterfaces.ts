@@ -1,5 +1,4 @@
 
-// Definimos los atributos de una reseña
 export interface ReviewAttributes {
     id?: number;
     user_id: number;

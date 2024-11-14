@@ -25,12 +25,10 @@ export default function Home() {
         };
       });
 
-      // Ordenar las noticias por 'published_at' de forma descendente
       const sortedNews = formattedNews.sort(
         (a, b) => new Date(b.published_at) - new Date(a.published_at)
       );
 
-      // Establecer el estado con solo la primera noticia (más reciente)
       setNews(sortedNews);
     } else {
       console.error("La respuesta no es un array:", dataNews);
@@ -42,8 +40,8 @@ export default function Home() {
     fetchData();
   }, []);
 
-  const mainCardNews = news.length > 0 ? news[0] : null; // La más reciente
-  const secondaryCardNews = news.length > 1 ? news.slice(1, 4) : []; // Las tres siguientes
+  const mainCardNews = news.length > 0 ? news[0] : null; 
+  const secondaryCardNews = news.length > 1 ? news.slice(1, 4) : []; 
 
   return (
     <div className="min-h-screen font-orbitron bg-dark text-light">

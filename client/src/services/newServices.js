@@ -44,7 +44,6 @@ export const deleteNew = async (id) => {
   try {
     // Obtener el token de autorización
     const token = sessionStorage.getItem('token');
-    // Configuración de los headers
     const config = {
       headers: {
         'Authorization': token ? `Bearer ${token}` : ''
@@ -63,9 +62,7 @@ export const createNew = async (newData) => {
   const { title, news, image_url, image2_url } = newData;
 
   try {
-    // Obtener el token de autorización
     const token = sessionStorage.getItem('token');
-    // Configuración de los headers
     const config = {
       headers: {
         'Authorization': token ? `Bearer ${token}` : ''
@@ -82,9 +79,7 @@ export const createNew = async (newData) => {
 // Actualizar noticia -- PUT
 export const updateNew = async (id, updatedData) => {
   try {
-    // Obtener el token de autorización
     const token = sessionStorage.getItem('token');
-    // Configuración de los headers
     const config = {
       headers: {
         'Authorization': token ? `Bearer ${token}` : ''

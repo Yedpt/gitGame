@@ -10,7 +10,6 @@ describe('CRUD usuarios', () => {
   let token: string;
 
   beforeAll(async () => {
-    // Sincroniza la base de datos antes de las pruebas
     await connectionDb.sync({ force: true });
     
     // Crea un usuario administrador para autenticación en las pruebas
@@ -31,7 +30,7 @@ describe('CRUD usuarios', () => {
       email: 'admin@example.com',
       password: 'Password123',
     });
-    console.log('Login Response:', loginResponse.body); // Log para depuración
+    console.log('Login Response:', loginResponse.body); 
     token = loginResponse.body.token;
   });
 
@@ -64,17 +63,16 @@ describe('CRUD usuarios', () => {
     const response = await request(app)
       .get('/api/users')
       .set('Authorization', `Bearer ${token}`);
-    console.log('Get All Users Response:', response.body); // Log para depuración
+    console.log('Get All Users Response:', response.body);
     expect(response.statusCode).toBe(200);
     expect(response.header["content-type"]).toBe("application/json; charset=utf-8");
   });
 
   test('Debería crear e iniciar sesión con un usuario existente', async () => {
-    // Paso 1: Crear un usuario
     const newUser = {
       name: 'New User',
       email: 'newuser@example.com',
-      password: 'Password123',  // Contraseña con mayúscula al inicio
+      password: 'Password123', 
       birth_date: new Date('1993-03-03'),
       bio: 'Test user bio',
       avatar: 'avatar.png',
@@ -84,7 +82,7 @@ describe('CRUD usuarios', () => {
   
     const createUserResponse = await request(app)
       .post('/api/users')
-      .send(newUser); // Aquí no es necesario el token, suponiendo que el registro de usuario es público
+      .send(newUser); 
   
     expect(createUserResponse.statusCode).toBe(201);
     expect(createUserResponse.body.user.email).toBe(newUser.email);
@@ -95,14 +93,12 @@ describe('CRUD usuarios', () => {
       password: newUser.password,
     });
   
-    // Validaciones de la respuesta de login
     expect(loginResponse.statusCode).toBe(200);
     expect(loginResponse.body.message).toBe('Inicio de sesión exitoso');
     expect(loginResponse.body).toHaveProperty('token');
   
-    // Opcional: guardar el token para futuros tests si es necesario
     const token = loginResponse.body.token;
-    console.log('Token generado en login:', token); // Útil para depuración
+    console.log('Token generado en login:', token); 
   });
 
   test('Debería actualizar un usuario existente', async () => {

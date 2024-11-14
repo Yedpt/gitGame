@@ -3,13 +3,12 @@ import { useAuth } from "../context/authContextsss";
 
 const API_URL = "http://localhost:3000/api/users";
 
-// prueba para pushear
-// listar todos los usuarios
+// listar todos los usuarios GET
 export const getUsers = async (token) => {
   try {
     const response = await axios.get(API_URL, {
       headers: {
-        Authorization: `Bearer ${token}`, // Incluye el token en los headers
+        Authorization: `Bearer ${token}`, 
       },
     });
     return response.data;
@@ -22,8 +21,8 @@ export const getUsers = async (token) => {
 // Crear un nuevo usuario
 export const createUser = async (userData) => {
   const { name, email, birth_date, password, bio, avatar } = userData;
-  const role = "usuario"; // Asigna el rol por defecto
-  const create_at = new Date(); // Fecha de creación
+  const role = "usuario"; 
+  const create_at = new Date(); 
 
   try {
     const response = await axios.post(API_URL, {
@@ -35,7 +34,7 @@ export const createUser = async (userData) => {
       avatar,
       role,
       create_at,
-      status: "active", // Estado por defecto
+      status: "active", 
     });
     return response.data;
   } catch (error) {

@@ -20,11 +20,9 @@ const ManageNews = () => {
   const [sortConfig, setSortConfig] = useState({ key: "", direction: "" });
   const [editNew, setEditNew] = useState(null);
 
-  // CONFIRMATION MODAL
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [newToDelete, setNewToDelete] = useState(null);
 
-  // Confirm Delete Modal component
   const ConfirmDeleteModal = ({ onConfirm, onCancel }) => (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white p-6 rounded shadow-lg text-center">
@@ -136,7 +134,6 @@ const ManageNews = () => {
       return 0;
     });
 
-  // Rellenar formulario
   const handleEdit = async (report) => {
     setEditNew(report);
     setValue("title", report.title);
@@ -146,14 +143,13 @@ const ManageNews = () => {
     setValue("productId", report.productId);
   };
 
-  // Actualizar reseña
   const onSubmit = async (data) => {
     try {
       if (editNew) {
         await updateNew(editNew.id, data);
         setEditNew(null);
-        fetchNews(); // Refrescar la lista de reseñas
-        reset(); // Limpiar formulario
+        fetchNews(); 
+        reset(); 
       }
     } catch (error) {
       console.error("Error al actualizar la reseña:", error);
@@ -312,7 +308,7 @@ const ManageNews = () => {
             </tbody>
           </table>
         </div>
-        {/* * Modal para editar reseña */}
+        
         {editNew && (
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -352,7 +348,7 @@ const ManageNews = () => {
             </button>
           </form>
         )}
-        {/* Modal de confirmación de eliminación */}
+        
         {showDeleteModal && (
           <ConfirmDeleteModal
             onConfirm={handleDeleteConfirm}

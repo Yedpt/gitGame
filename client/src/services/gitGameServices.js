@@ -1,6 +1,5 @@
 import axios from "axios";
 const URL_API = "http://localhost:5173";
-// const URL_STORAGE = "https://api.cloudinary.com/v1_1/dz53okn10/image/upload";
 
 //Get all news -- GET
 export const getAllNews = async () => {
@@ -24,20 +23,6 @@ export const getOneNew = async (id) => {
   }
 
 };
-
-//Create new -- POST
-// export async function uploadImage(file) {
-//     try {
-//       const formData = new FormData();
-//       formData.append('upload_preset', 'ml_default');
-//       formData.append('file', file);
-
-//       const response = await axios.post(URL_STORAGE, formData);
-//       return response.data;
-//     } catch (error) {
-//       console.log("ERROR en la subida de la imagen", error);
-//     }
-//   };
 
 export const createNew = async (data) => {
   try {

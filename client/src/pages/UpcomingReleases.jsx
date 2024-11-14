@@ -6,8 +6,8 @@ import GameCard from '../components/GameCard';
 
 const UpcomingReleases = () => {
   const [releasesData, setReleasesData] = useState([]);
-  const [currentPages, setCurrentPages] = useState({}); // Almacenará la página actual para cada mes
-  const releasesPerPage = 4; // Lanzamientos por página por mes
+  const [currentPages, setCurrentPages] = useState({}); 
+  const releasesPerPage = 4; 
   const releasesRef = useRef(null);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const UpcomingReleases = () => {
     fetchData();
   }, []);
 
-  // Agrupar lanzamientos por mes
+  
   const groupedReleases = releasesData.reduce((acc, release) => {
     const releaseDate = new Date(release.release_date);
     const monthYear = releaseDate.toLocaleString('es-ES', { month: 'long', year: 'numeric' });
@@ -44,10 +44,10 @@ const UpcomingReleases = () => {
     return acc;
   }, {});
 
-  // Crear un array con los meses y sus lanzamientos
+  
   const groupedReleasesArray = Object.entries(groupedReleases);
 
-  // Manejar el cambio de página para cada mes
+  
   const handlePageChange = (monthYear, page) => {
     setCurrentPages((prev) => ({
       ...prev,
@@ -56,16 +56,15 @@ const UpcomingReleases = () => {
     releasesRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Paginación por mes
   const paginatedReleases = groupedReleasesArray.map(([monthYear, releases]) => {
-    const currentPage = currentPages[monthYear] || 1; // Página actual para este mes
+    const currentPage = currentPages[monthYear] || 1; 
     const startIndex = (currentPage - 1) * releasesPerPage;
     const paginatedData = releases.slice(startIndex, startIndex + releasesPerPage);
 
     return {
       monthYear,
       releases: paginatedData,
-      totalPages: Math.ceil(releases.length / releasesPerPage), // Total de páginas para este mes
+      totalPages: Math.ceil(releases.length / releasesPerPage), 
     };
   });
 
@@ -107,7 +106,7 @@ const UpcomingReleases = () => {
               ))}
             </div>
 
-            {/* Paginación de este mes */}
+            
             <Pagination
               currentPage={currentPages[monthYear] || 1}
               totalPages={totalPages}

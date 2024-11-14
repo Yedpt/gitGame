@@ -6,14 +6,12 @@ import CardsReviews from '../components/CardReviews';
 import AdminPanel from '../components/AdminPanel';
 
 const Profile = () => {
-    const { user, isAdmin } = useAuth();  // Accede a `user` y a `isAdmin` desde el contexto
+    const { user, isAdmin } = useAuth();  
 
-    // Si el usuario es admin, muestra el panel de administrador
     if (isAdmin()) {
         return <AdminPanel user={user} />;
     }
 
-    // Si no es admin, muestra el perfil de usuario normal
     return (
         <div className="min-h-screen bg-dark text-light font-title p-6 flex flex-col items-center mt-10">
         {/* Contenedor principal del perfil con imagen de fondo */}
@@ -23,7 +21,7 @@ const Profile = () => {
                 backgroundImage: "url('../src/assets/images/image.png')",
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
-                height: '100px', // Ajusta la altura según tus necesidades
+                height: '100px', 
             }}
         >
             <h1 className="text-3xl font-bold text-light">MI PERFIL</h1>
@@ -40,7 +38,6 @@ const Profile = () => {
             </Link>
         </div>
 
-        {/* Contenedor de las reviews */}
         <div className="w-full max-w-2xl mt-8">
             <h2 className="text-2xl mb-4 text-center bg-greenDark text-light py-3 rounded-md font-semibold shadow-md">
                 MIS REVIEWS

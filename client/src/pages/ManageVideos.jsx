@@ -12,7 +12,6 @@ const ManageVideos = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [videoToDelete, setVideoToDelete] = useState(null);
   
-// Confirm Delete Modal component
 const ConfirmDeleteModal = ({ onConfirm, onCancel }) => (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
     <div className="bg-light p-6 rounded shadow-lg text-center">
@@ -184,7 +183,7 @@ const ConfirmDeleteModal = ({ onConfirm, onCancel }) => (
             <form
               onSubmit={(e) => {
               e.preventDefault();
-              handleSave(editVideo); // Guardar los cambios al hacer submit
+              handleSave(editVideo); 
               }}
               >
     <div className="mb-4">
@@ -193,7 +192,7 @@ const ConfirmDeleteModal = ({ onConfirm, onCancel }) => (
       type="text"
       value={editVideo.title}
       onChange={(e) => setEditVideo({ ...editVideo, title: e.target.value })}
-      className="w-full px-4 font-paragraph py-2 border rounded text-dark bg-light" // Cambié el color de texto a negro y el fondo a blanco
+      className="w-full px-4 font-paragraph py-2 border rounded text-dark bg-light" 
     />
   </div>
 
@@ -203,7 +202,7 @@ const ConfirmDeleteModal = ({ onConfirm, onCancel }) => (
       type="text"
       value={editVideo.video_url}
       onChange={(e) => setEditVideo({ ...editVideo, video_url: e.target.value })}
-      className="w-full px-4 py-2 border font-paragraph rounded text-dark bg-light" // Cambié el color de texto a negro y el fondo a blanco
+      className="w-full px-4 py-2 border font-paragraph rounded text-dark bg-light" 
     />
   </div>
 
@@ -212,7 +211,7 @@ const ConfirmDeleteModal = ({ onConfirm, onCancel }) => (
     <input
       type="file"
       onChange={(e) => setEditVideo({ ...editVideo, thumbnail: e.target.files[0] })}
-      className="w-full px-4 py-2 border font-paragraph rounded text-dark bg-light" // Cambié el color de texto a negro y el fondo a blanco
+      className="w-full px-4 py-2 border font-paragraph rounded text-dark bg-light" 
     />
   </div>
 
@@ -226,8 +225,8 @@ const ConfirmDeleteModal = ({ onConfirm, onCancel }) => (
 
             <button
               onClick={() => {
-                setIsEditing(false); // Cerrar el formulario de edición
-                setEditVideo(null); // Limpiar el video en edición
+                setIsEditing(false); 
+                setEditVideo(null); 
               }}
               className="mt-4 bg-red-500 text-light px-4 py-2 rounded hover:bg-red-700"
             >

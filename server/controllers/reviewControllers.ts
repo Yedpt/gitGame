@@ -1,14 +1,11 @@
 import { Request, Response } from 'express';
 import reviews from '../models/reviewModel';
-// import { addLikeToReview } from "../middleware/reviewService";
 
-// Extiende el tipo Request para incluir la propiedad file de Multer.
 interface MulterRequest extends Request {
     file?: Express.Multer.File;
-    user?: { // Define el tipo que tiene el usuario en tu app
+    user?: { 
         id: string;
         rol: string;
-        // Otros campos según tu implementación de user
     };
 }
 
@@ -82,15 +79,12 @@ export const createReview = async (req: Request, res: Response) => {
     try {
         const { user_id, rol, title, review, author, rating } = req.body;
 
-        // Verifica si el campo rating está presente solo si el rol es "admin"
         if (rol === 'admin' && (rating === undefined || rating < 1 || rating > 5)) {
             res.status(400).json({ message: 'El rating debe estar entre 1 y 5 para el rol admin' });
             return;
         }
-        // Si el rol es "user", el rating no es necesario, o se puede asignar un valor por defecto
-        const finalRating = rol === 'user' ? 0 : rating; // Si es usuario, el rating puede ser 0 o no enviado
+        const finalRating = rol === 'user' ? 0 : rating; 
         
-        // Normaliza la ruta de la imagen
         const imagePath = req.file?.path ? req.file.path.replace(/\\/g, '/') : ''; 
         const imageName = imagePath.split('/').pop(); 
         const imageUrl = imageName ? `/uploads/reviews/${imageName}` : ''; 
@@ -109,10 +103,9 @@ export const createReview = async (req: Request, res: Response) => {
             rating: finalRating,
         });
 
-        // Envía la respuesta y termina la ejecución sin retorno
         res.status(201).json(newReview);
     } catch (error) {
-        console.error("Error al crear la reseña:", error); // Agrega log detallado de error
+        console.error("Error al crear la reseña:", error); 
         res.status(500).json({ message: "No se ha podido crear un review", error });
     }
 
@@ -161,24 +154,6 @@ export const updateReview = async (req: Request, res: Response) => {
         }
     };
 
-
-// //PATCH LIKE
-// // Controlador para agregar un like a una reseña
-// export const addLike = async (req: Request, res: Response): Promise<void> => {
-//     try {
-//       const reviewId = parseInt(req.params.id);
-//       const updatedReview = await addLikeToReview(reviewId);
-  
-//       if (!updatedReview) {
-//         res.status(404).json({ message: 'Reseña no encontrada' });
-//         return;
-//       }
-  
-//       res.status(200).json(updatedReview);
-//     } catch (error) {
-//       res.status(500).json({ message: 'Error al agregar un like' });
-//     }
-//   };
 
   //PUT LIKE
 export const incrementLike = async (req: Request, res: Response) => {

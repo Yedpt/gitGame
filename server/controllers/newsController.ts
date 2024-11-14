@@ -33,7 +33,7 @@ export const getNewById = async (req: Request, res: Response) => {
 
 //POST
 export const createNew = async (req: Request, res: Response) => {
-  console.log('Cuerpo de la solicitud:', req.body);   // Verifica los datos
+  console.log('Cuerpo de la solicitud:', req.body);  
   console.log('Archivos recibidos:', req.files);
 
   try {

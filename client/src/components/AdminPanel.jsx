@@ -11,21 +11,21 @@ const AdminPanel = ({ user }) => {
 
     return (
         <div className="min-h-screen bg-dark text-light font-title p-6 flex flex-col items-center mt-10"> {/* Espaciado debajo del navbar */}
-        {/* Contenedor del título de Admin con imagen de fondo */}
+        
         <div 
             className="relative bg-secondary rounded-lg shadow-lg w-full max-w-10xl text-center overflow-hidden flex items-center justify-center"
             style={{
                 backgroundImage: `url('../src/assets/images/image.png')`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
-                height: '100px', // Ajusta la altura según tus necesidades
+                height: '100px', 
             }}
         >
             <h1 className="text-3xl font-bold text-light">ADMIN</h1>
         </div>
 
         <div className="w-full max-w-md mt-4 flex flex-col gap-4">
-            {/* Carta de Usuarios */}
+            
             <div className="bg-green-700 p-4 rounded-md cursor-pointer shadow-md" onClick={() => toggleCard('usuarios')}>
                 <h2 className="text-xl text-center text-light font-semibold">USUARIOS</h2>
                 {expandedCard === 'usuarios' && (
@@ -37,7 +37,7 @@ const AdminPanel = ({ user }) => {
                 )}
             </div>
 
-            {/* Carta de Noticias */}
+            
             <div className="bg-green-800 p-4 rounded-md cursor-pointer shadow-md" onClick={() => toggleCard('noticias')}>
                 <h2 className="text-xl text-center text-light font-semibold">NOTICIAS</h2>
                 {expandedCard === 'noticias' && (
@@ -52,7 +52,7 @@ const AdminPanel = ({ user }) => {
                 )}
             </div>
 
-            {/* Carta de Reviews */}
+            
             <div className="bg-green-700 p-4 rounded-md cursor-pointer shadow-md" onClick={() => toggleCard('reviews')}>
                 <h2 className="text-xl text-center text-light font-semibold">REVIEWS</h2>
                 {expandedCard === 'reviews' && (
@@ -67,7 +67,7 @@ const AdminPanel = ({ user }) => {
                 )}
             </div>
 
-            {/* Carta de Lanzamientos */}
+            
             <div className="bg-green-800 p-4 rounded-md cursor-pointer shadow-md" onClick={() => toggleCard('lanzamientos')}>
                 <h2 className="text-xl text-center text-light font-semibold">LANZAMIENTOS</h2>
                 {expandedCard === 'lanzamientos' && (
@@ -82,7 +82,7 @@ const AdminPanel = ({ user }) => {
                 )}
             </div>
 
-            {/* Carta de Videos */}
+            
             <div className="bg-green-700 p-4 rounded-md cursor-pointer shadow-md" onClick={() => toggleCard('videos')}>
                 <h2 className="text-xl text-center text-light font-semibold">VIDEOS</h2>
                 {expandedCard === 'videos' && (

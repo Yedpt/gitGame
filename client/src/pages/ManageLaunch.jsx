@@ -20,11 +20,9 @@ const ManageLaunch = () => {
   const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
   const [editLaunch, setEditLaunch] = useState(null);
 
-  // Estado para el modal de confirmación de eliminación
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [launchToDelete, setLaunchToDelete] = useState(null);
 
-  // Modal de Confirmación de Eliminación
   const ConfirmDeleteModal = ({ onConfirm, onCancel }) => (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white p-6 rounded shadow-lg text-center">
@@ -123,8 +121,8 @@ const ManageLaunch = () => {
       if (editLaunch) {
         await updateRelease(editLaunch.id, data);
         setEditLaunch(null);
-        fetchLaunches(); // Refrescar la lista de lanzamientos
-        reset(); // Limpiar formulario
+        fetchLaunches(); 
+        reset(); 
       }
     } catch (error) {
       console.error('Error al actualizar el lanzamiento:', error);
@@ -185,7 +183,7 @@ const ManageLaunch = () => {
             <option value="octubre">OCTUBRE</option>
             <option value="noviembre">NOVIEMBRE</option>
             <option value="diciembre">DICIEMBRE</option>
-            {/* Añade más opciones de meses según sea necesario */}
+          
           </select>
         </div>
 
@@ -239,7 +237,6 @@ const ManageLaunch = () => {
   <form onSubmit={handleSubmit(onSubmit)} className="bg-light p-4 rounded-md shadow-md mt-6">
     <h2 className="text-xl font-bold mb-4">Editando Lanzamiento ID: {editLaunch.id}</h2>
     
-    {/* Campo para Título */}
     <div className="mb-4">
       <label className="block font-medium mb-2">Título</label>
       <input 
@@ -250,7 +247,6 @@ const ManageLaunch = () => {
       {errors.title && <span className="text-red-500">Este campo es requerido</span>}
     </div>
     
-    {/* Campo para Fecha de Lanzamiento */}
     <div className="mb-4">
       <label className="block font-medium mb-2">Fecha de Lanzamiento</label>
       <input 
@@ -261,7 +257,6 @@ const ManageLaunch = () => {
       {errors.release_date && <span className="text-red-500">Este campo es requerido</span>}
     </div>
     
-    {/* Campo para Rating */}
     <div className="mb-4">
       <label className="block font-medium mb-2">Rating</label>
       <input 
@@ -273,7 +268,6 @@ const ManageLaunch = () => {
     </div>
 
     
-    {/* Campo para Mes */}
     <div className="mb-4">
       <label className="block font-medium mb-2">Mes</label>
       <input 

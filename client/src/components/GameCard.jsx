@@ -2,12 +2,12 @@ import React from 'react';
 import { FaStar, FaRegStar } from 'react-icons/fa';
 
 const GameCard = ({ game, bgColor }) => {
-  // Verifica que `game` esté definido y tenga `imageUrl`
+  
   if (!game) {
     return null;
   }
 
-  // Renderiza el rating como estrellas
+  
   const renderStars = (rating) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {

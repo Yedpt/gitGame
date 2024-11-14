@@ -107,7 +107,6 @@ const CreateLaunch = () => {
               {errors.release_date && <p className="text-red-500 text-sm">{errors.release_date}</p>}
             </div>
 
-            {/* Rating (Admin only) */}
             {user?.rol === 'admin' && (
               <div className="mb-4">
                 <label className="font-title block text-greenLight text-lg mb-2">CALIFICACIÓN</label>
@@ -122,7 +121,6 @@ const CreateLaunch = () => {
               </div>
             )}
 
-            {/* Image */}
             <div className="mb-4">
               <label className="font-title block text-greenLight text-lg mb-2">IMAGEN</label>
               <input
@@ -134,7 +132,6 @@ const CreateLaunch = () => {
               {errors.image_url && <p className="text-red-500 text-sm">{errors.image_url}</p>}
             </div>
 
-            {/* Month */}
             <div className="mb-4">
               <label className="font-title block text-greenLight text-lg mb-2">MES</label>
               <input

@@ -26,7 +26,7 @@ beforeAll(async () => {
 
     // Autenticar y obtener el token
     const loginResponse = await request(app)
-        .post('/api/login') // Asegúrate de que esta sea la ruta correcta para iniciar sesión
+        .post('/api/login') 
         .send({ email: 'jane@example.com', password: 'Password123' });
     token = loginResponse.body.token;
 });
@@ -45,12 +45,12 @@ it('METHOD POST - should create a new news entry with images', async () => {
 
     const response = await request(app)
         .post('/api/news')
-        .set('Authorization', `Bearer ${token}`) // Agregar el token en los encabezados
+        .set('Authorization', `Bearer ${token}`)
         .send(report);
 
     console.log("Response body en POST:", response.body);
     expect(response.statusCode).toBe(201);
-    expect(response.body).toHaveProperty('id');  // Asumiendo que el objeto creado devuelve un ID
+    expect(response.body).toHaveProperty('id');  
     expect(response.body.title).toEqual(report.title);
 });
 
@@ -70,11 +70,11 @@ it('METHOD DELETE - should delete a news entry', async () => {
 
     const response = await request(app)
         .delete(`/api/news/${id}`)
-        .set('Authorization', `Bearer ${token}`) // Agregar el token en los encabezados
+        .set('Authorization', `Bearer ${token}`) 
 
     console.log("Response body en DELETE:", response.body);
     expect(response.statusCode).toBe(200);
-    expect(response.body).toBe(1);  // Verifica que response.body es 1
+    expect(response.body).toBe(1);  
 });
 
 // Método PUT para actualizar una entrada de noticias
@@ -102,7 +102,7 @@ it('METHOD PUT - should update the news entry', async () => {
     const id = newNews?.get('id')?.toString();
     const response = await request(app)
         .put(`/api/news/${id}`)
-        .set('Authorization', `Bearer ${token}`) // Agregar el token en los encabezados
+        .set('Authorization', `Bearer ${token}`) 
         .send(updatedData);
 
     console.log("Response body en PUT:", response.body);
@@ -111,5 +111,5 @@ it('METHOD PUT - should update the news entry', async () => {
 });
 
 afterAll(async () => {
-    server.close(); // Cierra el servidor para evitar que Jest quede esperando
+    server.close();
 });

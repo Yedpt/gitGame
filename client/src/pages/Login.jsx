@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/authContextsss'; // Importa el hook useAuth
+import { useAuth } from '../context/authContextsss'; 
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -9,7 +9,7 @@ const Login = () => {
   const [error, setError] = useState(null);
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const { login } = useAuth(); // Usa el hook en lugar de AuthContext
+  const { login } = useAuth(); 
 
   const navigate = useNavigate();
 
@@ -40,13 +40,10 @@ const Login = () => {
       const response = await axios.post('http://localhost:3000/api/login', { email, password });
       const { token, user: userData } = response.data;
 
-      // Incluye el token en userData antes de llamarlo
       const userWithToken = { ...userData, token };
 
-      // Guarda el token en sessionStorage
       sessionStorage.setItem('token', token);
 
-      // Llama a login en el contexto con el usuario completo
       login(userWithToken);
 
       if (userData.rol === 'admin') {
