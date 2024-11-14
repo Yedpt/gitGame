@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form"; // Importamos useForm
 import { getReviewsByUserId, deleteReview, updateReview } from "../services/reviewServices"; 
 import { FiEdit, FiTrash2 } from "react-icons/fi"; // Importamos los iconos de react-icons
 
 const CardsReviews = ({ userId }) => { 
   const [reviews, setReviews] = useState([]);
   const [editingReview, setEditingReview] = useState(null); 
-  const [updatedTitle, setUpdatedTitle] = useState('');
-  const [updatedContent, setUpdatedContent] = useState('');
+
+  // Inicializamos react-hook-form
+  const { register, handleSubmit, setValue, reset, formState: { errors } } = useForm();
 
   useEffect(() => {
     if (userId) { 
@@ -24,8 +26,8 @@ const CardsReviews = ({ userId }) => {
 
   const handleEdit = (review) => {
     setEditingReview(review);
-    setUpdatedTitle(review.title);
-    setUpdatedContent(review.content);
+    setValue('title', review.title); // Establece el título en el formulario
+    setValue('content', review.content); // Establece el contenido en el formulario
   };
 
   const handleDelete = async (id) => {
@@ -37,17 +39,18 @@ const CardsReviews = ({ userId }) => {
     }
   };
 
-  const handleSaveEdit = async () => {
-    if (!updatedTitle || !updatedContent) return; 
+  const onSubmit = async (data) => {
+    if (!data.title || !data.content) return; 
     try {
-      const updatedReview = { title: updatedTitle, content: updatedContent };
+      const updatedReview = { title: data.title, content: data.content };
       await updateReview(editingReview.id, updatedReview);
       
-      setReviews(reviews.map((review) => (review.id === editingReview.id ? { ...review, title: updatedTitle, content: updatedContent } : review)));
+      setReviews(reviews.map((review) => 
+        (review.id === editingReview.id ? { ...review, title: data.title, content: data.content } : review)
+      ));
       
       setEditingReview(null);
-      setUpdatedTitle('');
-      setUpdatedContent('');
+      reset(); // Reseteamos el formulario
     } catch (error) {
       console.error("Error al guardar la reseña actualizada:", error);
     }
@@ -94,29 +97,31 @@ const CardsReviews = ({ userId }) => {
       {editingReview && (
         <div className="mt-4 p-4 bg-greenMid rounded-md shadow-md">
           <h4 className="text-xl text-light font-bold mb-2">Editar Reseña</h4>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-greenLight">Título</label>
-            <input
-              type="text"
-              className="w-full text-dark p-2 border rounded-md mt-2"
-              value={updatedTitle}
-              onChange={(e) => setUpdatedTitle(e.target.value)}
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-greenLight">Reseña</label>
-            <textarea
-              className="w-full p-2 border rounded-md mt-2"
-              value={updatedContent}
-              onChange={(e) => updateReview(e.target.value)}
-            />
-          </div>
-          <button
-            onClick={handleSaveEdit}
-            className="bg-green-500 text-white p-2 rounded-md"
-          >
-            Guardar Cambios
-          </button>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-greenLight">Título</label>
+              <input
+                type="text"
+                className="w-full text-dark p-2 border rounded-md mt-2"
+                {...register('title', { required: 'El título es obligatorio' })}
+              />
+              {errors.title && <p className="text-red-500 text-xs">{errors.title.message}</p>}
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-greenLight">Reseña</label>
+              <textarea
+                className="w-full p-2 border rounded-md mt-2"
+                {...register('content', { required: 'El contenido es obligatorio' })}
+              />
+              {errors.content && <p className="text-red-500 text-xs">{errors.content.message}</p>}
+            </div>
+            <button
+              type="submit"
+              className="bg-green-500 text-white p-2 rounded-md"
+            >
+              Guardar Cambios
+            </button>
+          </form>
         </div>
       )}
     </div>
