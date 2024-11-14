@@ -71,7 +71,7 @@ GitGame está construido con una variedad de tecnologías modernas para ofrecer 
 
 ## Instalación
 
-Para ejecutar GitGame en tu entorno local, sigue estos pasos:
+Para ejecutar Git_Game en tu entorno local, sigue estos pasos:
 
 1. Clona el repositorio:
    ```bash
