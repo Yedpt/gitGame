@@ -1,6 +1,6 @@
 # GitGame 🎮
 
-Bienvenidos PRUEBA a **GitGame**, una plataforma completa para los apasionados de los videojuegos. Aquí encontrarás noticias, videos, lanzamientos y reseñas de los títulos más actuales y relevantes. Nuestra plataforma ofrece una experiencia personalizada con contenido exclusivo para usuarios registrados.
+Bienvenidos a **GitGame**, una plataforma completa para los apasionados de los videojuegos. Aquí encontrarás noticias, videos, lanzamientos y reseñas de los títulos más actuales y relevantes. Nuestra plataforma ofrece una experiencia personalizada con contenido exclusivo para usuarios registrados.
 
 ![image](https://github.com/user-attachments/assets/ee5b4c35-8c61-4dfe-a992-d7d48d590963)
 
